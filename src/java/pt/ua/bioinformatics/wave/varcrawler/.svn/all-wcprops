@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/varcrawler
+END
+Crawler.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/varcrawler/Crawler.java
+END
+Creator.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/wave/!svn/ver/272/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/varcrawler/Creator.java
+END
+Builder.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/wave/!svn/ver/272/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/varcrawler/Builder.java
+END
+UMDReader.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/wave/!svn/ver/272/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/varcrawler/UMDReader.java
+END
+LOVDFeedReader.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/varcrawler/LOVDFeedReader.java
+END
+LSDBLoader.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/wave/!svn/ver/272/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/varcrawler/LSDBLoader.java
+END
+Deploy.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/wave/!svn/ver/272/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/varcrawler/Deploy.java
+END
+ExternalData.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/varcrawler/ExternalData.java
+END

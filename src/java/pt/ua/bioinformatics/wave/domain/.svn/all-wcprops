@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/domain
+END
+Type.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/domain/Type.java
+END
+LSDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/domain/LSDB.java
+END
+Variant.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/domain/Variant.java
+END
+Node.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/domain/Node.java
+END
+Leaf.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/domain/Leaf.java
+END
+MetaType.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/domain/MetaType.java
+END
+Gene.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/domain/Gene.java
+END
+Item.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/domain/Item.java
+END

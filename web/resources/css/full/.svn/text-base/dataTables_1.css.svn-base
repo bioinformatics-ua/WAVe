@@ -1,0 +1,229 @@
+.dataTables_wrapper {
+    margin: 3% auto;
+    clear: both;
+    width: 95%;
+    background: transparent;
+    zoom: 1; /* Feeling sorry for IE */
+}
+
+.dataTables_processing {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 250px;
+    height: 30px;
+    margin-left: -125px;
+    margin-top: -15px;padding: 10px 2px 2px 28px;
+    background: #fffac7 url(../images/sprite.png) 12px -1248px no-repeat;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    text-align: center;
+    color: #333;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.dataTables_length {
+    /*width: 40%;*/
+    float: left;
+    text-align: center;
+}
+
+.dataTables_filter {
+    /*width: 50%;*/
+    float: right;
+    text-align: right;
+}
+
+.dataTables_info {
+    /*width: 60%;*/
+    float: left;
+}
+
+.dataTables_paginate {
+    /*width: 44px;*/
+    float: right;
+    text-align: right;
+}
+
+/* Pagination nested */
+.paginate_disabled_previous, .paginate_enabled_previous, .paginate_disabled_next, .paginate_enabled_next {
+    height: 19px;
+    width: 19px;
+    margin-left: 3px;
+    float: left;
+}
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * DataTables display
+*/
+table.display {
+    margin: 20px 0 10px 0;
+    width: 99%;
+    clear: both;
+}
+
+table.display thead th {
+    padding: 3px 18px 3px 10px;
+    border-bottom: 3px solid #4c0045;
+    font-weight: bold;
+    font-size: 110%;
+    cursor: pointer;
+}
+
+table.display tfoot th {
+    padding: 3px 10px;
+    border-top: 1px solid #333;
+    font-weight: bold;
+}
+
+table.display td {
+    padding: 3px 10px;
+    margin: 1px 0 0 0;
+}
+
+table.display td.center {
+    text-align: center;
+}
+
+tr.odd {
+    background-color: #ede5ec;
+    color: #4d4d4f;
+    text-align: center;
+    border-bottom: 1px solid white;
+    border-top: 1px solid white;
+}
+
+tr.even {
+    background-color: #efefef;
+    color: #4d4d4f;
+    text-align: center;
+    border-bottom: 1px solid white;
+    border-top: 1px solid white;
+}
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+ * Misc
+*/
+.top, .bottom {
+    vertical-align: bottom;
+}
+
+.dataTables_length {
+    width: 15%;
+    float: left;
+    text-align: left;
+}
+
+.dataTables_filter {
+    width: 30%;
+    float: left;
+    text-align: right;
+}
+
+.dataTables_info {
+    width: 30%;
+    float: left;
+}
+
+.dataTables_paginate {
+    float: right;
+    text-align: right;
+}
+
+
+.clear {
+    clear: both;
+}
+
+.dataTables_empty {
+    text-align: center;
+}
+
+tfoot input {
+    margin: 0.5em 0;
+    width: 100%;
+    color: #444;
+}
+
+tfoot input.search_init {
+    color: #999;
+}
+
+td.group {
+    background-color: #d1cfd0;
+    border-bottom: 2px solid #A19B9E;
+    border-top: 2px solid #A19B9E;
+}
+
+td.details {
+    background-color: #d1cfd0;
+    border: 2px solid #A19B9E;
+}
+
+
+.example_alt_pagination div.dataTables_info {
+    width: 40%;
+}
+
+.paging_full_numbers {
+    width: 400px;
+    height: 22px;
+    line-height: 22px;
+}
+
+.paging_full_numbers span.paginate_button,
+.paging_full_numbers span.paginate_active {
+    border: 1px solid #aaa;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    padding: 2px 5px;
+    margin: 0 3px;
+    cursor: pointer;
+}
+
+.paging_full_numbers span.paginate_button {
+    background-color: #efefef;
+}
+
+.paging_full_numbers span.paginate_button:hover {
+    background-color: #dabfd8;
+}
+
+.paging_full_numbers span.paginate_active {
+    background-color: #d3b2d0;
+}
+
+table.display tr.even.row_selected td {
+    background-color: #B0BED9;
+}
+
+table.display tr.odd.row_selected td {
+    background-color: #9FAFD1;
+}
+
+
+/*
+ * Sorting classes for columns
+*/
+/* For the standard odd/even */
+tr.odd td.sorting_1 {
+    background-color: #e2cce0;
+}
+
+tr.even td.sorting_1 {
+    background-color: #f2e5f2;
+}
+
+/*
+ * Row highlighting example
+*/
+.ex_highlight #example tbody tr.even:hover, #example tbody tr.even td.highlighted {
+    background-color: #ECFFB3;
+}
+
+.ex_highlight #example tbody tr.odd:hover, #example tbody tr.odd td.highlighted {
+    background-color: #E6FF99;
+}

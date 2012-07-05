@@ -1,0 +1,557 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genes generated="2010/04/09 12:10:06">
+	<gene hgnc="BRCA2" wave="1740">
+		<hgnc>BRCA2</hgnc>
+		<types>
+			<type name="LSDB">
+				<nodes>
+					<node name="LSDB">
+						<leafs>
+							<leaf name="LOVD BRCA2">
+								<value>http://china-hvp.org/LOVD/home.php?select_db=BRCA2</value>
+							</leaf>
+							<leaf name="LOVD BRCA2">
+								<value>http://chromium.liacs.nl/LOVD2/cancer/home.php?select_db=BRCA2</value>
+							</leaf>
+							<leaf name="LOVD BRCA2">
+								<value>https://australianhumanvariomedatabase.arcs.org.au/home.php?select_db=BRCA2</value>
+							</leaf>
+							<leaf name="LOVD BRCA2">
+								<value>http://chromium.liacs.nl/LOVD2/FANC/home.php?select_db=FANCD1</value>
+							</leaf>
+							<leaf name="UMD BRCA2">
+								<value>http://umd.be/BRCA2/</value>
+							</leaf>
+							<leaf name="Generic BRCA2">
+								<value>http://www.rockefeller.edu/fanconi/mutate/</value>
+							</leaf>
+						</leafs>
+					</node>
+				</nodes>
+			</type>
+			<type name="Variation">
+				<nodes>
+					<node name="Variants">
+						<leafs>
+							<leaf name="all">
+									<value>http://bioinformatics.ua.pt/WAVe/variant/BRCA2/all</value>
+							</leaf>
+							<leaf name="coding">
+									<value>http://bioinformatics.ua.pt/WAVe/variant/BRCA2/c</value>
+							</leaf>
+							<leaf name="genomic">
+									<value>http://bioinformatics.ua.pt/WAVe/variant/BRCA2/g</value>
+							</leaf>
+							<leaf name="mitochondrial">
+									<value>http://bioinformatics.ua.pt/WAVe/variant/BRCA2/m</value>
+							</leaf>
+							<leaf name="rnd">
+									<value>http://bioinformatics.ua.pt/WAVe/variant/BRCA2/r</value>
+							</leaf>
+							<leaf name="proteic">
+									<value>http://bioinformatics.ua.pt/WAVe/variant/BRCA2/p</value>
+							</leaf>
+							<leaf name="substitution">
+									<value>http://bioinformatics.ua.pt/WAVe/variant/BRCA2/sub</value>
+							</leaf>
+							<leaf name="deletion">
+									<value>http://bioinformatics.ua.pt/WAVe/variant/BRCA2/del</value>
+							</leaf>
+							<leaf name="insertion">
+									<value>http://bioinformatics.ua.pt/WAVe/variant/BRCA2/ins</value>
+							</leaf>
+							<leaf name="inversion">
+									<value>http://bioinformatics.ua.pt/WAVe/variant/BRCA2/inv</value>
+							</leaf>
+							<leaf name="duplication">
+									<value>http://bioinformatics.ua.pt/WAVe/variant/BRCA2/dup</value>
+							</leaf>
+							<leaf name="conversion">
+									<value>http://bioinformatics.ua.pt/WAVe/variant/BRCA2/con</value>
+							</leaf>
+						</leafs>
+					</node>
+				</nodes>
+			</type>
+			<type name="Publication">
+				<nodes>
+					<node name="Gene">
+						<leafs>
+							<leaf name="Gene">
+								<value>http://bioinformatics.ua.pt/quext_dev/process-human-gene/BRCA2?wgene=100&amp;wprotein=0&amp;wpathway=0&amp;wdisease=0</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Disease">
+						<leafs>
+							<leaf name="Disease">
+								<value>http://bioinformatics.ua.pt/quext_dev/process-human-gene/BRCA2?wgene=0&amp;wprotein=0&amp;wpathway=0&amp;wdisease=100</value>
+							</leaf>
+						</leafs>
+					</node>
+				</nodes>
+			</type>
+			<type name="Disease">
+				<nodes>
+					<node name="OMIM">
+						<leafs>
+							<leaf name="114480">
+								<value>http://www.ncbi.nlm.nih.gov/entrez/dispomim.cgi?id=114480</value>
+							</leaf>
+							<leaf name="137800">
+								<value>http://www.ncbi.nlm.nih.gov/entrez/dispomim.cgi?id=137800</value>
+							</leaf>
+							<leaf name="155255">
+								<value>http://www.ncbi.nlm.nih.gov/entrez/dispomim.cgi?id=155255</value>
+							</leaf>
+							<leaf name="176807">
+								<value>http://www.ncbi.nlm.nih.gov/entrez/dispomim.cgi?id=176807</value>
+							</leaf>
+							<leaf name="194070">
+								<value>http://www.ncbi.nlm.nih.gov/entrez/dispomim.cgi?id=194070</value>
+							</leaf>
+							<leaf name="260350">
+								<value>http://www.ncbi.nlm.nih.gov/entrez/dispomim.cgi?id=260350</value>
+							</leaf>
+							<leaf name="600185">
+								<value>http://www.ncbi.nlm.nih.gov/entrez/dispomim.cgi?id=600185</value>
+							</leaf>
+							<leaf name="605724">
+								<value>http://www.ncbi.nlm.nih.gov/entrez/dispomim.cgi?id=605724</value>
+							</leaf>
+							<leaf name="612555">
+								<value>http://www.ncbi.nlm.nih.gov/entrez/dispomim.cgi?id=612555</value>
+							</leaf>
+						</leafs>
+					</node>
+				</nodes>
+			</type>
+			<type name="Gene">
+				<nodes>
+					<node name="Gene Card">
+						<leafs>
+							<leaf name="Gene Card">
+								<value>http://www.genecards.org/cgi-bin/carddisp.pl?gene=BRCA2</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Gene Names">
+						<leafs>
+							<leaf name="HGNC:1101">
+								<value>http://www.genenames.org/data/hgnc_data.php?hgnc_id=HGNC:1101</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Entrez Gene">
+						<leafs>
+							<leaf name="675">
+								<value>http://www.ncbi.nlm.nih.gov/gene/675</value>
+							</leaf>
+						</leafs>
+					</node>
+				</nodes>
+			</type>
+			<type name="Pharmacogenomics">
+				<nodes>
+					<node name="Pharmacogenomics">
+						<leafs>
+							<leaf name="PA25412">
+								<value>http://www.pharmgkb.org/views/index.jsp?objCls=Gene&amp;objId=PA25412</value>
+							</leaf>
+						</leafs>
+					</node>
+				</nodes>
+			</type>
+			<type name="Locus">
+				<nodes>
+					<node name="Map Viewer">
+						<leafs>
+							<leaf name="Map Viewer">
+								<value>http://www.ncbi.nlm.nih.gov/projects/mapview/map_search.cgi?taxid=9606&amp;query=BRCA2</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Ensembl">
+						<leafs>
+							<leaf name="ENSG00000139618">
+								<value>http://www.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=ENSG00000139618</value>
+							</leaf>
+						</leafs>
+					</node>
+				</nodes>
+			</type>
+			<type name="Pathway">
+				<nodes>
+					<node name="KEGG">
+						<leafs>
+							<leaf name="hsa:675">
+								<value>http://www.genome.jp/dbget-bin/www_bget?hsa:675</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Reactome">
+						<leafs>
+							<leaf name="REACT_216">
+								<value>http://www.reactome.org/cgi-bin/eventbrowser_st_id?ST_ID=REACT_216</value>
+							</leaf>
+						</leafs>
+					</node>
+				</nodes>
+			</type>
+			<type name="Protein">
+				<nodes>
+					<node name="General">
+						<leafs>
+							<leaf name="A1YBP1">
+								<value>http://www.uniprot.org/uniprot/A1YBP1</value>
+							</leaf>
+							<leaf name="O00183">
+								<value>http://www.uniprot.org/uniprot/O00183</value>
+							</leaf>
+							<leaf name="O15008">
+								<value>http://www.uniprot.org/uniprot/O15008</value>
+							</leaf>
+							<leaf name="P51587">
+								<value>http://www.uniprot.org/uniprot/P51587</value>
+							</leaf>
+							<leaf name="Q13879">
+								<value>http://www.uniprot.org/uniprot/Q13879</value>
+							</leaf>
+							<leaf name="Q5TBJ7">
+								<value>http://www.uniprot.org/uniprot/Q5TBJ7</value>
+							</leaf>
+							<leaf name="Q8IU64">
+								<value>http://www.uniprot.org/uniprot/Q8IU64</value>
+							</leaf>
+							<leaf name="Q8IU77">
+								<value>http://www.uniprot.org/uniprot/Q8IU77</value>
+							</leaf>
+							<leaf name="Q8IU82">
+								<value>http://www.uniprot.org/uniprot/Q8IU82</value>
+							</leaf>
+							<leaf name="Q9BX99">
+								<value>http://www.uniprot.org/uniprot/Q9BX99</value>
+							</leaf>
+							<leaf name="Q9H265">
+								<value>http://www.uniprot.org/uniprot/Q9H265</value>
+							</leaf>
+							<leaf name="Q9H4L2">
+								<value>http://www.uniprot.org/uniprot/Q9H4L2</value>
+							</leaf>
+							<leaf name="Q9H4L3">
+								<value>http://www.uniprot.org/uniprot/Q9H4L3</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Structure">
+						<leafs>
+							<leaf name="1N0W">
+								<value>http://www.pdb.org/pdb/explore/explore.do?pdbId=1N0W</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Sequence">
+						<leafs>
+							<leaf name="AF309413">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AF309413</value>
+							</leaf>
+							<leaf name="AF348515">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AF348515</value>
+							</leaf>
+							<leaf name="AF489725">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AF489725</value>
+							</leaf>
+							<leaf name="AF489726">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AF489726</value>
+							</leaf>
+							<leaf name="AF489727">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AF489727</value>
+							</leaf>
+							<leaf name="AF489728">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AF489728</value>
+							</leaf>
+							<leaf name="AF489729">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AF489729</value>
+							</leaf>
+							<leaf name="AF489730">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AF489730</value>
+							</leaf>
+							<leaf name="AF489731">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AF489731</value>
+							</leaf>
+							<leaf name="AF489732">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AF489732</value>
+							</leaf>
+							<leaf name="AF489733">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AF489733</value>
+							</leaf>
+							<leaf name="AF489734">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AF489734</value>
+							</leaf>
+							<leaf name="AF489735">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AF489735</value>
+							</leaf>
+							<leaf name="AF489736">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AF489736</value>
+							</leaf>
+							<leaf name="AF489737">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AF489737</value>
+							</leaf>
+							<leaf name="AF489738">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AF489738</value>
+							</leaf>
+							<leaf name="AF507079">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AF507079</value>
+							</leaf>
+							<leaf name="AF507080">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AF507080</value>
+							</leaf>
+							<leaf name="AF507081">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AF507081</value>
+							</leaf>
+							<leaf name="AF507082">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AF507082</value>
+							</leaf>
+							<leaf name="AF507083">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AF507083</value>
+							</leaf>
+							<leaf name="AF507084">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AF507084</value>
+							</leaf>
+							<leaf name="AF507085">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AF507085</value>
+							</leaf>
+							<leaf name="AF507086">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AF507086</value>
+							</leaf>
+							<leaf name="AF507087">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AF507087</value>
+							</leaf>
+							<leaf name="AF507088">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AF507088</value>
+							</leaf>
+							<leaf name="AF507089">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AF507089</value>
+							</leaf>
+							<leaf name="AF507090">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AF507090</value>
+							</leaf>
+							<leaf name="AL137247">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AL137247</value>
+							</leaf>
+							<leaf name="AL445212">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AL445212</value>
+							</leaf>
+							<leaf name="AY008850">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AY008850</value>
+							</leaf>
+							<leaf name="AY008851">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AY008851</value>
+							</leaf>
+							<leaf name="AY151039">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AY151039</value>
+							</leaf>
+							<leaf name="AY436640">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AY436640</value>
+							</leaf>
+							<leaf name="DQ889340">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?DQ889340</value>
+							</leaf>
+							<leaf name="DQ897648">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?DQ897648</value>
+							</leaf>
+							<leaf name="U43746">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?U43746</value>
+							</leaf>
+							<leaf name="X95152">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?X95152</value>
+							</leaf>
+							<leaf name="X95153">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?X95153</value>
+							</leaf>
+							<leaf name="X95154">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?X95154</value>
+							</leaf>
+							<leaf name="X95155">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?X95155</value>
+							</leaf>
+							<leaf name="X95156">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?X95156</value>
+							</leaf>
+							<leaf name="X95157">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?X95157</value>
+							</leaf>
+							<leaf name="X95158">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?X95158</value>
+							</leaf>
+							<leaf name="X95159">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?X95159</value>
+							</leaf>
+							<leaf name="X95160">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?X95160</value>
+							</leaf>
+							<leaf name="X95161">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?X95161</value>
+							</leaf>
+							<leaf name="X95162">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?X95162</value>
+							</leaf>
+							<leaf name="X95163">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?X95163</value>
+							</leaf>
+							<leaf name="X95164">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?X95164</value>
+							</leaf>
+							<leaf name="X95165">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?X95165</value>
+							</leaf>
+							<leaf name="X95166">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?X95166</value>
+							</leaf>
+							<leaf name="X95167">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?X95167</value>
+							</leaf>
+							<leaf name="X95168">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?X95168</value>
+							</leaf>
+							<leaf name="X95169">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?X95169</value>
+							</leaf>
+							<leaf name="X95170">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?X95170</value>
+							</leaf>
+							<leaf name="X95171">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?X95171</value>
+							</leaf>
+							<leaf name="X95172">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?X95172</value>
+							</leaf>
+							<leaf name="X95173">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?X95173</value>
+							</leaf>
+							<leaf name="X95174">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?X95174</value>
+							</leaf>
+							<leaf name="X95175">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?X95175</value>
+							</leaf>
+							<leaf name="X95176">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?X95176</value>
+							</leaf>
+							<leaf name="X95177">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?X95177</value>
+							</leaf>
+							<leaf name="Z73359">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?Z73359</value>
+							</leaf>
+							<leaf name="Z74739">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?Z74739</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Domain">
+						<leafs>
+							<leaf name="IPR001545">
+								<value>http://www.ebi.ac.uk/interpro/IEntry?ac=IPR001545</value>
+							</leaf>
+							<leaf name="IPR002093">
+								<value>http://www.ebi.ac.uk/interpro/IEntry?ac=IPR002093</value>
+							</leaf>
+							<leaf name="IPR015188">
+								<value>http://www.ebi.ac.uk/interpro/IEntry?ac=IPR015188</value>
+							</leaf>
+							<leaf name="IPR015252">
+								<value>http://www.ebi.ac.uk/interpro/IEntry?ac=IPR015252</value>
+							</leaf>
+							<leaf name="IPR011370">
+								<value>http://www.ebi.ac.uk/interpro/IEntry?ac=IPR011370</value>
+							</leaf>
+							<leaf name="IPR015187">
+								<value>http://www.ebi.ac.uk/interpro/IEntry?ac=IPR015187</value>
+							</leaf>
+							<leaf name="IPR015205">
+								<value>http://www.ebi.ac.uk/interpro/IEntry?ac=IPR015205</value>
+							</leaf>
+							<leaf name="IPR015525">
+								<value>http://www.ebi.ac.uk/interpro/IEntry?ac=IPR015525</value>
+							</leaf>
+						</leafs>
+					</node>
+				</nodes>
+			</type>
+			<type name="Ontology">
+				<nodes>
+					<node name="Molecular Function">
+						<leafs>
+							<leaf name="GO:0003697">
+								<value>http://amigo.geneontology.org/cgi-bin/amigo/term-details.cgi?term=GO:0003697</value>
+							</leaf>
+							<leaf name="GO:0043015">
+								<value>http://amigo.geneontology.org/cgi-bin/amigo/term-details.cgi?term=GO:0043015</value>
+							</leaf>
+							<leaf name="GO:0005515">
+								<value>http://amigo.geneontology.org/cgi-bin/amigo/term-details.cgi?term=GO:0005515</value>
+							</leaf>
+							<leaf name="GO:0016563">
+								<value>http://amigo.geneontology.org/cgi-bin/amigo/term-details.cgi?term=GO:0016563</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Biological Process">
+						<leafs>
+							<leaf name="GO:0000724">
+								<value>http://amigo.geneontology.org/cgi-bin/amigo/term-details.cgi?term=GO:0000724</value>
+							</leaf>
+							<leaf name="GO:0006289">
+								<value>http://amigo.geneontology.org/cgi-bin/amigo/term-details.cgi?term=GO:0006289</value>
+							</leaf>
+							<leaf name="GO:0033595">
+								<value>http://amigo.geneontology.org/cgi-bin/amigo/term-details.cgi?term=GO:0033595</value>
+							</leaf>
+							<leaf name="GO:0043627">
+								<value>http://amigo.geneontology.org/cgi-bin/amigo/term-details.cgi?term=GO:0043627</value>
+							</leaf>
+							<leaf name="GO:0051298">
+								<value>http://amigo.geneontology.org/cgi-bin/amigo/term-details.cgi?term=GO:0051298</value>
+							</leaf>
+							<leaf name="GO:0006302">
+								<value>http://amigo.geneontology.org/cgi-bin/amigo/term-details.cgi?term=GO:0006302</value>
+							</leaf>
+							<leaf name="GO:0006355">
+								<value>http://amigo.geneontology.org/cgi-bin/amigo/term-details.cgi?term=GO:0006355</value>
+							</leaf>
+							<leaf name="GO:0007090">
+								<value>http://amigo.geneontology.org/cgi-bin/amigo/term-details.cgi?term=GO:0007090</value>
+							</leaf>
+							<leaf name="GO:0033205">
+								<value>http://amigo.geneontology.org/cgi-bin/amigo/term-details.cgi?term=GO:0033205</value>
+							</leaf>
+							<leaf name="GO:0033600">
+								<value>http://amigo.geneontology.org/cgi-bin/amigo/term-details.cgi?term=GO:0033600</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Cellular Component">
+						<leafs>
+							<leaf name="GO:0005634">
+								<value>http://amigo.geneontology.org/cgi-bin/amigo/term-details.cgi?term=GO:0005634</value>
+							</leaf>
+							<leaf name="GO:0005813">
+								<value>http://amigo.geneontology.org/cgi-bin/amigo/term-details.cgi?term=GO:0005813</value>
+							</leaf>
+							<leaf name="GO:0030141">
+								<value>http://amigo.geneontology.org/cgi-bin/amigo/term-details.cgi?term=GO:0030141</value>
+							</leaf>
+							<leaf name="GO:0033593">
+								<value>http://amigo.geneontology.org/cgi-bin/amigo/term-details.cgi?term=GO:0033593</value>
+							</leaf>
+							<leaf name="GO:0005654">
+								<value>http://amigo.geneontology.org/cgi-bin/amigo/term-details.cgi?term=GO:0005654</value>
+							</leaf>
+						</leafs>
+					</node>
+				</nodes>
+			</type>
+		</types>
+	</gene>
+</genes>

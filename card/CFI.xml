@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genes>
+  <gene>
+    <hgncID>CFI</hgncID>
+    <nodes>
+       <node name="LSDB">
+           <leafs>
+           <leaf name="CFI">
+               <value>http://bioinf.uta.fi/CFIbase/</value>
+           </leaf>
+           </leafs>
+        </node>
+       <node name="Publication">
+           <leafs>
+           <leaf name="2954545">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/2954545</value>
+           </leaf>
+           <leaf name="8604219">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/8604219</value>
+           </leaf>
+           <leaf name="9291131">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/9291131</value>
+           </leaf>
+           <leaf name="12477932">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/12477932</value>
+           </leaf>
+           <leaf name="14761935">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/14761935</value>
+           </leaf>
+           <leaf name="16621965">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/16621965</value>
+           </leaf>
+           <leaf name="17055788">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/17055788</value>
+           </leaf>
+           <leaf name="17320177">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/17320177</value>
+           </leaf>
+           <leaf name="17597211">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/17597211</value>
+           </leaf>
+           <leaf name="18374984">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/18374984</value>
+           </leaf>
+           <leaf name="19065647">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/19065647</value>
+           </leaf>
+           <leaf name="7672128">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/7672128</value>
+           </leaf>
+           <leaf name="8648130">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/8648130</value>
+           </leaf>
+           <leaf name="9605165">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/9605165</value>
+           </leaf>
+           <leaf name="14760718">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/14760718</value>
+           </leaf>
+           <leaf name="15173250">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/15173250</value>
+           </leaf>
+           <leaf name="15835912">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/15835912</value>
+           </leaf>
+           <leaf name="17106690">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/17106690</value>
+           </leaf>
+           <leaf name="17548110">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/17548110</value>
+           </leaf>
+           <leaf name="18029348">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/18029348</value>
+           </leaf>
+           <leaf name="18566438">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/18566438</value>
+           </leaf>
+           <leaf name="18701018">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/18701018</value>
+           </leaf>
+           <leaf name="2563353">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/2563353</value>
+           </leaf>
+           <leaf name="14702039">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/14702039</value>
+           </leaf>
+           <leaf name="14967308">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/14967308</value>
+           </leaf>
+           <leaf name="15342556">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/15342556</value>
+           </leaf>
+           <leaf name="16386793">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/16386793</value>
+           </leaf>
+           <leaf name="17018561">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/17018561</value>
+           </leaf>
+           <leaf name="17599974">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/17599974</value>
+           </leaf>
+           <leaf name="18544012">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/18544012</value>
+           </leaf>
+           <leaf name="18685559">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/18685559</value>
+           </leaf>
+           <leaf name="18825487">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/18825487</value>
+           </leaf>
+           <leaf name="1401896">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/1401896</value>
+           </leaf>
+           <leaf name="2956252">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/2956252</value>
+           </leaf>
+           <leaf name="8613545">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/8613545</value>
+           </leaf>
+           <leaf name="9479036">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/9479036</value>
+           </leaf>
+           <leaf name="15210795">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/15210795</value>
+           </leaf>
+           <leaf name="16335952">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/16335952</value>
+           </leaf>
+           <leaf name="16920989">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/16920989</value>
+           </leaf>
+           <leaf name="17067565">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/17067565</value>
+           </leaf>
+           <leaf name="17482181">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/17482181</value>
+           </leaf>
+           <leaf name="18658028">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/18658028</value>
+           </leaf>
+           <leaf name="18805611">
+               <value>http://www.ncbi.nlm.nih.gov/pubmed/18805611</value>
+           </leaf>
+           </leafs>
+        </node>
+       <node name="Disease">
+           <leafs>
+           <leaf name="217030">
+               <value>http://www.ncbi.nlm.nih.gov/entrez/dispomim.cgi?id=217030</value>
+           </leaf>
+           <leaf name="217030">
+               <value>http://bioinformatics.ua.pt/diseasecard/evaluateCard.do?diseaseid=217030</value>
+           </leaf>
+           <leaf name="610984">
+               <value>http://www.ncbi.nlm.nih.gov/entrez/dispomim.cgi?id=610984</value>
+           </leaf>
+           <leaf name="610984">
+               <value>http://bioinformatics.ua.pt/diseasecard/evaluateCard.do?diseaseid=610984</value>
+           </leaf>
+           </leafs>
+        </node>
+    </nodes>
+  </gene>
+</genes>

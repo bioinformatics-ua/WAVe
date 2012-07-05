@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genes generated="2010/03/11 18:11:00">
+	<gene hgnc="ABCA13" wave="87">
+		<types>
+			<type name="LSDB">
+				<nodes>
+					<node name="LOVD">
+						<leafs>
+							<leaf name="ABCA13">
+								<value>http://chromium.liacs.nl/LOVD2/home.php?select_db=ABCA13</value>
+							</leaf>
+						</leafs>
+					</node>
+				</nodes>
+			</type>
+			<type name="Variation">
+				<nodes>
+					<node name="All">
+						<leafs>
+							<leaf name="All">
+								<value>/view/ABCA13/variants/all</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Change Type">
+						<leafs>
+							<leaf name="Change Type">
+								<value>/view/ABCA13/variants/change</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Sequence Type">
+						<leafs>
+							<leaf name="Sequence Type">
+								<value>/view/ABCA13/variants/sequence</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Substitution">
+						<leafs>
+							<leaf name="Substitution">
+								<value>/view/ABCA13/variants/sub</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Deletion">
+						<leafs>
+							<leaf name="Deletion">
+								<value>/view/ABCA13/variants/del</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Duplication">
+						<leafs>
+							<leaf name="Duplication">
+								<value>/view/ABCA13/variants/dup</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Insertion">
+						<leafs>
+							<leaf name="Insertion">
+								<value>/view/ABCA13/variants/ins</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Inversion">
+						<leafs>
+							<leaf name="Inversion">
+								<value>/view/ABCA13/variants/inv</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Conversion">
+						<leafs>
+							<leaf name="Conversion">
+								<value>/view/ABCA13/variants/con</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Coding">
+						<leafs>
+							<leaf name="Coding">
+								<value>/view/ABCA13/variants/c</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Genomic">
+						<leafs>
+							<leaf name="Genomic">
+								<value>/view/ABCA13/variants/g</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Mitochondrial">
+						<leafs>
+							<leaf name="Mitochondrial">
+								<value>/view/ABCA13/variants/m</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="RNA">
+						<leafs>
+							<leaf name="RNA">
+								<value>/view/ABCA13/variants/r</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Proteic">
+						<leafs>
+							<leaf name="Proteic">
+								<value>/view/ABCA13/variants/p</value>
+							</leaf>
+						</leafs>
+					</node>
+				</nodes>
+			</type>
+			<type name="Publication">
+				<nodes>
+				</nodes>
+			</type>
+			<type name="Disease">
+				<nodes>
+					<node name="OMIM">
+						<leafs>
+							<leaf name="607807">
+								<value>http://www.ncbi.nlm.nih.gov/entrez/dispomim.cgi?id=607807</value>
+							</leaf>
+						</leafs>
+					</node>
+				</nodes>
+			</type>
+			<type name="Gene">
+				<nodes>
+					<node name="Gene Card">
+						<leafs>
+							<leaf name="Gene Card">
+								<value>http://www.genecards.org/cgi-bin/carddisp.pl?gene=ABCA13</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Gene Names">
+						<leafs>
+							<leaf name="HGNC:14638">
+								<value>http://www.genenames.org/data/hgnc_data.php?hgnc_id=HGNC:14638</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Entrez Gene">
+						<leafs>
+							<leaf name="154664">
+								<value>http://www.ncbi.nlm.nih.gov/gene/154664</value>
+							</leaf>
+						</leafs>
+					</node>
+				</nodes>
+			</type>
+			<type name="Pharmacogenomics">
+				<nodes>
+					<node name="Pharmacogenomics">
+						<leafs>
+							<leaf name="PA134925234">
+								<value>http://www.pharmgkb.org/views/index.jsp?objCls=Gene&objId=PA134925234</value>
+							</leaf>
+						</leafs>
+					</node>
+				</nodes>
+			</type>
+			<type name="Locus">
+				<nodes>
+					<node name="Map Viewer">
+						<leafs>
+							<leaf name="Map Viewer">
+								<value>http://www.ncbi.nlm.nih.gov/projects/mapview/map_search.cgi?taxid=9606&query=ABCA13</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Ensembl">
+						<leafs>
+							<leaf name="ENSG00000179869">
+								<value>http://www.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=ENSG00000179869</value>
+							</leaf>
+						</leafs>
+					</node>
+				</nodes>
+			</type>
+			<type name="Pathway">
+				<nodes>
+					<node name="KEGG">
+						<leafs>
+							<leaf name="hsa:154664">
+								<value>http://www.genome.jp/dbget-bin/show_pathway?hsa:154664</value>
+							</leaf>
+						</leafs>
+					</node>
+				</nodes>
+			</type>
+			<type name="Enzyme">
+				<nodes>
+				</nodes>
+			</type>
+			<type name="Protein">
+				<nodes>
+					<node name="UniProt">
+						<leafs>
+							<leaf name="Q6ZTT7">
+								<value>http://www.uniprot.org/uniprot/Q6ZTT7</value>
+							</leaf>
+							<leaf name="Q86UQ4">
+								<value>http://www.uniprot.org/uniprot/Q86UQ4</value>
+							</leaf>
+							<leaf name="Q86WI2">
+								<value>http://www.uniprot.org/uniprot/Q86WI2</value>
+							</leaf>
+							<leaf name="Q8N248">
+								<value>http://www.uniprot.org/uniprot/Q8N248</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Sequence">
+						<leafs>
+							<leaf name="AF501281">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AF501281</value>
+							</leaf>
+							<leaf name="AK091270">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AK091270</value>
+							</leaf>
+							<leaf name="AK126220">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AK126220</value>
+							</leaf>
+							<leaf name="AY204751">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AY204751</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Domain">
+						<leafs>
+							<leaf name="IPR003439">
+								<value>http://www.ebi.ac.uk/interpro/IEntry?ac=IPR003439</value>
+							</leaf>
+							<leaf name="IPR003593">
+								<value>http://www.ebi.ac.uk/interpro/IEntry?ac=IPR003593</value>
+							</leaf>
+						</leafs>
+					</node>
+				</nodes>
+			</type>
+			<type name="Ontology">
+				<nodes>
+				</nodes>
+			</type>
+		</types>
+	</gene>
+</genes>

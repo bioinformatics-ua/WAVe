@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE config SYSTEM "./config.dtd">
+<config>
+	
+	<webmap>
+		<stop id="VAR">
+			<loc type="HTTP" keys="KEY" vals="gene">KEY</loc>
+			<act>
+				<seek><![CDATA[[c]{1}\.(\[|\(|-)?[0-9]*[A-Za-z]*(\]|\))?(>|&gt;|del|delins|indel|ins|dup|inv|con|[0-9]*|\+|\-|\?|_)+(\[|\()?([a-zA-Z0-9]+)(\]|\))?]]></seek>
+				<save>vars</save>
+			</act>
+		</stop>
+	</webmap>
+
+</config>

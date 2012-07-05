@@ -1,0 +1,38 @@
+<!-- Arabella config DTD -->
+
+<!-- ROOT ELEMENT -->
+<!ELEMENT config (option?,webmap)>
+
+	<!ELEMENT option EMPTY>
+	
+	<!ELEMENT webmap (stop+)>
+		<!ELEMENT stop (loc,act+)>
+			<!ELEMENT loc (#PCDATA)>
+			<!ELEMENT act (splt?,grep?,seek?,xfrm*,xpnd?,splt?,save)>
+			    <!ELEMENT grep (#PCDATA)>
+				<!ELEMENT seek (#PCDATA)>
+				<!ELEMENT xfrm (#PCDATA)>
+				<!ELEMENT xpnd (#PCDATA)>
+				<!ELEMENT splt (#PCDATA)>
+				<!ELEMENT save (#PCDATA)>
+
+<!ATTLIST option no_repeat       (true|false) "true">
+<!ATTLIST option xfrm_separator  CDATA "::::">
+<!ATTLIST option debug           (true|false) "false">
+<!ATTLIST option dry_run         (true|false) "false">
+<!ATTLIST option dump            (true|false) "false">
+<!ATTLIST option dump_dir        CDATA #IMPLIED>
+<!ATTLIST option dump_key        CDATA #IMPLIED>
+<!ATTLIST option threaded        (true|false) "true">
+<!ATTLIST option proxy           CDATA #IMPLIED>
+
+
+<!ATTLIST stop id ID #REQUIRED>
+
+<!ATTLIST loc type (HTTP|LINK|CNTN) #REQUIRED> <!-- add "FSYS" here when done -->
+<!ATTLIST loc post CDATA #IMPLIED>
+<!ATTLIST loc keys CDATA #IMPLIED>
+<!ATTLIST loc vals CDATA #IMPLIED>
+<!ATTLIST loc ri CDATA #IMPLIED>
+<!ATTLIST loc to CDATA #IMPLIED>
+

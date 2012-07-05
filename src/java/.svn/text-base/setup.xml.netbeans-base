@@ -1,0 +1,692 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configs>
+    <config id="gene">
+        <type>Gene</type>
+        <src>hgnc_genes.csv</src>
+    </config>
+    <config id="metatype">
+        <type>MetaType</type>
+        <values>
+            <value>
+                <name>Variant Change</name>
+                <description>Describes distinct genomic variant sequence change types. These change type are applied only to coding sequence variants.</description>
+                <shortname>variantchange</shortname>
+            </value>
+            <value>
+                <name>Data</name>
+                <description>Data type defines the type of information each node in WAVe gene tree will contain.</description>
+                <shortname>data</shortname>
+            </value>
+            <value>
+                <name>Association</name>
+                <description>Association type describes the distinct associations that can be included in WAVe.</description>
+                <shortname>association</shortname>
+            </value>
+            <value>
+                <name>API Method</name>
+                <description>Describes WAVe API methods.</description>
+                <shortname>api</shortname>
+            </value>
+            <value>
+                <name>Reference sequence</name>
+                <description>Describes gene reference sequences.</description>
+                <shortname>sequence</shortname>
+            </value>
+        </values>
+    </config>
+    <config id="data">
+        <values>
+            <value id="01">
+                <name>Variation</name>
+                <description>Genomic variants.</description>
+                <shortname>variation</shortname>
+            </value>
+            <value id="02">
+                <name>LSDB</name>
+                <description>Locus specific databases.</description>
+                <shortname>lsdb</shortname>
+            </value>
+            <value id="03">
+                <name>Locus</name>
+                <description>Genetic and genomic information.</description>
+                <shortname>locus</shortname>
+            </value>
+            <value id="04">
+                <name>Publication</name>
+                <description>Scientific publications.</description>
+                <shortname>publication</shortname>
+            </value>
+            <value id="05">
+                <name>Disease</name>
+                <description>Human diseases.</description>
+                <shortname>disease</shortname>
+            </value>
+            <value id="06">
+                <name>Study</name>
+                <description>Genetic and genomic studies.</description>
+                <shortname>study</shortname>
+            </value>
+            <value id="07">
+                <name>Pharmacogenomics</name>
+                <description>Pharmacogenomics information.</description>
+                <shortname>pharmacogenomics</shortname>
+            </value>
+            <value id="08">
+                <name>Genome</name>
+                <description>Chromossomal location information.</description>
+                <shortname>genome</shortname>
+            </value>
+            <value id="09">
+                <name>Pathway</name>
+                <description>Metabolic pathways information.</description>
+                <shortname>pathway</shortname>
+            </value>
+            <value id="10">
+                <name>Protein</name>
+                <description>Proteomic information.</description>
+                <shortname>protein</shortname>
+            </value>
+            <value id="11">
+                <name>Ontology</name>
+                <description>Gene Ontology information.</description>
+                <shortname>ontology</shortname>
+            </value>
+        </values>
+    </config>
+    <config id="variantchange">
+        <values>
+            <value>
+                <name>Substitution</name>
+                <description>Substitution at DNA level (like  c.76A&amp;gt;T)</description>
+                <shortname>sub</shortname>
+            </value>
+            <value>
+                <name>Deletion</name>
+                <description>Deletion (like  c.76delA)</description>
+                <shortname>del</shortname>
+            </value>
+            <value>
+                <name>Duplication</name>
+                <description>Duplication (like  c.76dupA)</description>
+                <shortname>dup</shortname>
+            </value>
+            <value>
+                <name>Insertion</name>
+                <description>Insertion (like  c.76_77insG)</description>
+                <shortname>ins</shortname>
+            </value>
+            <value>
+                <name>Inversion</name>
+                <description>Inversion (like  c.76_83inv)</description>
+                <shortname>inv</shortname>
+            </value>
+            <value>
+                <name>Conversion</name>
+                <description>Conversion (like c.123_678conNM_004006.1:c.123_678)</description>
+                <shortname>con</shortname>
+            </value>
+            <value>
+                <name>Deletion/Insertion</name>
+                <description>Deletion and Insertion (like c.112_117delinsTG)</description>
+                <shortname>delins</shortname>
+            </value>
+        </values>
+    </config>
+    <config id="association">
+        <values>
+            <value>
+                <name>Gene+Leaf</name>
+                <description>Association between a gene and a leaf, required to build the gene navigation tree.</description>
+                <shortname>geneleaf</shortname>
+            </value>
+            <value>
+                <name>Variant+Leaf</name>
+                <description>Association between a variant and a leaf, required to enable direct links from the variant to the respective locus-specific database.</description>
+                <shortname>variantleaf</shortname>
+            </value>
+            <value>
+                <name>Gene+Gene</name>
+                <description>Association between two distinct genes.</description>
+                <shortname>genegene</shortname>
+            </value>
+            <value>
+                <change>Variant+Variant</change>
+                <description>Association between two distinct variants.</description>
+                <shortname>variantvariant</shortname>
+            </value>
+            <value>
+                <change>Gene+Sequence</change>
+                <description>Association between two distinct variants.</description>
+                <shortname>genesequence</shortname>
+            </value>
+        </values>
+    </config>
+    <config id="sequence">
+        <values>
+            <value>
+                <name>LRG</name>
+                <description>GEN2PHEN Locus Reference Genomic reference sequence.</description>
+                <shortname>lrg</shortname>
+            </value>
+        </values>
+    </config>
+    <config id="api">
+        <values>
+            <value>
+                <name>Gene Tree RSS</name>
+                <description>Access to WAVe navigation tree in RSS Format.</description>
+                <shortname>generss</shortname>
+            </value>
+            <value>
+                <name>Gene Tree Atom</name>
+                <description>Access to WAVe navigation tree in Atom Format.</description>
+                <shortname>geneatom</shortname>
+            </value>
+            <value>
+                <name>Gene Tree JSON</name>
+                <description>Access to WAVe navigation tree in JSON Format.</description>
+                <shortname>genejson</shortname>
+            </value>
+            <value>
+                <name>Variants RSS</name>
+                <description>Access to WAVe gene variants in RSS Format.</description>
+                <shortname>variantrss</shortname>
+            </value>
+            <value>
+                <name>Variants Atom</name>
+                <description>Access to WAVe gene variants in Atom Format.</description>
+                <shortname>variantatom</shortname>
+            </value>
+            <value>
+                <name>Variants JSON</name>
+                <description>Access to WAVe gene variants in JSON Format.</description>
+                <shortname>variantjson</shortname>
+            </value>
+            <value>
+                <name>Browse genes Atom</name>
+                <description>Access to WAVe gene browsing in JSON Format.</description>
+                <shortname>browseatom</shortname>
+            </value>
+            <value>
+                <name>Browse genes RSS</name>
+                <description>Access to WAVe gene browsing in JSON Format.</description>
+                <shortname>browserss</shortname>
+            </value>
+            <value>
+                <name>Browse genes JSON</name>
+                <description>Access to WAVe gene browsing in JSON Format.</description>
+                <shortname>browsejson</shortname>
+            </value>
+            <value>
+                <name>Universal Access</name>
+                <description>Access to WAVe Universal Access.</description>
+                <shortname>ua</shortname>
+            </value>
+        </values>
+    </config>
+    <config id="node">
+        <type>Node</type>
+        <values>
+            <value>
+                <name>Leiden Open-source Variation Database</name>
+                <description>Reference to Leiden Open-source Variation Database LSDBs.</description>
+                <shortname>LOVD</shortname>
+                <source>
+                    <method>onload</method>
+                </source>
+                <value></value>
+                <parent></parent>
+                <type>lsdb</type>
+                <ua>lsdb</ua>
+            </value>
+            <value>
+                <name>Universal Mutation Database</name>
+                <description>Reference to Universal Mutation Database LSDBs.</description>
+                <shortname>UMD</shortname>
+                <source>
+                    <method>onload</method>
+                </source>
+                <value></value>
+                <parent></parent>
+                <type>lsdb</type>
+                <ua>lsdb</ua>
+            </value>
+            <value>
+                <name>MUTbase</name>
+                <description>Reference to MUTbases (databases for immunodeficiency-causing mutations) LSDBs.</description>
+                <shortname>MUTbase</shortname>
+                <source>
+                    <method>onload</method>
+                </source>
+                <value></value>
+                <parent></parent>
+                <type>lsdb</type>
+                <ua>lsdb</ua>
+            </value>
+            <value>
+                <name>Unknown LSDBs</name>
+                <description>Reference to various general LSDBs.</description>
+                <shortname>Unknown</shortname>
+                <source>
+                    <method>onload</method>
+                </source>
+                <value></value>
+                <parent></parent>
+                <type>lsdb</type>
+                <ua>lsdb</ua>
+            </value>
+            <value>
+                <name>Pharmacogenomics KB</name>
+                <description>Referebce to information from Pharmacogenomics Knowledge Base.</description>
+                <shortname>PharmGKB</shortname>
+                <source>
+                    <method>cache</method>
+                    <type>sql</type>
+                    <connection>jdbc:sqlserver://sql2k8-ua.servers.ua.pt;database=GeNS;user=GeNSdbo;password=xgsJ38Doa1qi.F4e</connection>
+                    <query>SELECT DISTINCT BE.BioEntityName AS result FROM Protein P INNER JOIN ProteinBioEntity PBO ON PBO.ProteinId = P.ProteinId INNER JOIN BioEntity BE ON BE.BioEntityId = PBO.BioEntityId WHERE BE.DataTypeId = 36 AND P.ProteinId IN (SELECT P.ProteinId FROM Protein P INNER JOIN Identifier I on I.ProteinId = P.ProteinId WHERE P.TaxonomicId = 9606 AND I.DataTypeId = 1 AND I.Alias LIKE '#replaceme#')</query>
+                    <result>result</result>
+                </source>
+                <value>http://www.pharmgkb.org/views/index.jsp?objCls=Gene&amp;objId=#replaceme#</value>
+                <parent></parent>
+                <type>pharmacogenomics</type>
+                <ua>pharmgkb</ua>
+            </value>
+            <value>
+                <name>All genomic variants</name>
+                <description>All available genomic variants presented using the coding sequence as reference.</description>
+                <shortname>All Variants</shortname>
+                <source>
+                    <method>onload</method>
+                </source>
+                <value>http://bioinformatics.ua.pt/WAVe/variant/#replaceme#/all</value>
+                <parent></parent>
+                <type>variation</type>
+                <ua>variantall</ua>
+            </value>
+            <value>
+                <name>Substitution variants</name>
+                <description>All available substitution genomic variants presented using the coding sequence as reference.</description>
+                <shortname>Substitutions</shortname>
+                <source>
+                    <method>onload</method>
+                </source>
+                <value>http://bioinformatics.ua.pt/WAVe/variant/#replaceme#/sub</value>
+                <parent></parent>
+                <type>variation</type>
+                <ua>variantsub</ua>
+            </value>
+            <value>
+                <name>Deletion variants</name>
+                <description>All available deletion genomic variants presented using the coding sequence as reference.</description>
+                <shortname>Deletions</shortname>
+                <source>
+                    <method>onload</method>
+                </source>
+                <value>http://bioinformatics.ua.pt/WAVe/variant/#replaceme#/del</value>
+                <parent></parent>
+                <type>variation</type>
+                <ua>variantdel</ua>
+            </value>
+            <value>
+                <name>Insertion variants</name>
+                <description>All available insertion genomic variants presented using the coding sequence as reference.</description>
+                <shortname>Insertions</shortname>
+                <source>
+                    <method>onload</method>
+                </source>
+                <value>http://bioinformatics.ua.pt/WAVe/variant/#replaceme#/ins</value>
+                <parent></parent>
+                <type>variation</type>
+                <ua>variantins</ua>
+            </value>
+            <value>
+                <name>Duplication variants</name>
+                <description>All available duplication genomic variants presented using the coding sequence as reference.</description>
+                <shortname>Duplications</shortname>
+                <source>
+                    <method>onload</method>
+                </source>
+                <value>http://bioinformatics.ua.pt/WAVe/variant/#replaceme#/dup</value>
+                <parent></parent>
+                <type>variation</type>
+                <ua>variantdup</ua>
+                </value>
+            <value>
+                <name>Conversion variants</name>
+                <description>All available conversion genomic variants presented using the coding sequence as reference.</description>
+                <shortname>Conversion</shortname>
+                <source>
+                    <method>onload</method>
+                </source>
+                <value>http://bioinformatics.ua.pt/WAVe/variant/#replaceme#/con</value>
+                <parent></parent>
+                <type>variation</type>
+                <ua>variantcon</ua>
+            </value>
+            <value>
+                <name>Deletion/Insertion variants</name>
+                <description>All available deletion/insertion genomic variants presented using the coding sequence as reference.</description>
+                <shortname>Deletion/Insertion</shortname>
+                <source>
+                    <method>onload</method>
+                </source>
+                <value>http://bioinformatics.ua.pt/WAVe/variant/#replaceme#/delins</value>
+                <parent></parent>
+                <type>variation</type>
+                <ua>variantdelins</ua>
+            </value>
+            <value>
+                <name>Inversion variants</name>
+                <description>All available inversion genomic variants presented using the coding sequence as reference.</description>
+                <shortname>Inversions</shortname>
+                <source>
+                    <method>onload</method>
+                </source>
+                <value>http://bioinformatics.ua.pt/WAVe/variant/#replaceme#/inv</value>
+                <parent></parent>
+                <type>variation</type>
+                <ua>variantinv</ua>
+            </value>
+            <value>
+                <name>QuExTGene</name>
+                <description>Publications ranked in QuExT and ordered by gene relevance.</description>
+                <shortname>QuExT by Gene</shortname>
+                <source>
+                    <method>direct</method>
+                </source>
+                <value>http://bioinformatics.ua.pt/quext_dev/process-human-gene/#replaceme#?wgene=100&amp;wprotein=0&amp;wpathway=0&amp;wdisease=0</value>
+                <parent></parent>
+                <type>publication</type>
+                <ua>quextgene</ua>
+            </value>
+            <value>
+                <name>PubMed</name>
+                <description>Publications from Medline</description>
+                <shortname>pubmed</shortname>
+                <source>
+                    <method>direct</method>
+                </source>
+                <value>http://www.ncbi.nlm.nih.gov/pubmed?term=#replaceme#</value>
+                <parent></parent>
+                <type>publication</type>
+                <ua>pubmed</ua>
+            </value>
+            <value>
+                <name>NCBI OMIM</name>
+                <description>Information relative to diseases available Online Mendelian Inheritance in Men database.</description>
+                <shortname>OMIM</shortname>
+                <source>
+                    <method>cache</method>
+                    <type>sql</type>
+                    <connection>jdbc:sqlserver://sql2k8-ua.servers.ua.pt;database=GeNS;user=GeNSdbo;password=xgsJ38Doa1qi.F4e</connection>
+                    <query>SELECT DISTINCT BE.BioEntityName AS result FROM Protein P INNER JOIN ProteinBioEntity PBO ON PBO.ProteinId = P.ProteinId INNER JOIN BioEntity BE ON BE.BioEntityId = PBO.BioEntityId WHERE BE.DataTypeId = 151 AND P.ProteinId IN (SELECT P.ProteinId FROM Protein P INNER JOIN Identifier I on I.ProteinId = P.ProteinId WHERE P.TaxonomicId = 9606 AND I.DataTypeId = 1 AND I.Alias LIKE '#replaceme#')</query>
+                    <result>result</result>
+                </source>
+                <value>http://www.ncbi.nlm.nih.gov/omim/#replaceme#</value>
+                <parent></parent>
+                <type>disease</type>
+                <ua>omim</ua>
+            </value>
+            <value>
+                <name>NCBI MapViewer</name>
+                <description>Information from NCBI Map Viewer project.</description>
+                <shortname>Map View</shortname>
+                <source>
+                    <method>direct</method>
+                </source>
+                <value>http://www.ncbi.nlm.nih.gov/projects/mapview/map_search.cgi?taxid=9606&amp;query=#replaceme#</value>
+                <parent></parent>
+                <type>genome</type>
+                <ua>mapview</ua>
+            </value>
+            <value>
+                <name>Ensembl</name>
+                <description>Information from Ensembl genome browser.</description>
+                <shortname>Ensembl</shortname>
+                <source>
+                    <method>cache</method>
+                    <type>sql</type>
+                    <connection>jdbc:sqlserver://sql2k8-ua.servers.ua.pt;database=GeNS;user=GeNSdbo;password=xgsJ38Doa1qi.F4e</connection>
+                    <query>SELECT DISTINCT BE.BioEntityName AS result FROM Protein P INNER JOIN ProteinBioEntity PBO ON PBO.ProteinId = P.ProteinId INNER JOIN BioEntity BE ON BE.BioEntityId = PBO.BioEntityId WHERE BE.DataTypeId = 15 AND P.ProteinId IN (SELECT P.ProteinId FROM Protein P INNER JOIN Identifier I on I.ProteinId = P.ProteinId WHERE P.TaxonomicId = 9606 AND I.DataTypeId = 1 AND I.Alias LIKE '#replaceme#')</query>
+                    <result>result</result>
+                </source>
+                <value>http://www.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=#replaceme#</value>
+                <parent></parent>
+                <type>genome</type>
+                <ua>ensembl</ua>
+            </value>
+            <value>
+                <name>Gene Cards</name>
+                <description>Information from Gene Cards.</description>
+                <shortname>GeneCards</shortname>
+                <source>
+                    <method>direct</method>
+                </source>
+                <value>http://www.genecards.org/cgi-bin/carddisp.pl?gene=#replaceme#</value>
+                <parent></parent>
+                <type>locus</type>
+                <ua>genecard</ua>
+            </value>
+            <value>
+                <name>Gene Names</name>
+                <description>Information from HGNC GeneNames.</description>
+                <shortname>GeneNames</shortname>
+                <source>
+                    <method>cache</method>
+                    <type>sql</type>
+                    <connection>jdbc:sqlserver://sql2k8-ua.servers.ua.pt;database=GeNS;user=GeNSdbo;password=xgsJ38Doa1qi.F4e</connection>
+                    <query>SELECT DISTINCT I.Alias AS result FROM Identifier  I WHERE I.DataTypeId = 34 AND I.ProteinId IN (SELECT P.ProteinId FROM Protein P INNER JOIN Identifier I ON I.ProteinId = P.ProteinId WHERE P.TaxonomicId = 9606 AND I.DataTypeId = 1 AND I.Alias LIKE '#replaceme#')</query>
+                    <result>result</result>
+                </source>
+                <value>http://www.genenames.org/data/hgnc_data.php?hgnc_id=#replaceme#</value>
+                <parent></parent>
+                <type>locus</type>
+                <ua>hgnc</ua>
+            </value>
+            <value>
+                <name>NCBI Entrez Gene</name>
+                <description>Information from NCBI Entrez Gene database.</description>
+                <shortname>Entrez</shortname>
+                <source>
+                    <method>cache</method>
+                    <type>sql</type>
+                    <connection>jdbc:sqlserver://sql2k8-ua.servers.ua.pt;database=GeNS;user=GeNSdbo;password=xgsJ38Doa1qi.F4e</connection>
+                    <query>SELECT DISTINCT I.Alias AS result FROM Identifier  I WHERE I.DataTypeId = 9 AND I.ProteinId IN (SELECT P.ProteinId FROM Protein P INNER JOIN Identifier I ON I.ProteinId = P.ProteinId WHERE P.TaxonomicId = 9606 AND I.DataTypeId = 1 AND I.Alias LIKE '#replaceme#')</query>
+                    <result>result</result>
+                </source>
+                <value>http://www.ncbi.nlm.nih.gov/gene/#replaceme#</value>
+                <parent></parent>
+                <type>locus</type>
+                <ua>entrez</ua>
+            </value>
+            <value>
+                <name>KEGG</name>
+                <description>Information from metabolic pathways available in Kyoto Encyclopedia of Genes and Genomes database.</description>
+                <shortname>KEGG</shortname>
+                <source>
+                    <method>cache</method>
+                    <type>sql</type>
+                    <connection>jdbc:sqlserver://sql2k8-ua.servers.ua.pt;database=GeNS;user=GeNSdbo;password=xgsJ38Doa1qi.F4e</connection>
+                    <query>SELECT DISTINCT I.Alias AS result FROM Identifier  I WHERE I.DataTypeId = 11 AND I.ProteinId IN (SELECT P.ProteinId FROM Protein P INNER JOIN Identifier I ON I.ProteinId = P.ProteinId WHERE P.TaxonomicId = 9606 AND I.DataTypeId = 1 AND I.Alias LIKE '#replaceme#')</query>
+                    <result>result</result>
+                </source>
+                <value>http://www.genome.jp/dbget-bin/www_bget?#replaceme#</value>
+                <parent></parent>
+                <type>pathway</type>
+                <ua>kegg</ua>
+            </value>
+            <value>
+                <name>Reactome</name>
+                <description>Information from metabolic pathways availablble in Reactome.</description>
+                <shortname>Reactome</shortname>
+                <source>
+                    <method>cache</method>
+                    <type>sql</type>
+                    <connection>jdbc:sqlserver://sql2k8-ua.servers.ua.pt;database=GeNS;user=GeNSdbo;password=xgsJ38Doa1qi.F4e</connection>
+                    <query>SELECT DISTINCT BE.BioEntityName AS result FROM Protein P INNER JOIN ProteinBioEntity PBO ON PBO.ProteinId = P.ProteinId INNER JOIN BioEntity BE ON BE.BioEntityId = PBO.BioEntityId WHERE BE.DataTypeId = 40 AND P.ProteinId IN (SELECT P.ProteinId FROM Protein P INNER JOIN Identifier I on I.ProteinId = P.ProteinId WHERE P.TaxonomicId = 9606 AND I.DataTypeId = 1 AND I.Alias LIKE '#replaceme#')</query>
+                    <result>result</result>
+                </source>
+                <value>http://www.reactome.org/cgi-bin/eventbrowser_st_id?ST_ID=#replaceme#</value>
+                <parent></parent>
+                <type>pathway</type>
+                <ua>reactome</ua>
+            </value>
+            <value>
+                <name>UniProt/SwissProt</name>
+                <description>Information regarding available, active and reviewed proteins in UniProt.</description>
+                <shortname>SwissProt</shortname>
+                <source>
+                    <method>cache</method>
+                    <type>csv</type>
+                    <connection>http://www.uniprot.org/uniprot/?query=gene_exact:#replaceme#+AND+active:yes+AND+reviewed:yes+AND+organism:9606&amp;format=tab&amp;columns=id</connection>
+                    <query>\t</query>
+                    <result>0</result>
+                </source>
+                <value>http://www.uniprot.org/uniprot/#replaceme#</value>
+                <parent></parent>
+                <type>protein</type>
+                <ua>uniprot</ua>
+            </value>
+            <value>
+                <name>UniProt/TrEMBL</name>
+                <description>Information regarding available, active and unreviewed proteins in UniProt.</description>
+                <shortname>TrEMBL</shortname>
+                <source>
+                    <method>cache</method>
+                    <type>csv</type>
+                    <connection>http://www.uniprot.org/uniprot/?query=gene_exact:#replaceme#+AND+active:yes+AND+reviewed:no+AND+organism:9606&amp;format=tab&amp;columns=id</connection>
+                    <query>\t</query>
+                    <result>0</result>
+                </source>
+                <value>http://www.uniprot.org/uniprot/#replaceme#</value>
+                <parent></parent>
+                <type>protein</type>
+                <ua>uniprot</ua>
+            </value>
+            <value>
+                <name>Structure</name>
+                <description>Protein structure information from Protein Data Bank.</description>
+                <shortname>PDB</shortname>
+                <source>
+                    <method>cache</method>
+                    <type>sql</type>
+                    <connection>jdbc:sqlserver://sql2k8-ua.servers.ua.pt;database=GeNS;user=GeNSdbo;password=xgsJ38Doa1qi.F4e</connection>
+                    <query>SELECT DISTINCT BE.BioEntityName AS result FROM Protein P INNER JOIN ProteinBioEntity PBO ON PBO.ProteinId = P.ProteinId INNER JOIN BioEntity BE ON BE.BioEntityId = PBO.BioEntityId WHERE BE.DataTypeId = 38 AND P.ProteinId IN (SELECT P.ProteinId FROM Protein P INNER JOIN Identifier I on I.ProteinId = P.ProteinId WHERE P.TaxonomicId = 9606 AND I.DataTypeId = 1 AND I.Alias LIKE '#replaceme#')</query>
+                    <result>result</result>
+                </source>
+                <value>http://www.pdb.org/pdb/explore/explore.do?pdbId=#replaceme#</value>
+                <parent></parent>
+                <type>protein</type>
+                <ua>pdb</ua>
+            </value>
+            <value>
+                <name>Sequence</name>
+                <description>Protein sequence information from Expasy.</description>
+                <shortname>Expasy</shortname>
+                <source>
+                    <method>cache</method>
+                    <type>sql</type>
+                    <connection>jdbc:sqlserver://sql2k8-ua.servers.ua.pt;database=GeNS;user=GeNSdbo;password=xgsJ38Doa1qi.F4e</connection>
+                    <query>SELECT DISTINCT I.Alias AS result FROM Identifier  I WHERE I.DataTypeId = 4 AND I.ProteinId IN (SELECT P.ProteinId FROM Protein P INNER JOIN Identifier I ON I.ProteinId = P.ProteinId WHERE P.TaxonomicId = 9606 AND I.DataTypeId = 1 AND I.Alias LIKE '#replaceme#')</query>
+                    <result>result</result>
+                </source>
+                <value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?#replaceme#</value>
+                <parent></parent>
+                <type>protein</type>
+                <ua>expasy</ua>
+            </value>
+            <value>
+                <name>Domain</name>
+                <description>Protein domain information from InterPro.</description>
+                <shortname>InterPro</shortname>
+                <source>
+                    <method>cache</method>
+                    <type>sql</type>
+                    <connection>jdbc:sqlserver://sql2k8-ua.servers.ua.pt;database=GeNS;user=GeNSdbo;password=xgsJ38Doa1qi.F4e</connection>
+                    <query>SELECT DISTINCT BE.BioEntityName AS result FROM Protein P INNER JOIN ProteinBioEntity PBO ON PBO.ProteinId = P.ProteinId INNER JOIN BioEntity BE ON BE.BioEntityId = PBO.BioEntityId WHERE BE.DataTypeId = 16 AND P.ProteinId IN (SELECT P.ProteinId FROM Protein P INNER JOIN Identifier I on I.ProteinId = P.ProteinId WHERE P.TaxonomicId = 9606 AND I.DataTypeId = 1 AND I.Alias LIKE '#replaceme#')</query>
+                    <result>result</result>
+                </source>
+                <value>http://www.ebi.ac.uk/interpro/IEntry?ac=#replaceme#</value>
+                <parent></parent>
+                <type>protein</type>
+                <ua>interpro</ua>
+            </value>
+            <value>
+                <name>Molecular Function</name>
+                <description>Information regarding Gene Ontology defined molecular functions.</description>
+                <shortname>AmiGO MF</shortname>
+                <source>
+                    <method>cache</method>
+                    <type>sql</type>
+                    <connection>jdbc:sqlserver://sql2k8-ua.servers.ua.pt;database=GeNS;user=GeNSdbo;password=xgsJ38Doa1qi.F4e</connection>
+                    <query>SELECT DISTINCT BE.BioEntityName AS result FROM Protein P INNER JOIN ProteinBioEntity PBO ON PBO.ProteinId = P.ProteinId INNER JOIN BioEntity BE ON BE.BioEntityId = PBO.BioEntityId WHERE BE.DataTypeId = 135 AND P.ProteinId IN (SELECT P.ProteinId FROM Protein P INNER JOIN Identifier I on I.ProteinId = P.ProteinId WHERE P.TaxonomicId = 9606 AND I.DataTypeId = 1 AND I.Alias LIKE '#replaceme#')</query>
+                    <result>result</result>
+                </source>
+                <value>http://amigo.geneontology.org/cgi-bin/amigo/term-details.cgi?term=#replaceme#</value>
+                <parent></parent>
+                <type>ontology</type>
+                <ua>amigo</ua>
+            </value>
+            <value>
+                <name>Biological Process</name>
+                <description>Information regarding Gene Ontology defined biological processes.</description>
+                <shortname>AmiGO BP</shortname>
+                <source>
+                    <method>cache</method>
+                    <type>sql</type>
+                    <connection>jdbc:sqlserver://sql2k8-ua.servers.ua.pt;database=GeNS;user=GeNSdbo;password=xgsJ38Doa1qi.F4e</connection>
+                    <query>SELECT DISTINCT BE.BioEntityName AS result FROM Protein P INNER JOIN ProteinBioEntity PBO ON PBO.ProteinId = P.ProteinId INNER JOIN BioEntity BE ON BE.BioEntityId = PBO.BioEntityId WHERE BE.DataTypeId = 136 AND P.ProteinId IN (SELECT P.ProteinId FROM Protein P INNER JOIN Identifier I on I.ProteinId = P.ProteinId WHERE P.TaxonomicId = 9606 AND I.DataTypeId = 1 AND I.Alias LIKE '#replaceme#')</query>
+                    <result>result</result>
+                </source>
+                <value>http://amigo.geneontology.org/cgi-bin/amigo/term-details.cgi?term=#replaceme#</value>
+                <parent></parent>
+                <type>ontology</type>
+                <ua>amigo</ua>
+            </value>
+            <value>
+                <name>Cellular Component</name>
+                <description>Information regarding Gene Ontology defined cellular components.</description>
+                <shortname>AmiGO CC</shortname>
+                <source>
+                    <method>cache</method>
+                    <type>sql</type>
+                    <connection>jdbc:sqlserver://sql2k8-ua.servers.ua.pt;database=GeNS;user=GeNSdbo;password=xgsJ38Doa1qi.F4e</connection>
+                    <query>SELECT DISTINCT BE.BioEntityName AS result FROM Protein P INNER JOIN ProteinBioEntity PBO ON PBO.ProteinId = P.ProteinId INNER JOIN BioEntity BE ON BE.BioEntityId = PBO.BioEntityId WHERE BE.DataTypeId = 137 AND P.ProteinId IN (SELECT P.ProteinId FROM Protein P INNER JOIN Identifier I on I.ProteinId = P.ProteinId WHERE P.TaxonomicId = 9606 AND I.DataTypeId = 1 AND I.Alias LIKE '#replaceme#')</query>
+                    <result>result</result>
+                </source>
+                <value>http://amigo.geneontology.org/cgi-bin/amigo/term-details.cgi?term=#replaceme#</value>
+                <parent></parent>
+                <type>ontology</type>
+                <ua>amigo</ua>
+            </value>
+            <value>
+                <name>HGVbaseGEN2PHEN</name>
+                <description>Information for association atudies from HGVbaseG2P.</description>
+                <shortname>HGVbaseG2P</shortname>
+                <source>
+                    <method>cache</method>
+                    <type>feed</type>
+                    <connection>http://www.hgvbaseg2p.org/studies?q=#replaceme#&amp;format=atom&amp;t=2</connection>
+                </source>
+                <value>http://www.hgvbaseg2p.org/study/#replaceme#</value>
+                <parent></parent>
+                <type>study</type>
+                <ua>hgvbaseg2p</ua>
+            </value>
+            <value>
+                <name>Locus Reference Genomic</name>
+                <description>Information for LRG reference sequence information.</description>
+                <shortname>LRG</shortname>
+                <source>
+                    <method>cache</method>
+                    <type>csv</type>
+                    <connection>ftp://ftp.ebi.ac.uk/pub/databases/lrgex/.lrg_index</connection>
+                </source>
+                <value>http://www.lrg-sequence.org/#replaceme#</value>
+                <parent></parent>
+                <type>genesequence</type>
+                <ua>lrg</ua>
+            </value>
+        </values>
+    </config>
+</configs>

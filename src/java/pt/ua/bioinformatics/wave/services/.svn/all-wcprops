@@ -1,0 +1,65 @@
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/services
+END
+Settings.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/wave/!svn/ver/272/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/services/Settings.java
+END
+Updater.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/services/Updater.java
+END
+DB.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/services/DB.java
+END
+GeneCompare.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/services/GeneCompare.java
+END
+Tester.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/services/Tester.java
+END
+Index.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/services/Index.java
+END
+API.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/services/API.java
+END
+GeneList.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/services/GeneList.java
+END
+SimpleXML.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/services/SimpleXML.java
+END
+VariantCompare.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/services/VariantCompare.java
+END

@@ -1,0 +1,221 @@
+/** reset defaults **/
+html, body {
+    height:90%;
+    margin: 1% 0 0 1%;
+    padding: 0;
+    width: 95%;
+    font-size: 12px; /* Resets 1em to 10px */
+    font-family: 'Helvetica Neue', Arial, Verdana, Sans-Serif;
+    color: #454547;
+    background: none;
+}
+#summary {
+    margin: 25px 0 0 0;
+    width: 60%;
+    padding: 0px 10px 5px 10px;
+    background-color: #ede5ec;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+#summary .name{
+    background: transparent url(../images/sprite.png) 0 -985px no-repeat;
+    padding: 0px 2px 2px 18px;
+    border-bottom: 1px solid #BBB;
+    height: 20px;
+}
+#summary .sequence{
+    background: transparent url(../images/sprite.png) 0 -1077px no-repeat;
+    padding: 2px 2px 2px 20px;
+    border-bottom: 1px solid #BBB;
+    height: 20px;
+}
+#summary .shortcut{
+    background: transparent url(../images/shortcuts.png) left center no-repeat;
+    padding: 2px 2px 2px 20px;
+    border-bottom: 1px solid #BBB;
+    font-weight: bold;
+    height: 20px;
+}
+#summary .shortcuts {
+    padding: 5px;
+    height: 35px;
+    text-align: center;
+}
+#summary .shortcuts .diseasecard {
+    background: url(../images/sprite.png) 0 -62px no-repeat;
+    width: 90px;
+    height: 15px;
+    display: block;
+    margin: 10px 10px 0 0;
+    float: left;
+}
+#summary .shortcuts .diseasecard:hover {
+    background-position: 0 -92px;
+}
+#summary .shortcuts .diseasecard a {
+    width: 90px;
+    height: 15px;
+    display: block;
+}
+#summary .shortcuts .diseasecard a span {
+    display: none;
+}
+#summary .shortcuts .gen2phenkc {
+    background: url(../images/sprite.png) 0 -509px no-repeat;
+    width: 80px;
+    height: 30px;
+    display: block;
+    margin: 4px 10px 0 0;
+    float: left;
+    top: 50%;
+}
+#summary .shortcuts .gen2phenkc:hover {
+    background-position: 0 -569px;
+}
+#summary .shortcuts .gen2phenkc a {
+    width: 80px;
+    height: 30px;
+    display: block;
+}
+#summary .shortcuts .gen2phenkc a span{
+    display: none;
+}
+#summary .shortcuts .uniprot {
+    background: url(../images/sprite.png) 0 -1123px no-repeat;
+    width: 65px;
+    height: 30px;
+    display: block;
+    margin: 4px 10px 0 10px;
+    float: left;
+    top: 50%;
+}
+#summary .shortcuts .uniprot:hover {
+    background-position: 0 -1153px;
+}
+#summary .shortcuts .uniprot a {
+    width: 65px;
+    height: 30px;
+    display: block;
+}
+#summary .shortcuts .uniprot a span{
+    display: none;
+}
+#summary .genomic {
+    padding: 2px 2px 2px 0px;
+    border-bottom: 1px solid #BBB;
+}
+
+#summary .genomic .variant {
+    background: transparent url(../images/sprite.png)  0 -1213px no-repeat;
+    padding: 0 0 0 18px;
+    font-weight: bold;
+}
+#summary .genomic .lsdb {
+    background: transparent url(../images/sprite.png) 0 -847px no-repeat;
+    padding: 0 0 0 18px;
+    font-weight: bold;
+}
+#summary .novariome {
+    background: url(../images/sprite.png) 0 -1031px no-repeat;
+    padding: 2px 5px 1px 20px;
+    border-bottom: 1px solid #ff9696;
+}
+#freebase {
+    width: 35%;
+    margin: 4px;
+    background-color: #f7f3f7;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    padding: 6px;
+    position: absolute;
+    right: 2%;
+    top: 69px;
+}
+
+#freebase .information {
+    background: transparent url(../images/sprite.png) 0 -691px no-repeat;
+    padding: 0 0 0 20px;
+    font-weight: bold;
+    border-bottom: 1px solid #AAA;
+}
+
+/** clearfixes **/
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+.clearfix {
+    display: inline-block;
+}
+
+/* Hides from IE-mac \*/
+* html .clearfix {
+    height: 1%;
+}
+
+.clearfix {
+    display: block;
+}
+
+#pics {
+    margin: 25px 0 0 0;
+    width: 60%;
+    padding: 10px 10px 10px 10px;
+    float: left;
+    background-color: #efefef;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+#pics .images {
+    width:  420px;
+    height: 200px;
+    margin:0 auto;
+    padding: 0 10px 0 10px;
+    border-left: 1px solid #BBB;
+    border-right: 1px solid #BBB;
+}
+#pics .image {
+    background-color: #eee;
+    width:  400px;
+    height: 200px;
+    margin:0 auto;
+}
+#pics .image .caption {
+    position: absolute;
+    width: 400px;
+    bottom: 0;
+    left: 0;
+    background: #efefef;
+    color: #000;
+    height: 40px;
+    width: 100%;
+    opacity: .7;
+    padding: 0 2px 0 0;
+    filter: alpha(Opacity=70);
+    -ms-filter: "Alpha(Opacity=70)";
+}
+#pics .image .caption .title {
+    font-size: 120%;
+    font-weight: bold;
+}
+
+/*printer styles*/
+@media print{
+    /*hide the left column when printing*/
+    #sidebar{display:none;}
+    #container{width:100%; float:none;}
+}

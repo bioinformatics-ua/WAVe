@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genes generated="2010/03/11 18:20:38">
+	<gene hgnc="AIRE" wave="520">
+		<types>
+			<type name="LSDB">
+				<nodes>
+					<node name="IDBases">
+						<leafs>
+							<leaf name="AIRE">
+								<value>http://bioinf.uta.fi/AIREbase/</value>
+							</leaf>
+						</leafs>
+					</node>
+				</nodes>
+			</type>
+			<type name="Variation">
+				<nodes>
+					<node name="All">
+						<leafs>
+							<leaf name="All">
+								<value>/view/AIRE/variants/all</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Change Type">
+						<leafs>
+							<leaf name="Change Type">
+								<value>/view/AIRE/variants/change</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Sequence Type">
+						<leafs>
+							<leaf name="Sequence Type">
+								<value>/view/AIRE/variants/sequence</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Substitution">
+						<leafs>
+							<leaf name="Substitution">
+								<value>/view/AIRE/variants/sub</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Deletion">
+						<leafs>
+							<leaf name="Deletion">
+								<value>/view/AIRE/variants/del</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Duplication">
+						<leafs>
+							<leaf name="Duplication">
+								<value>/view/AIRE/variants/dup</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Insertion">
+						<leafs>
+							<leaf name="Insertion">
+								<value>/view/AIRE/variants/ins</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Inversion">
+						<leafs>
+							<leaf name="Inversion">
+								<value>/view/AIRE/variants/inv</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Conversion">
+						<leafs>
+							<leaf name="Conversion">
+								<value>/view/AIRE/variants/con</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Coding">
+						<leafs>
+							<leaf name="Coding">
+								<value>/view/AIRE/variants/c</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Genomic">
+						<leafs>
+							<leaf name="Genomic">
+								<value>/view/AIRE/variants/g</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Mitochondrial">
+						<leafs>
+							<leaf name="Mitochondrial">
+								<value>/view/AIRE/variants/m</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="RNA">
+						<leafs>
+							<leaf name="RNA">
+								<value>/view/AIRE/variants/r</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Proteic">
+						<leafs>
+							<leaf name="Proteic">
+								<value>/view/AIRE/variants/p</value>
+							</leaf>
+						</leafs>
+					</node>
+				</nodes>
+			</type>
+			<type name="Publication">
+				<nodes>
+					<node name="Gene">
+						<leafs>
+							<leaf name="Gene">
+								<value>http://quext.org/gene/AIRE</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Disease">
+						<leafs>
+							<leaf name="Disease">
+								<value>http://quext.org/disease/AIRE</value>
+							</leaf>
+						</leafs>
+					</node>
+				</nodes>
+			</type>
+			<type name="Disease">
+				<nodes>
+					<node name="OMIM">
+						<leafs>
+							<leaf name="240300">
+								<value>http://www.ncbi.nlm.nih.gov/entrez/dispomim.cgi?id=240300</value>
+							</leaf>
+							<leaf name="607358">
+								<value>http://www.ncbi.nlm.nih.gov/entrez/dispomim.cgi?id=607358</value>
+							</leaf>
+						</leafs>
+					</node>
+				</nodes>
+			</type>
+			<type name="Gene">
+				<nodes>
+					<node name="Gene Card">
+						<leafs>
+							<leaf name="Gene Card">
+								<value>http://www.genecards.org/cgi-bin/carddisp.pl?gene=AIRE</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Gene Names">
+						<leafs>
+							<leaf name="HGNC:360">
+								<value>http://www.genenames.org/data/hgnc_data.php?hgnc_id=HGNC:360</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Entrez Gene">
+						<leafs>
+							<leaf name="326">
+								<value>http://www.ncbi.nlm.nih.gov/gene/326</value>
+							</leaf>
+						</leafs>
+					</node>
+				</nodes>
+			</type>
+			<type name="Pharmacogenomics">
+				<nodes>
+					<node name="Pharmacogenomics">
+						<leafs>
+							<leaf name="PA24654">
+								<value>http://www.pharmgkb.org/views/index.jsp?objCls=Gene&objId=PA24654</value>
+							</leaf>
+						</leafs>
+					</node>
+				</nodes>
+			</type>
+			<type name="Locus">
+				<nodes>
+					<node name="Map Viewer">
+						<leafs>
+							<leaf name="Map Viewer">
+								<value>http://www.ncbi.nlm.nih.gov/projects/mapview/map_search.cgi?taxid=9606&query=AIRE</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Ensembl">
+						<leafs>
+							<leaf name="ENSG00000160224">
+								<value>http://www.ensembl.org/Homo_sapiens/Gene/Summary?db=core;g=ENSG00000160224</value>
+							</leaf>
+						</leafs>
+					</node>
+				</nodes>
+			</type>
+			<type name="Pathway">
+				<nodes>
+					<node name="KEGG">
+						<leafs>
+							<leaf name="hsa:326">
+								<value>http://www.genome.jp/dbget-bin/show_pathway?hsa:326</value>
+							</leaf>
+						</leafs>
+					</node>
+				</nodes>
+			</type>
+			<type name="Enzyme">
+				<nodes>
+				</nodes>
+			</type>
+			<type name="Protein">
+				<nodes>
+					<node name="UniProt">
+						<leafs>
+							<leaf name="A5A8N0">
+								<value>http://www.uniprot.org/uniprot/A5A8N0</value>
+							</leaf>
+							<leaf name="A5PKT6">
+								<value>http://www.uniprot.org/uniprot/A5PKT6</value>
+							</leaf>
+							<leaf name="B2RP50">
+								<value>http://www.uniprot.org/uniprot/B2RP50</value>
+							</leaf>
+							<leaf name="O43918">
+								<value>http://www.uniprot.org/uniprot/O43918</value>
+							</leaf>
+							<leaf name="O43922">
+								<value>http://www.uniprot.org/uniprot/O43922</value>
+							</leaf>
+							<leaf name="O43932">
+								<value>http://www.uniprot.org/uniprot/O43932</value>
+							</leaf>
+							<leaf name="O75745">
+								<value>http://www.uniprot.org/uniprot/O75745</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Structure">
+						<leafs>
+							<leaf name="1XWH">
+								<value>http://www.pdb.org/pdb/explore/explore.do?pdbId=1XWH</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Sequence">
+						<leafs>
+							<leaf name="AB006682">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AB006682</value>
+							</leaf>
+							<leaf name="AB006683">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AB006683</value>
+							</leaf>
+							<leaf name="AB006684">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AB006684</value>
+							</leaf>
+							<leaf name="AB006685">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AB006685</value>
+							</leaf>
+							<leaf name="AB303969">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AB303969</value>
+							</leaf>
+							<leaf name="AJ009610">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AJ009610</value>
+							</leaf>
+							<leaf name="AP001754">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?AP001754</value>
+							</leaf>
+							<leaf name="BC137268">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?BC137268</value>
+							</leaf>
+							<leaf name="BC137270">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?BC137270</value>
+							</leaf>
+							<leaf name="BC142608">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?BC142608</value>
+							</leaf>
+							<leaf name="CH471079">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?CH471079</value>
+							</leaf>
+							<leaf name="Z97990">
+								<value>http://www.ebi.ac.uk/cgi-bin/expasyfetch?Z97990</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Domain">
+						<leafs>
+							<leaf name="IPR000770">
+								<value>http://www.ebi.ac.uk/interpro/IEntry?ac=IPR000770</value>
+							</leaf>
+							<leaf name="IPR001965">
+								<value>http://www.ebi.ac.uk/interpro/IEntry?ac=IPR001965</value>
+							</leaf>
+							<leaf name="IPR004865">
+								<value>http://www.ebi.ac.uk/interpro/IEntry?ac=IPR004865</value>
+							</leaf>
+							<leaf name="IPR008087">
+								<value>http://www.ebi.ac.uk/interpro/IEntry?ac=IPR008087</value>
+							</leaf>
+							<leaf name="IPR013083">
+								<value>http://www.ebi.ac.uk/interpro/IEntry?ac=IPR013083</value>
+							</leaf>
+						</leafs>
+					</node>
+				</nodes>
+			</type>
+			<type name="Ontology">
+				<nodes>
+					<node name="Molecular Function">
+						<leafs>
+							<leaf name="GO:0003677">
+								<value>http://amigo.geneontology.org/cgi-bin/amigo/term-details.cgi?term=GO:0003677</value>
+							</leaf>
+							<leaf name="GO:0008270">
+								<value>http://amigo.geneontology.org/cgi-bin/amigo/term-details.cgi?term=GO:0008270</value>
+							</leaf>
+							<leaf name="GO:0045182">
+								<value>http://amigo.geneontology.org/cgi-bin/amigo/term-details.cgi?term=GO:0045182</value>
+							</leaf>
+							<leaf name="GO:0003700">
+								<value>http://amigo.geneontology.org/cgi-bin/amigo/term-details.cgi?term=GO:0003700</value>
+							</leaf>
+							<leaf name="GO:0005515">
+								<value>http://amigo.geneontology.org/cgi-bin/amigo/term-details.cgi?term=GO:0005515</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Biological Process">
+						<leafs>
+							<leaf name="GO:0006955">
+								<value>http://amigo.geneontology.org/cgi-bin/amigo/term-details.cgi?term=GO:0006955</value>
+							</leaf>
+							<leaf name="GO:0006959">
+								<value>http://amigo.geneontology.org/cgi-bin/amigo/term-details.cgi?term=GO:0006959</value>
+							</leaf>
+							<leaf name="GO:0006355">
+								<value>http://amigo.geneontology.org/cgi-bin/amigo/term-details.cgi?term=GO:0006355</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Cellular Component">
+						<leafs>
+							<leaf name="GO:0005634">
+								<value>http://amigo.geneontology.org/cgi-bin/amigo/term-details.cgi?term=GO:0005634</value>
+							</leaf>
+							<leaf name="GO:0005737">
+								<value>http://amigo.geneontology.org/cgi-bin/amigo/term-details.cgi?term=GO:0005737</value>
+							</leaf>
+						</leafs>
+					</node>
+				</nodes>
+			</type>
+		</types>
+	</gene>
+</genes>

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genes generated="2010/03/12 16:42:38">
+	<gene hgnc="USH3" wave="24751">
+		<types>
+			<type name="LSDB">
+				<nodes>
+					<node name="Generic">
+						<leafs>
+							<leaf name="USH3">
+								<value>http://hearing.harvard.edu/genepages/ush3dream.htm</value>
+							</leaf>
+						</leafs>
+					</node>
+				</nodes>
+			</type>
+			<type name="Variation">
+				<nodes>
+					<node name="All">
+						<leafs>
+							<leaf name="All">
+								<value>/view/USH3/variants/all</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Change Type">
+						<leafs>
+							<leaf name="Change Type">
+								<value>/view/USH3/variants/change</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Sequence Type">
+						<leafs>
+							<leaf name="Sequence Type">
+								<value>/view/USH3/variants/sequence</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Substitution">
+						<leafs>
+							<leaf name="Substitution">
+								<value>/view/USH3/variants/sub</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Deletion">
+						<leafs>
+							<leaf name="Deletion">
+								<value>/view/USH3/variants/del</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Duplication">
+						<leafs>
+							<leaf name="Duplication">
+								<value>/view/USH3/variants/dup</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Insertion">
+						<leafs>
+							<leaf name="Insertion">
+								<value>/view/USH3/variants/ins</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Inversion">
+						<leafs>
+							<leaf name="Inversion">
+								<value>/view/USH3/variants/inv</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Conversion">
+						<leafs>
+							<leaf name="Conversion">
+								<value>/view/USH3/variants/con</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Coding">
+						<leafs>
+							<leaf name="Coding">
+								<value>/view/USH3/variants/c</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Genomic">
+						<leafs>
+							<leaf name="Genomic">
+								<value>/view/USH3/variants/g</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Mitochondrial">
+						<leafs>
+							<leaf name="Mitochondrial">
+								<value>/view/USH3/variants/m</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="RNA">
+						<leafs>
+							<leaf name="RNA">
+								<value>/view/USH3/variants/r</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Proteic">
+						<leafs>
+							<leaf name="Proteic">
+								<value>/view/USH3/variants/p</value>
+							</leaf>
+						</leafs>
+					</node>
+				</nodes>
+			</type>
+			<type name="Publication">
+				<nodes>
+					<node name="Gene">
+						<leafs>
+							<leaf name="Gene">
+								<value>http://quext.org/gene/USH3</value>
+							</leaf>
+						</leafs>
+					</node>
+					<node name="Disease">
+						<leafs>
+							<leaf name="Disease">
+								<value>http://quext.org/disease/USH3</value>
+							</leaf>
+						</leafs>
+					</node>
+				</nodes>
+			</type>
+			<type name="Disease">
+				<nodes>
+				</nodes>
+			</type>
+			<type name="Gene">
+				<nodes>
+					<node name="Gene Card">
+						<leafs>
+							<leaf name="Gene Card">
+								<value>http://www.genecards.org/cgi-bin/carddisp.pl?gene=USH3</value>
+							</leaf>
+						</leafs>
+					</node>
+				</nodes>
+			</type>
+			<type name="Pharmacogenomics">
+				<nodes>
+				</nodes>
+			</type>
+			<type name="Locus">
+				<nodes>
+					<node name="Map Viewer">
+						<leafs>
+							<leaf name="Map Viewer">
+								<value>http://www.ncbi.nlm.nih.gov/projects/mapview/map_search.cgi?taxid=9606&query=USH3</value>
+							</leaf>
+						</leafs>
+					</node>
+				</nodes>
+			</type>
+			<type name="Pathway">
+				<nodes>
+				</nodes>
+			</type>
+			<type name="Enzyme">
+				<nodes>
+				</nodes>
+			</type>
+			<type name="Protein">
+				<nodes>
+				</nodes>
+			</type>
+			<type name="Ontology">
+				<nodes>
+				</nodes>
+			</type>
+		</types>
+	</gene>
+</genes>

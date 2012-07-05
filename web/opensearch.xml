@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
+   <ShortName>WAVe</ShortName>
+   <Description>Web Analysis of the Variome gene search.</Description>
+   <Tags>wave genetics bioinformatics variome gen2phen aveiro</Tags>
+   <Contact>pedrolopes@ua.pt</Contact>
+   <Url type="application/atom+xml"
+        template="http://bioinformatics.ua.pt/wave/browse/{searchTerms}/atom"/>
+   <Url type="text/html"
+        template="http://bioinformatics.ua.pt/wave/gene/{searchTerms}"/>
+   <LongName>WAVe | Web Analysis of the Variome</LongName>
+   <Image height="16" width="16" type="image/x-icon">favicon.ico</Image>
+   <Developer>Pedro Lopes @ UA.PT Bioinformatics</Developer>
+   <Attribution>
+     Copyright 2010, UA.PT Bioinformatics
+   </Attribution>
+   <SyndicationRight>open</SyndicationRight>
+   <AdultContent>false</AdultContent>
+   <Language>en-en</Language>
+   <OutputEncoding>UTF-8</OutputEncoding>
+   <InputEncoding>UTF-8</InputEncoding>
+ </OpenSearchDescription>

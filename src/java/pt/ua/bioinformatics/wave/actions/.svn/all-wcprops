@@ -1,0 +1,119 @@
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/actions
+END
+DisclaimerActionBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/actions/DisclaimerActionBean.java
+END
+PathwayActionBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/actions/PathwayActionBean.java
+END
+DiseaseActionBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/actions/DiseaseActionBean.java
+END
+GeneActionBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/actions/GeneActionBean.java
+END
+ProteinActionBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/actions/ProteinActionBean.java
+END
+StatusActionBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/actions/StatusActionBean.java
+END
+VariantsActionBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/actions/VariantsActionBean.java
+END
+HelpActionBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/actions/HelpActionBean.java
+END
+ContactActionBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/actions/ContactActionBean.java
+END
+BrowseActionBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/actions/BrowseActionBean.java
+END
+AutocompleteActionBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/actions/AutocompleteActionBean.java
+END
+VariantActionBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/actions/VariantActionBean.java
+END
+SearchActionBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/actions/SearchActionBean.java
+END
+UAActionBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/actions/UAActionBean.java
+END
+StudyActionBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/actions/StudyActionBean.java
+END
+PharmaActionBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/actions/PharmaActionBean.java
+END
+OntologyActionBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/actions/OntologyActionBean.java
+END
+ContentActionBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/actions/ContentActionBean.java
+END
+AboutActionBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/wave/!svn/ver/268/branches/WAVe1.5/src/java/pt/ua/bioinformatics/wave/actions/AboutActionBean.java
+END

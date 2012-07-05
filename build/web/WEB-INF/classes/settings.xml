@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<WAVe>
+    <version>1.5</version>
+    <host>http://localhost:8080/</host>
+    <database>
+        <!-- MySQL Expression -->
+        <connection>
+            <server>jdbc:mysql://localhost:3306/wave10</server>
+            <username>root</username>
+            <password>telematica</password>
+        </connection>
+        <!-- MySQL CICUA
+        <connection>
+            <server>jdbc:mysql://193.136.172.136:3306/wave</server>
+            <username>wave_user</username>
+            <password>JALqN8R3CDYp7TtC</password>
+        </connection>-->
+        <build>10</build>
+        <genelist>2011-09-14</genelist>
+        <index>hgnc|uniprots|uniprott|omim|pharmgkb|hgvbaseg2p|kegg|reactome|amigob|amigoc|amigom</index>
+    </database>
+    <modules>
+        <!-- access to all genes --><module><name>geneverse</name><enabled>false</enabled></module>
+        <!-- database building --><module><name>varcrawler</name><enabled>true</enabled></module>
+        <!-- Arabella web crawler --><module><name>arabella</name><enabled>false</enabled></module>
+        <!-- api --><module><name>api</name><enabled>true</enabled></module>
+        <!-- database --><module><name>database</name><enabled>true</enabled></module>
+        <!-- real time --><module><name>realtime</name><enabled>false</enabled></module>
+    </modules>
+</WAVe>
