@@ -12,10 +12,10 @@
     <s:layout-component name="title">
         <c:choose>
             <c:when test="${actionBean.hgnc == '*'}">
-                Browse all genes | WAVe
+                Browse  WAVe
             </c:when>
             <c:otherwise>
-                Browse for <c:out value="${actionBean.hgnc}" escapeXml="true" /> | WAVe
+                Browse WAVe for <c:out value="${actionBean.hgnc}" escapeXml="true" />
             </c:otherwise>
         </c:choose>
     </s:layout-component>

@@ -42,21 +42,29 @@ $(document).ready(function() {
                 }
                 self._renderItem( ul, item );
             });
+        },
+        select: function( event, ui ) {
+            event.preventDefault();
+            window.location.href = "/WAVe/search/" + $("#hgnc").attr("value");
         }
     });
     
     $("#hgnc").catcomplete({
         delay: 500,
-        source: 'http://bioinformatics.ua.pt/WAVe/autocomplete'
+        source: '/WAVe/autocomplete',
+        select: function( event, ui ) {
+            event.preventDefault();
+            window.location.href = "/WAVe/search/" + $("#hgnc").attr("value");
+        }
     });
 
     //$("#hgnc").autocomplete('autocomplete');
     $("#submit").click(function(){
-        window.location.href = "http://bioinformatics.ua.pt/WAVe/search/" + $("#hgnc").attr("value");
+        window.location.href = "/WAVe/search/" + $("#hgnc").attr("value");
     });
     $("#hgnc").keypress(function(e){
         if(e.keyCode == 13) {
-            window.location.href = "http://bioinformatics.ua.pt/WAVe/search/" + $("#hgnc").attr("value");
+            window.location.href = "/WAVe/search/" + $("#hgnc").attr("value");
         }
     });
     

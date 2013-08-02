@@ -117,7 +117,7 @@ public class Settings {
 
     public static boolean load() {
         try {
-            path = Settings.class.getResource("/").getPath();  
+            path = Settings.class.getResource("/").getPath();
             settingsFile = new SimpleXML(path + "settings.xml");
             version = settingsFile.selectNode("//version");
             dbServer = settingsFile.selectNode("//database/connection/server");
@@ -126,7 +126,6 @@ public class Settings {
             dbBuild = settingsFile.selectNode("//database/build");
             index = settingsFile.selectNode("//database/index");
             host = settingsFile.selectNode("//host");
-
             NodeList moduleList = settingsFile.selectNodes("//module");
             for (int i = 0; i < moduleList.getLength(); i++) {
                 Node n = moduleList.item(i);

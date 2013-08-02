@@ -2,7 +2,7 @@
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld"%>
 <s:layout-render name="/layout/extras.jsp">
     <s:layout-component name="title">
-        Disclaimer | WAVe
+        Disclaimer WAVe
     </s:layout-component>
     <s:layout-component name="content">
 

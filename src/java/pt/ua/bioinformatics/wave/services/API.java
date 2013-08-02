@@ -10,10 +10,7 @@ import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.feed.synd.SyndFeedImpl;
 import com.sun.syndication.io.FeedException;
 import com.sun.syndication.io.SyndFeedOutput;
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.sql.ResultSet;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -25,12 +22,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 import pt.ua.bioinformatics.wave.domain.Gene;
 import pt.ua.bioinformatics.wave.domain.Leaf;
 import pt.ua.bioinformatics.wave.domain.Node;
 import pt.ua.bioinformatics.wave.domain.Type;
 import pt.ua.bioinformatics.wave.domain.Variant;
+import redis.clients.jedis.Jedis;
 
 /**
  *
@@ -49,6 +46,15 @@ public class API {
     static boolean typesLoaded = false;
     static boolean loaded = false;
     static DB db = new DB();
+    static Jedis jedis = null;      // Redis cache client
+
+    public static Jedis getJedis() {
+        return jedis;
+    }
+
+    public static void setJedis(Jedis jedis) {
+        API.jedis = jedis;
+    }
 
     public static DB getDb() {
         return db;
@@ -128,6 +134,7 @@ public class API {
             if (!typesLoaded) {
                 loadTypes();
             }
+            jedis = new Jedis("localhost");
             loaded = true;
         } catch (Exception e) {
             System.out.println("[API] unable to load all data\n\t" + e.toString());
@@ -156,8 +163,9 @@ public class API {
     }
 
     /**
-     * Loads information regarding WAVe gene tree Nodes for Universal Access API.
-     * 
+     * Loads information regarding WAVe gene tree Nodes for Universal Access
+     * API.
+     *
      * @return
      */
     public static boolean loadNodes() {
@@ -215,9 +223,9 @@ public class API {
             }
         }
         /* for (Type t : types.values()) {
-        System.out.println("\t" + t.getShortname() + ":" + t.getId());
-        }
-        System.out.println(types.get("delins").getShortname() + types.get("delins").getId());*/
+         System.out.println("\t" + t.getShortname() + ":" + t.getId());
+         }
+         System.out.println(types.get("delins").getShortname() + types.get("delins").getId());*/
         return typesLoaded;
     }
 
@@ -235,7 +243,6 @@ public class API {
             if (Settings.modules.get("api")) {
                 try {
                     db.connect();
-
                     ResultSet rs = db.getData("SELECT * FROM wave#build#_type WHERE refmetatypeid = 14");
                     while (rs.next()) {
                         methods.put(rs.getString("shortname"), rs.getInt("id"));
@@ -254,13 +261,15 @@ public class API {
     /**
      * Hanlder for calls to WAVe Universal Access API.
      * <p>
-     *     The Universal Access API enables direct access to integrated pages within WAVe
-     *     gene context and using a single address location.<br /><b>Sample</b>
-     *     <ul>
-     *         <li>http://bioinformatics.ua.pt/WAVe/gene/BRCA2/uniprot:P51587</li>
-     *     </ul>
-     *     <br />Available identifiers are all Nodes (check configuration file for UA field)
+     * The Universal Access API enables direct access to integrated pages within
+     * WAVe gene context and using a single address location.<br /><b>Sample</b>
+     * <ul>
+     * <li>http://bioinformatics.ua.pt/WAVe/gene/BRCA2/uniprot:P51587</li>
+     * </ul>
+     * <br />Available identifiers are all Nodes (check configuration file for
+     * UA field)
      * </p>
+     *
      * @param query
      * @param caller
      * @return
@@ -275,7 +284,7 @@ public class API {
         //System.out.println(query);
         String[] full = query.split(":");
         full[0] = full[0].toLowerCase();
-        register(caller, methods.get("ua"));
+        //register(caller, methods.get("ua"));
         //System.out.println(nodes.get(full[0]).getValue());
         if (full.length > 2) {
             return nodes.get(full[0]).getValue().replace("#replaceme#", full[1] + ":" + full[2]);
@@ -299,17 +308,17 @@ public class API {
         if (!methodsLoaded) {
             loadMethods();
         }
- if (method.equals("atom_1.0")) {
+        if (method.equals("atom_1.0")) {
             try {
                 response = geneFeed(gene, method);
-                register(gene.getId(), methods.get("geneatom"));
+                //   register(gene.getId(), methods.get("geneatom"));
             } catch (FeedException ex) {
                 Logger.getLogger(API.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (method.equals("json")) {
             try {
                 response = geneFeed(gene, method);
-                register(gene.getId(), methods.get("genejson"));
+                // register(gene.getId(), methods.get("genejson"));
             } catch (Exception ex) {
                 Logger.getLogger(API.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -332,13 +341,13 @@ public class API {
         if (method.equals("atom_1.0")) {
             try {
                 response = variantFeed(gene, method);
-                register(gene.getId(), methods.get("variantatom"));
+                //  register(gene.getId(), methods.get("variantatom"));
             } catch (Exception ex) {
                 Logger.getLogger(API.class.getName()).log(Level.SEVERE, null, ex);
                 System.out.println("[API][Variant] unable to call API for gene variants " + method + "\n" + ex.toString());
             }
         } else if (method.equals("json")) {
-            register(gene.getId(), methods.get("variantjson"));
+            //  register(gene.getId(), methods.get("variantjson"));
         }
         return response;
     }
@@ -359,14 +368,14 @@ public class API {
         if (method.equals("atom_1.0")) {
             try {
                 response = browseFeed(genes, method);
-                register(0, methods.get("browseatom"));
+                //register(0, methods.get("browseatom"));
             } catch (Exception ex) {
                 Logger.getLogger(API.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else if (method.equals("json")) {
             try {
                 response = browseFeed(genes, method);
-                register(0, methods.get("browsejson"));
+                //  register(0, methods.get("browsejson"));
             } catch (Exception ex) {
                 Logger.getLogger(API.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -376,6 +385,7 @@ public class API {
 
     /**
      * Loads all genes in feed format
+     *
      * @param feedType
      * @return
      */
@@ -386,7 +396,7 @@ public class API {
         feed.setLink("http://bioinformatics.ua.pt/WAVe");
         feed.setDescription("WAVe | Web Analysis of the Variome variant listing for all genes.");
         feed.setAuthor("http://bioinformatics.ua.pt");
-        feed.setCopyright("WAVe (c) UA.PT Bioinformatics & Computational Biology 2010");
+        feed.setCopyright("WAVe (c) UA.PT Bioinformatics & Computational Biology 2013");
         List entries = new ArrayList();
         try {
             for (Gene g : genes) {
@@ -414,12 +424,13 @@ public class API {
     /**
      * Loads gene variant dataList in feed format.
      * <p><b>Feature:</b><br />
-     * Builds a generic String containing the feed structure that is passed to the web API.<br /><br/>
+     * Builds a generic String containing the feed structure that is passed to
+     * the web API.<br /><br/>
      * <b>Operation:</b>
      * <ul>
-     *  <li>Initiate document definition</li>
-     *  <li>Read variants to Feed</li>
-     *  <li>Finalize Feed String and return it</li>
+     * <li>Initiate document definition</li>
+     * <li>Read variants to Feed</li>
+     * <li>Finalize Feed String and return it</li>
      * </ul>
      * </p>
      *
@@ -427,14 +438,14 @@ public class API {
      * @param feedType Output feed type (available types: rss_2.0, atom_1.0)
      * @return A string containing the complete gene RSS feed.
      */
-    static String variantFeed(Gene g, String feedType) throws IOException, FeedException {
+    public static String variantFeed(Gene g, String feedType) throws IOException, FeedException {
         SyndFeed feed = new SyndFeedImpl();
         feed.setFeedType(feedType);
         feed.setTitle("Variant list | WAVe");
         feed.setLink("http://bioinformatics.ua.pt/WAVe");
         feed.setDescription("WAVe | Web Analysis of the Variome variant listing for " + g.getHGNC() + " gene.");
         feed.setAuthor("http://bioinformatics.ua.pt");
-        feed.setCopyright("WAVe (c) UA.PT Bioinformatics & Computational Biology 2010");
+        feed.setCopyright("WAVe (c) UA.PT Bioinformatics & Computational Biology 2013");
         List entries = new ArrayList();
 
         try {
@@ -478,13 +489,14 @@ public class API {
     /**
      * Loads the gene navigation tree dataList in feed format.
      * <p><b>Feature:</b><br />
-     * Builds a generic String containing the feed structure that is passed to the web API.<br /><br/>
+     * Builds a generic String containing the feed structure that is passed to
+     * the web API.<br /><br/>
      * <b>Operation:</b>
      * <ul>
-     *  <li>Initiate document definition</li>
-     *  <li>Read node list and add node information to Feed</li>
-     *  <li>Read leaf list for each node and add leaf information to Feed</li>
-     *  <li>Finalize Feed String and return it</li>
+     * <li>Initiate document definition</li>
+     * <li>Read node list and add node information to Feed</li>
+     * <li>Read leaf list for each node and add leaf information to Feed</li>
+     * <li>Finalize Feed String and return it</li>
      * </ul>
      * </p>
      *
@@ -492,7 +504,7 @@ public class API {
      * @param feedType Output feed type (available types: rss_2.0, atom_1.0)
      * @return A string containing the complete gene RSS feed.
      */
-    static String geneFeed(Gene g, String feedType) throws FeedException {
+    public static String geneFeed(Gene g, String feedType) throws FeedException {
 
         if (feedType.equals("json")) {
 
@@ -579,9 +591,9 @@ public class API {
             feed.setLink("http://bioinformatics.ua.pt/WAVe");
             feed.setDescription("WAVe | Web Analysis of the Variome navigation tree for " + g.getHGNC() + " gene.");
             feed.setAuthor("http://bioinformatics.ua.pt");
-            feed.setCopyright("WAVe (c) UA.PT Bioinformatics & Computational Biology 2010");
+            feed.setCopyright("WAVe (c) UA.PT Bioinformatics & Computational Biology 2013");
 
-            ArrayList<Type> datatypes = g.loadInfo();
+            ArrayList<Type> datatypes = g.loadInfoForCache();
 
             List entries = new ArrayList();
             try {
@@ -812,7 +824,8 @@ public class API {
      * Verifies if a given variant is valid.
      *
      * @param variant The variant to test.
-     * @return True if variant is invalid and should not be added to WAVe database, false it is valid.
+     * @return True if variant is invalid and should not be added to WAVe
+     * database, false it is valid.
      */
     public static boolean rejectVariant(String variant) {
         List<String> reject = Arrays.asList("water", "init", "IV", "info", "WT", "UK", "Ex", "vari", "geen", "cyto", "part", "pdf", ".fi", ".de", "net", "com", "org", "kb", "dupli", "dele", "ex", "onic", "var", "gen", "op", "Not", "unk", "dele", "Mut", "c.0", "clear", "edu", "yu", "win", "=", "set", "title", ".nl", "med", "value", "uk", "php", "win", "ih", "id", "@", "cgi", "il", "be", "ucl", "jpg", "htm", "src", "ac", "Mol", "Gen", "png", "gif", "js", "c.c", "J", "Vis", "__", "EVEN", "get");
@@ -863,32 +876,34 @@ public class API {
 
     /**
      * Loads given Gene description from Freebase database.
-     * 
+     *
      * @param gene the Freebase query
      * @return
+     * @deprecated
      */
     public static String getFreebase(String gene) {
-        gene = sanitize(gene);
-        String stream = "";
-        try {
-            URL query = new URL("http://www.freebase.com/api/service/search?query=" + gene.toLowerCase() + "&limit=1");
-            BufferedReader queryReader = new BufferedReader(new InputStreamReader(query.openStream()));
-            JSONObject queryObj = (JSONObject) JSONValue.parse(queryReader);
-            JSONArray queryResults = (JSONArray) queryObj.get("result");
-            for (Object queryResult : queryResults) {
-                JSONObject r = (JSONObject) queryResult;
-                URL geneUrl = new URL("http://api.freebase.com/api/experimental/topic/standard?id=" + r.get("id"));
-                BufferedReader geneReader = new BufferedReader(new InputStreamReader(geneUrl.openStream()));
-                JSONObject geneObj = (JSONObject) JSONValue.parse(geneReader);
-                JSONObject idObj = (JSONObject) geneObj.get(r.get("id"));
-                JSONObject resultObj = (JSONObject) idObj.get("result");
-                stream = r.get("id") + "#" + (String) resultObj.get("description");
-            }
-            queryReader.close();
-        } catch (Exception ex) {
-            Logger.getLogger(API.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return stream;
+        /* gene = sanitize(gene);
+         String stream = "";
+         try {
+         URL query = new URL("http://www.freebase.com/api/service/search?query=" + gene.toLowerCase() + "&limit=1");
+         BufferedReader queryReader = new BufferedReader(new InputStreamReader(query.openStream()));
+         JSONObject queryObj = (JSONObject) JSONValue.parse(queryReader);
+         JSONArray queryResults = (JSONArray) queryObj.get("result");
+         for (Object queryResult : queryResults) {
+         JSONObject r = (JSONObject) queryResult;
+         URL geneUrl = new URL("http://api.freebase.com/api/experimental/topic/standard?id=" + r.get("id"));
+         BufferedReader geneReader = new BufferedReader(new InputStreamReader(geneUrl.openStream()));
+         JSONObject geneObj = (JSONObject) JSONValue.parse(geneReader);
+         JSONObject idObj = (JSONObject) geneObj.get(r.get("id"));
+         JSONObject resultObj = (JSONObject) idObj.get("result");
+         stream = r.get("id") + "#" + (String) resultObj.get("description");
+         }
+         queryReader.close();
+         } catch (Exception ex) {
+         Logger.getLogger(API.class.getName()).log(Level.SEVERE, null, ex);
+         }*/
+        //return stream;
+        return "";
     }
 
     /**

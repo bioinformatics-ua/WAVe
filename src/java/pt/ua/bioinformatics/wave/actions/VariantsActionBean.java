@@ -65,171 +65,217 @@ public class VariantsActionBean implements ActionBean {
 
     /**
      * Forwards to a page with all variants.
+     *
      * @return
      */
     @DefaultHandler
     public Resolution all() {
-        JSONObject stream = new JSONObject();
-        JSONArray variantList = new JSONArray();
         if (!API.isLoaded()) {
             API.load();
         }
-        gene = genelist.getGene(hgnc.toUpperCase());
-        variants = gene.getVariants("all");
-        Collections.sort(variants, new VariantCompare());
-        for (Variant v : variants) {
-            if (v.getVariant().startsWith(":")) {
-                v.setVariant(v.getVariant().replace(":", ""));
+        try {
+            System.out.println("[WAVe][Variants] loading variants from Redis cache");
+            return new StreamingResolution("text/javascript", API.getJedis().get("wave:variant:all:" + hgnc));
+        } catch (Exception ex) {
+            JSONObject stream = new JSONObject();
+            JSONArray variantList = new JSONArray();
+            if (!API.isLoaded()) {
+                API.load();
             }
-            JSONArray vList = new JSONArray();
-            String vars = "";
-            if (v.getNumberOfSources() == 1) {
-                for (Leaf l : v.getSources()) {
-                    if (l.getName().contains("home.php")) {
-                        String[] tmp = l.getName().split("home.php");
-                        String[] getgene = l.getName().split("=");
-                        String lsdb_gene = getgene[1];
-                        l.setName(tmp[0] + "variants.php?select_db=" + lsdb_gene + "&action=search_all&search_Variant/DNA=" + v.getVariant());
+            gene = genelist.getGene(hgnc.toUpperCase());
+            variants = gene.getVariants("all");
+            Collections.sort(variants, new VariantCompare());
+            for (Variant v : variants) {
+                if (v.getVariant().startsWith(":")) {
+                    v.setVariant(v.getVariant().replace(":", ""));
+                }
+                JSONArray vList = new JSONArray();
+                String vars = "";
+                if (v.getNumberOfSources() == 1) {
+                    for (Leaf l : v.getSources()) {
+                        if (l.getName().contains("home.php")) {
+                            String[] tmp = l.getName().split("home.php");
+                            String[] getgene = l.getName().split("=");
+                            String lsdb_gene = getgene[1];
+                            l.setName(tmp[0] + "variants.php?select_db=" + lsdb_gene + "&action=search_all&search_Variant/DNA=" + v.getVariant());
+                        }
+                        if (!v.getRefseq().equals("")) {
+                            vList.add("<a class=\"var\" href=\"" + l.getName() + "\" title=\"All at " + l.getValue().substring(0, 20) + "...\">" + v.getRefseq() + ":" + v.getVariant() + "</a>");
+                        } else {
+                            vList.add("<a class=\"var\" href=\"" + l.getName() + "\" title=\"All at " + l.getValue().substring(0, 20) + "...\">" + v.getVariant() + "</a>");
+
+                        }
+                    }
+                } else if (v.getNumberOfSources() > 1) {
+                    vars += "<a class='var' rel='source' href='#' title='";
+                    for (Leaf l : v.getSources()) {
+                        if (l.getName().contains("home.php")) {
+                            String[] tmp = l.getName().split("home.php");
+                            String[] getgene = l.getName().split("=");
+                            String lsdb_gene = getgene[1];
+                            l.setName(tmp[0] + "variants.php?select_db=" + lsdb_gene + "&action=search_all&search_Variant/DNA=" + v.getVariant());
+                        }
+                        vars += "<a href=\"" + l.getName() + "\">" + l.getN() + " at " + l.getValue().substring(0, 20) + "...</a><br />";
                     }
                     if (!v.getRefseq().equals("")) {
-                        vList.add("<a class=\"var\" href=\"" + l.getName() + "\" title=\"All at " + l.getValue().substring(0, 20) + "...\">" + v.getRefseq() + ":" + v.getVariant() + "</a>");
+                        vars += "'>" + v.getRefseq() + ":" + v.getVariant() + "</a>";
                     } else {
-                        vList.add("<a class=\"var\" href=\"" + l.getName() + "\" title=\"All at " + l.getValue().substring(0, 20) + "...\">" + v.getVariant() + "</a>");
-
+                        vars += "'>" + v.getVariant() + "</a>";
+                    }
+                    vList.add(vars);
+                }
+                boolean found = false;
+                for (Type t : API.getTypes().values()) {
+                    if (v.getChangeType() == t.getId()) {
+                        vList.add(t.getName());
+                        found = true;
+                        break;
                     }
                 }
-            } else if (v.getNumberOfSources() > 1) {
-                vars += "<a class='var' rel='source' href='#' title='";
-                for (Leaf l : v.getSources()) {
-                    if (l.getName().contains("home.php")) {
-                        String[] tmp = l.getName().split("home.php");
-                        String[] getgene = l.getName().split("=");
-                        String lsdb_gene = getgene[1];
-                        l.setName(tmp[0] + "variants.php?select_db=" + lsdb_gene + "&action=search_all&search_Variant/DNA=" + v.getVariant());
-                    }
-                    vars += "<a href=\"" + l.getName() + "\">" + l.getN() + " at " + l.getValue().substring(0, 20) + "...</a><br />";
-                }
-                if (!v.getRefseq().equals("")) {
-                    vars += "'>" + v.getRefseq() + ":" + v.getVariant() + "</a>";
+                if (!found) {
+                    vList.add("Unknown");
                 } else {
-                    vars += "'>" + v.getVariant() + "</a>";
+                    found = false;
                 }
-                vList.add(vars);
+                vList.add(String.valueOf(v.getNumberOfSources()));
+                vList.add(String.valueOf(v.getN()));
+                variantList.add(vList);
             }
-            boolean found = false;
-            for (Type t : API.getTypes().values()) {
-                if (v.getChangeType() == t.getId()) {
-                    vList.add(t.getName());
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
-                vList.add("Unknown");
-            } else {
-                found = false;
-            }
-            vList.add(String.valueOf(v.getNumberOfSources()));
-            vList.add(String.valueOf(v.getN()));
-            variantList.add(vList);
-        }
-        stream.put("aaData", variantList);
+            stream.put("aaData", variantList);
 
-        return new StreamingResolution("text/javascript", stream.toJSONString());
+            return new StreamingResolution("text/javascript", stream.toJSONString());
+        }
     }
 
     /**
      * Forwards to a page with substitutions.
+     *
      * @return
      */
     public Resolution sub() {
         if (!API.isLoaded()) {
             API.load();
         }
-        gene = genelist.getGene(hgnc.toUpperCase());
-
-        return new StreamingResolution("text/javascript", generateVars("sub"));
+        try {
+            // System.out.println("[WAVe][Variants] loading sub variants from Redis cache");
+            return new StreamingResolution("text/javascript", API.getJedis().get("wave:variant:sub:" + hgnc));
+        } catch (Exception ex) {
+            gene = genelist.getGene(hgnc.toUpperCase());
+            return new StreamingResolution("text/javascript", generateVars("sub"));
+        }
     }
 
     /**
      * Forwards to a page with deletions.
+     *
      * @return
      */
     public Resolution del() {
         if (!API.isLoaded()) {
             API.load();
         }
-        gene = genelist.getGene(hgnc.toUpperCase());
-
-        return new StreamingResolution("text/javascript", generateVars("del"));
+        try {
+            // System.out.println("[WAVe][Variants] loading del variants from Redis cache");
+            return new StreamingResolution("text/javascript", API.getJedis().get("wave:variant:del:" + hgnc));
+        } catch (Exception ex) {
+            gene = genelist.getGene(hgnc.toUpperCase());
+            return new StreamingResolution("text/javascript", generateVars("del"));
+        }
     }
 
     /**
      * Forwards to a page with duplications.
+     *
      * @return
      */
     public Resolution dup() {
         if (!API.isLoaded()) {
             API.load();
         }
-        gene = genelist.getGene(hgnc.toUpperCase());
-
-        return new StreamingResolution("text/javascript", generateVars("dup"));
+        try {
+            // System.out.println("[WAVe][Variants] loading dup variants from Redis cache");
+            return new StreamingResolution("text/javascript", API.getJedis().get("wave:variant:dup:" + hgnc));
+        } catch (Exception ex) {
+            gene = genelist.getGene(hgnc.toUpperCase());
+            return new StreamingResolution("text/javascript", generateVars("dup"));
+        }
     }
 
     /**
      * Forwards to a page with insertions.
+     *
      * @return
      */
     public Resolution ins() {
         if (!API.isLoaded()) {
             API.load();
         }
-        gene = genelist.getGene(hgnc.toUpperCase());
-
-        return new StreamingResolution("text/javascript", generateVars("ins"));
+        try {
+            // System.out.println("[WAVe][Variants] loading ins variants from Redis cache");
+            return new StreamingResolution("text/javascript", API.getJedis().get("wave:variant:ins:" + hgnc));
+        } catch (Exception ex) {
+            gene = genelist.getGene(hgnc.toUpperCase());
+            return new StreamingResolution("text/javascript", generateVars("ins"));
+        }
     }
 
     /**
      * Forwards to a page with inversions.
+     *
      * @return
      */
     public Resolution inv() {
         if (!API.isLoaded()) {
             API.load();
         }
-        gene = genelist.getGene(hgnc.toUpperCase());
-        return new StreamingResolution("text/javascript", generateVars("inv"));
+        try {
+            // System.out.println("[WAVe][Variants] loading inv variants from Redis cache");
+            return new StreamingResolution("text/javascript", API.getJedis().get("wave:variant:inv:" + hgnc));
+        } catch (Exception ex) {
+            gene = genelist.getGene(hgnc.toUpperCase());
+            return new StreamingResolution("text/javascript", generateVars("inv"));
+        }
     }
 
     /**
      * Forwards to a page with conversions.
+     *
      * @return
      */
     public Resolution con() {
         if (!API.isLoaded()) {
             API.load();
         }
-        gene = genelist.getGene(hgnc.toUpperCase());
-
-        return new StreamingResolution("text/javascript", generateVars("con"));
+        try {
+            // System.out.println("[WAVe][Variants] loading con variants from Redis cache");
+            return new StreamingResolution("text/javascript", API.getJedis().get("wave:variant:con:" + hgnc));
+        } catch (Exception ex) {
+            gene = genelist.getGene(hgnc.toUpperCase());
+            return new StreamingResolution("text/javascript", generateVars("con"));
+        }
     }
 
     /**
      * Forwards to a page with deletions/insertions.
+     *
      * @return
      */
     public Resolution delins() {
         if (!API.isLoaded()) {
             API.load();
         }
-        gene = genelist.getGene(hgnc.toUpperCase());
-        return new StreamingResolution("text/javascript", generateVars("delins"));
+        try {
+            // System.out.println("[WAVe][Variants] loading delins variants from Redis cache");
+            return new StreamingResolution("text/javascript", API.getJedis().get("wave:variant:delins:" + hgnc));
+        } catch (Exception ex) {
+            gene = genelist.getGene(hgnc.toUpperCase());
+            return new StreamingResolution("text/javascript", generateVars("delins"));
+        }
     }
 
     /**
-     * Generates JSON object containing gene variants according to their change type, for usage with
-     * jQuery DataTables plugin.
+     * Generates JSON object containing gene variants according to their change
+     * type, for usage with jQuery DataTables plugin.
      *
      * @param type the Variant change type
      * @return

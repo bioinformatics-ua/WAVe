@@ -17,6 +17,8 @@
         <s:layout-component name="scripts">
             <jsp:include page="/layout/scripts.jsp" />
         </s:layout-component>
+        
+            <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
         <script src="<c:url value="/resources/javascript/defuscate.js" />" type="text/javascript"></script>
         <script type="text/javascript">
             $(document).ready(function() {               

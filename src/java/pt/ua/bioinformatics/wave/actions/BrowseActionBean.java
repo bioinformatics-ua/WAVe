@@ -65,7 +65,9 @@ public class BrowseActionBean implements ActionBean {
     }
 
     /**
-     * Main resolution handler, returns genes in JSON format for DataTables plugin.
+     * Main resolution handler, returns genes in JSON format for DataTables
+     * plugin.
+     *
      * @return
      */
     @DefaultHandler
@@ -96,6 +98,7 @@ public class BrowseActionBean implements ActionBean {
 
     /**
      * Returns enabled genes in JSON format for DataTables plugin.
+     *
      * @return
      */
     public Resolution enabled() {
@@ -133,6 +136,7 @@ public class BrowseActionBean implements ActionBean {
 
     /**
      * Returns all genes in JSON format for DataTables plugin.
+     *
      * @return
      */
     public Resolution all() {
@@ -157,6 +161,7 @@ public class BrowseActionBean implements ActionBean {
 
     /**
      * Handles call for Browsing Atom API.
+     *
      * @return
      */
     public Resolution atom() {
@@ -168,12 +173,13 @@ public class BrowseActionBean implements ActionBean {
 
     /**
      * Handles call for Browsing JSON API.
+     *
      * @return
      */
     public Resolution json() {
         if (query.equals("*")) {
-            return new StreamingResolution("text/xml", API.getGenes(genelist.getAll(), "json"));
+            return new StreamingResolution("application/json", API.getGenes(genelist.getAll(), "json"));
         }
-        return new StreamingResolution("text/xml", API.getGenes(genelist.searchGene(query, false), "json"));
+        return new StreamingResolution("application/json", API.getGenes(genelist.searchGene(query, false), "json"));
     }
 }

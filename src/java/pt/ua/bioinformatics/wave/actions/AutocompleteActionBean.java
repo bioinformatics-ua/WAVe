@@ -12,7 +12,6 @@ import net.sourceforge.stripes.action.UrlBinding;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import pt.ua.bioinformatics.wave.domain.Item;
-import pt.ua.bioinformatics.wave.services.API;
 import pt.ua.bioinformatics.wave.services.Index;
 
 /**
@@ -52,6 +51,7 @@ public class AutocompleteActionBean implements ActionBean {
 
     /**
      * Main resolution handler.
+     *
      * @return
      */
     @DefaultHandler

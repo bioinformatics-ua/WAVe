@@ -1,4 +1,4 @@
- package pt.ua.bioinformatics.wave.actions;
+package pt.ua.bioinformatics.wave.actions;
 
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -160,6 +160,7 @@ public class GeneActionBean implements ActionBean {
 
     /**
      * Main resolution handler.
+     *
      * @return
      */
     @DefaultHandler
@@ -193,6 +194,7 @@ public class GeneActionBean implements ActionBean {
 
     /**
      * Handles simple gene views.
+     *
      * @return
      */
     public Resolution view() {
@@ -249,6 +251,7 @@ public class GeneActionBean implements ActionBean {
 
     /**
      * Handles gene searches (query for "*").
+     *
      * @return
      */
     public Resolution browse() {
@@ -259,6 +262,7 @@ public class GeneActionBean implements ActionBean {
 
     /**
      * Handles call for UniversalAccess API.
+     *
      * @return
      */
     public Resolution get() {
@@ -282,26 +286,37 @@ public class GeneActionBean implements ActionBean {
 
     /**
      * Handles call for Gene Navigation Tree Atom API.
+     *
      * @return
      */
     public Resolution atom() {
         boolean exists = false;
-        try {
-            gene = genelist.getGene(hgnc.toUpperCase());
-            exists = true;
-        } catch (Exception e) {
-            exists = false;
-            System.out.println("[GeneActionBean] Unable to find gene " + hgnc + "\n\t" + e.toString());
+        if (!API.isLoaded()) {
+            API.load();
         }
 
-        if (exists) {
-            return new StreamingResolution("text/xml", API.getGeneTree(gene, "atom_1.0"));
+        try {
+            System.out.println("[WAVe][Gene] loaded gene feed for " + hgnc + " from Redis cache");
+            return new StreamingResolution("text/xml", API.getJedis().hget("wave:gene:" + hgnc, "feed"));
+        } catch (Exception ex) {
+            try {
+                gene = genelist.getGene(hgnc.toUpperCase());
+                exists = true;
+            } catch (Exception e) {
+                exists = false;
+                System.out.println("[GeneActionBean] Unable to find gene " + hgnc + "\n\t" + e.toString());
+            }
+
+            if (exists) {
+                return new StreamingResolution("text/xml", API.getGeneTree(gene, "atom_1.0"));
+            }
+            throw new UnsupportedOperationException();
         }
-        throw new UnsupportedOperationException();
     }
 
     /**
      * Handles call for Gene Navigation Tree JSON API.
+     *
      * @return
      */
     public Resolution json() {

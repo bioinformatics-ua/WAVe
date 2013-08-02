@@ -1,5 +1,6 @@
 package pt.ua.bioinformatics.wave.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,7 +13,7 @@ import pt.ua.bioinformatics.wave.services.DB;
  * @author pedrolopes
  * @version 1.2, 2010-12-17
  */
-public class Variant {
+public class Variant implements Serializable {
 
     private DB db = API.getDb();
     private Gene gene = new Gene();
@@ -194,7 +195,7 @@ public class Variant {
     @SuppressWarnings("finally")
     public boolean addVariantsToDB(ArrayList<String> variants) {
         boolean success = false;
-
+        //System.out.println(variants.size());
         try {
             // startup database connection
             db.connect();
@@ -238,7 +239,7 @@ public class Variant {
                     v = v.replace(">", "&gt;");
                 }
 
-                // System.out.println("[Variant][DB] Adding Variant " + refs + ":" + v + " and Change Type " + changeType + " to " + gene.getHGNC() + " and leaf " + source.getValue());
+                 //System.out.println("[Variant][DB] Adding Variant " + refs + ":" + v + " and Change Type " + changeType + " to " + gene.getHGNC() + " and leaf " + source.getValue());
 
 
                 if (changeType != 0) {

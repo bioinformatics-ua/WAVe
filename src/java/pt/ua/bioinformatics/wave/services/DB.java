@@ -1,5 +1,6 @@
 package pt.ua.bioinformatics.wave.services;
 
+import java.io.Serializable;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -14,7 +15,7 @@ import java.util.logging.Logger;
  * @author pedrolopes
  * @version 1.2, 2010-12-17
  */
-public class DB {
+public class DB implements Serializable {
 
     private Connection connection;
     private Statement statement;
@@ -79,6 +80,7 @@ public class DB {
                 // connect to WAVe database in use
                 Class.forName("com.mysql.jdbc.Driver");
                 connection = (com.mysql.jdbc.Connection) DriverManager.getConnection(Settings.getDbServer(), Settings.getDbUser(), Settings.getDbPassword());
+                
                 statement = connection.createStatement();
                 success = true;
             } catch (SQLException e) {
@@ -129,10 +131,11 @@ public class DB {
             if (!statement.isClosed()) {
                 statement.close();
             }
-            if (!connection.isClosed()) {
+         //   if (!connection.isClosed()) {
                 connection.close();
-            }
-
+           // }
+               
+                //DriverManager.
         } catch (SQLException e) {
             System.out.println("[DB] Unable to close " + database + " connection\n\t" + e.toString());
             return false;
@@ -163,6 +166,7 @@ public class DB {
 
         } catch (SQLException e) {
             System.out.println("[DB] Unable to insert " + what + "\n\t" + e.toString());
+            Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, e);
             return false;
         } finally {
             // System.out.println("[DB] Inserted " + query);
@@ -236,6 +240,7 @@ public class DB {
         ResultSet rs = null;
 
         try {
+           // statement = connection.createStatement();
             if (!connection.isClosed() && !statement.isClosed()) {
                 rs = statement.executeQuery(query);
             }

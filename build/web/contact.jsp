@@ -1,6 +1,6 @@
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld"%>
 <s:layout-render name="/layout/extras.jsp">
-    <s:layout-component name="title">Contacts | WAVe</s:layout-component>
+    <s:layout-component name="title">Contact WAVe</s:layout-component>
     <s:layout-component name="content">
         <h1>Contacts</h1>
         <div id="pink">

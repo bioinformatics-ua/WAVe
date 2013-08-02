@@ -1,6 +1,6 @@
 $(document).ready(function(){
     // (pseudo)form handling
-    $.widget("custom.catcomplete", $.ui.autocomplete, {
+       $.widget("custom.catcomplete", $.ui.autocomplete, {
         _renderMenu: function( ul, items ) {
             var self = this,
             currentCategory = "";
@@ -11,18 +11,29 @@ $(document).ready(function(){
                 }
                 self._renderItem( ul, item );
             });
+        },
+        select: function( event, ui ) {
+            event.preventDefault();
+            window.location.href = "/WAVe/search/" + $("#hgnc").attr("value");
         }
     });
+    
     $("#hgnc").catcomplete({
         delay: 500,
-        source: 'http://bioinformatics.ua.pt/WAVe/autocomplete'
+        source: '/WAVe/autocomplete',
+        select: function( event, ui ) {
+            event.preventDefault();
+            window.location.href = "/WAVe/search/" + $("#hgnc").attr("value");
+        }
     });
+
+    //$("#hgnc").autocomplete('autocomplete');
     $("#submit").click(function(){
-        window.location.href = "http://bioinformatics.ua.pt/WAVe/search/" + $("#hgnc").attr("value");
+        window.location.href = "/WAVe/search/" + $("#hgnc").attr("value");
     });
     $("#hgnc").keypress(function(e){
         if(e.keyCode == 13) {
-            window.location.href = "http://bioinformatics.ua.pt/WAVe/search/" + $("#hgnc").attr("value");
+            window.location.href = "/WAVe/search/" + $("#hgnc").attr("value");
         }
     });
 
@@ -129,6 +140,7 @@ $(document).ready(function(){
     $('.frame').click(function() {
         $('#external').attr("href", $(this).attr("value"));
         $("#frame").attr("src", $(this).attr("value"));
+        $('#frame').css("background-color", "#FFFFFF");
     });    
     $('.frame').tipsy({
         fade: true,

@@ -4,11 +4,13 @@
  */
 package pt.ua.bioinformatics.wave.domain;
 
+import java.io.Serializable;
+
 /**
  *
  * @author pedrolopes
  */
-public class Item {
+public class Item implements Serializable{
 
     private String value;
     private String gene;

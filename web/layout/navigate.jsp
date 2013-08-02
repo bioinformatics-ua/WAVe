@@ -7,6 +7,7 @@
     <html>
         <head>
             <link rel="shortcut icon" type="image/x-icon" href="<c:url value="/favicon.ico" />">
+            <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
             <link href="http://bioinformatics.ua.pt/WAVe/gene/${actionBean.gene.HGNC}/atom" rel="alternate" type="application/atom+xml" title="${actionBean.gene.HGNC} | WAVe" />
             <meta name="description" content="WAVe | Web Analysis of the Variome | View | ${actionBean.gene.HGNC} | ${actionBean.gene.name} | WAVe is a variome integration application, focused on providing a centralized access to online available locus-specific databases and genomic variants.">
             <meta name="keywords" content="WAVe, web analysis of the variome, ${actionBean.gene.HGNC}, ${actionBean.gene.name}, wavegene, aveiro, bioinformatics, http://bioinformatics.ua.pt, diseasecard, gen2phen, g2p, http://gen2phen.org, university of aveiro, universidade de aveiro, variome, variation, variant, hvp, human variome project, hgvs, lsdb, locus specific database, trembl, swissprot, expasy, uniprot, ncbi, ensembl, gene expression, genewave, g2pwave, biowave, genetic, genomic, lovd, integration, analysis, data integration, service composition, towards a portable personal health record">

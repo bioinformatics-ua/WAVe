@@ -1,5 +1,6 @@
 package pt.ua.bioinformatics.wave.domain;
 
+import java.io.Serializable;
 import pt.ua.bioinformatics.wave.services.API;
 import pt.ua.bioinformatics.wave.services.DB;
 
@@ -8,7 +9,7 @@ import pt.ua.bioinformatics.wave.services.DB;
  * @author pedrolopes
  * @version 1.2, 2010-12-17
  */
-public class LSDB {
+public class LSDB implements Serializable {
 
     private MetaType metatype;
     private Type type;

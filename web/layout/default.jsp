@@ -12,7 +12,7 @@
     <html>
         <head>
             <link rel="shortcut icon" type="image/x-icon" href="<c:url value="/favicon.ico" />">
-            <link rel="search" type="application/opensearchdescription+xml" href="<c:url value="/opensearch.xml" />" title="WAVe gene search" />
+            <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
             <title>
                 <s:layout-component name="title">
                     WAVe | Web Analysis of the Variome
@@ -63,7 +63,7 @@
                                     Try one of these searches: <a href="<c:url value="/gene/COL3A1" />" title="COL3A1 | Gene | WAVe" class="ex">COL3A1</a>, <a href="<c:url value="/search/P11532" />" title="P11532 | Protein | WAVe" class="ex">P11532</a>, <a href="<c:url value="/search/137800" />" title="137800 | Disease | WAVe" class="ex">137800</a> or <a href="<c:url value="/gene/*" />" title="All genes | WAVe" class="ex">view all genes</a>.</p>
                                 <br /><br /><b>WAVe</b> is a human variome integration application, focused on providing unified and enriched
                                 access to public locus-specific databases and genomic variation datasets.
-                                <br /><br /><br/><b>UPDATE</b>: WAVe has been updated to version 1.3, please refer to <a href="<c:url value="/about" />" title="About | WAVe">the about page</a> for relevant changes.
+                                <br /><br /><br/><b>UPDATE</b>: WAVe has been updated to version 1.6, please refer to <a href="<c:url value="/about" />" title="About | WAVe">the about page</a> for relevant changes.
                             </div>
                         </c:otherwise>
                     </c:choose>

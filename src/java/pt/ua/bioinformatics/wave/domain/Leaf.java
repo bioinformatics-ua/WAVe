@@ -1,5 +1,6 @@
 package pt.ua.bioinformatics.wave.domain;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import pt.ua.bioinformatics.wave.services.API;
 
@@ -10,10 +11,10 @@ import pt.ua.bioinformatics.wave.services.DB;
  * @author pedrolopes
  * @version 1.2, 2010-12-17
  */
-public class Leaf {
+public class Leaf implements Serializable {
 
     private DB db = API.getDb();
-    private int id = 0;
+    public int id = 0;
     private int n;          // number of variants associated with this Leaf (for variant counts)
     private String name;
     private String value;
@@ -157,7 +158,7 @@ public class Leaf {
      * @param value
      * @return
      */
-    private int updateLeafByValue(String value) {
+    public int updateLeafByValue(String value) {
         try {
             db.connect();
             ResultSet rs = db.getData("SELECT * FROM wave#build#_leaf WHERE value LIKE '" + value + "'");

@@ -1,5 +1,6 @@
 package pt.ua.bioinformatics.wave.domain;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import pt.ua.bioinformatics.wave.services.API;
@@ -10,7 +11,7 @@ import pt.ua.bioinformatics.wave.services.DB;
  * @author pedrolopes
  * @version 1.2, 2010-12-17
  */
-public class MetaType {
+public class MetaType implements Serializable{
 
     private DB db = API.getDb();
     private String name;

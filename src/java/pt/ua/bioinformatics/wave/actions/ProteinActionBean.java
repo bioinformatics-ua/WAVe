@@ -278,6 +278,6 @@ public class ProteinActionBean implements ActionBean {
         } catch (Exception e) {
             System.out.println("[GeneActionBean] Unable to find gene " + id + "\n\t" + e.toString());
         }
-        return new StreamingResolution("text/xml", API.getGenes(genes, "json"));
+        return new StreamingResolution("application/json", API.getGenes(genes, "json"));
     }
 }

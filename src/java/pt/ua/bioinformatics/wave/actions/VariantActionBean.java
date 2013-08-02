@@ -69,6 +69,7 @@ public class VariantActionBean implements ActionBean {
 
     /**
      * Forwards to a page with all variants.
+     *
      * @return
      */
     @DefaultHandler
@@ -82,6 +83,7 @@ public class VariantActionBean implements ActionBean {
 
     /**
      * Forwards to a page with substitutions.
+     *
      * @return
      */
     public Resolution sub() {
@@ -94,6 +96,7 @@ public class VariantActionBean implements ActionBean {
 
     /**
      * Forwards to a page with deletions.
+     *
      * @return
      */
     public Resolution del() {
@@ -106,6 +109,7 @@ public class VariantActionBean implements ActionBean {
 
     /**
      * Forwards to a page with duplications.
+     *
      * @return
      */
     public Resolution dup() {
@@ -118,6 +122,7 @@ public class VariantActionBean implements ActionBean {
 
     /**
      * Forwards to a page with insertions.
+     *
      * @return
      */
     public Resolution ins() {
@@ -130,6 +135,7 @@ public class VariantActionBean implements ActionBean {
 
     /**
      * Forwards to a page with inversions.
+     *
      * @return
      */
     public Resolution inv() {
@@ -142,6 +148,7 @@ public class VariantActionBean implements ActionBean {
 
     /**
      * Forwards to a page with conversions.
+     *
      * @return
      */
     public Resolution con() {
@@ -154,6 +161,7 @@ public class VariantActionBean implements ActionBean {
 
     /**
      * Forwards to a page with deletions/insertions.
+     *
      * @return
      */
     public Resolution delins() {
@@ -166,26 +174,36 @@ public class VariantActionBean implements ActionBean {
 
     /**
      * Handles call for Variant List Atom API.
+     *
      * @return
      */
     public Resolution atom() {
+        if (!API.isLoaded()) {
+            API.load();
+        }
         try {
-            gene = genelist.getGene(hgnc.toUpperCase());
-            return new StreamingResolution("text/xml", API.getGeneVariants(gene, "atom_1.0"));
-        } catch (Exception e) {
-            System.out.println("[VariantActionBean] Error " + e.toString());
-            throw new UnsupportedOperationException();
+            System.out.println("[WAVe][Variant] loaded variant feed from Redis cache");
+            return new StreamingResolution("text/xml", API.getJedis().get("wave:variant:feed:" + hgnc));
+        } catch (Exception ex) {
+           try {
+                gene = genelist.getGene(hgnc.toUpperCase());
+                return new StreamingResolution("text/xml", API.getGeneVariants(gene, "atom_1.0"));
+            } catch (Exception e) {
+                System.out.println("[VariantActionBean] Error " + e.toString());
+                throw new UnsupportedOperationException();
+            }
         }
     }
 
     /**
      * Handles call for Variant List JSON API.
+     *
      * @return
      */
     public Resolution json() {
         try {
             gene = genelist.getGene(hgnc.toUpperCase());
-            return new StreamingResolution("text/xml", API.getGeneVariants(gene, "json"));
+            return new StreamingResolution("application/json", API.getGeneVariants(gene, "json"));
         } catch (Exception e) {
             System.out.println("[VariantActionBean] Error " + e.toString());
             throw new UnsupportedOperationException();

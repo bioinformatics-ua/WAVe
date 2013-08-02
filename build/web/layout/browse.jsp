@@ -19,6 +19,7 @@
             <jsp:include page="/layout/scripts.jsp" />
         </s:layout-component>
         <!-- load custom scripts -->
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/dataTables.css" />" />
         <script type="text/javascript" src="<c:url value="/resources/javascript/datatables.gene.js" />"></script>
         <script type="text/javascript" src="<c:url value="/resources/javascript/datatables.reload.js" />"></script>

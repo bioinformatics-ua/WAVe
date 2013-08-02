@@ -5,9 +5,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
     <head>
-        <title>WAVe | Navigation</title>
+        <title>WAVe</title>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/content.css" />" />
         <link rel="stylesheet" type="text/css" href="<c:url value="/resources/css/typo.css" />" />
+        
         <!-- load default javascripts -->
         <script src="<c:url value="/resources/javascript/jquery.min.js" />" type="text/javascript"></script>
         <script src="<c:url value="/resources/javascript/slideshow.js" />" type="text/javascript"></script>
@@ -32,7 +34,7 @@
             <c:choose>
                 <c:when test="${actionBean.gene.sequence.id != 0}">
                     <p class="sequence">
-                        ${actionBean.gene.sequence.info} Locus Reference Genomic | <a href="http://www.lrg-sequence.org/lrg.php?id=${actionBean.gene.sequence.name}">${actionBean.gene.sequence.name}</a>
+                        ${actionBean.gene.sequence.info} Locus Reference Genomic | <a href="ftp://ftp.ebi.ac.uk/pub/databases/lrgex/${actionBean.gene.sequence.name}.xml">${actionBean.gene.sequence.name}</a>
                     </p>
                 </c:when>
                 <c:otherwise>
@@ -46,7 +48,7 @@
                             <div class="uniprot"><a href="http://www.uniprot.org/uniprot/${actionBean.gene.protein.name}" title="${actionBean.gene.protein.name} in Uniprot" target="frame"><span>${actionBean.gene.protein.name} in Uniprot</span></a></div>
                         </c:when>
                     </c:choose>
-                    <div class="diseasecard"><a href="http://bioinformatics.ua.pt/diseasecard/searchDisease.do?key=${actionBean.hgnc}&mode=gene" title="${actionBean.hgnc} in DiseaseCard"><span>${actionBean.hgnc} in DiseaseCard</span></a></div>
+                    <div class="diseasecard"><a href="http://bioinformatics.ua.pt/diseasecard/search/id/${actionBean.hgnc}" title="${actionBean.hgnc} in DiseaseCard"><span>${actionBean.hgnc} in DiseaseCard</span></a></div>
                     <div class="gen2phenkc"><a href="http://www.gen2phen.org/gene/${actionBean.hgnc}" title="${actionBean.hgnc} in GEN2PHEN Knowledge Centre"><span>${actionBean.hgnc} in GEN2PHEN Knowledge Centre</span></a></div>
                 </div>
             </div>
@@ -79,7 +81,7 @@
     </body>
     <script type="text/javascript">
         $(document).ready(function() {
-            $.ajax({
+            /*$.ajax({
                 url: '../content/${actionBean.hgnc}/free',
                 success: function(data) {
                     var response = data.split("#");
@@ -92,7 +94,7 @@
                         $('body').append('<div id="freebase"></div>');
                         $('#freebase').html('<p class="information"><a href="http://www.freebase.com/search?query=' + response[0] + '" title="View ${actionBean.hgnc} details in Freebase">View ${actionBean.hgnc} details in Freebase <img src="../resources/images/freebasemore.png" border="none" width="16px" height="16px" alt="..." /></a></p');
                     }}
-            })
+            })*/
             $('.images').fadeSlideShow({
                 width:400,
                 height:200, 

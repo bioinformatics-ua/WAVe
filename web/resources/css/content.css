@@ -5,7 +5,8 @@ html, body {
     padding: 0;
     width: 95%;
     font-size: 12px; /* Resets 1em to 10px */
-    font-family: 'Helvetica Neue', Arial, Verdana, Sans-Serif;
+    font-family: 'Open Sans', 'Helvetica Neue', Arial, Verdana, Sans-Serif;
+    font-weight: 400;
     color: #454547;
     background: none;
 }
@@ -45,18 +46,19 @@ html, body {
     text-align: center;
 }
 #summary .shortcuts .diseasecard {
-    background: url(../images/sprite.png) 0 -62px no-repeat;
-    width: 90px;
+    background: url(../images/diseasecard.png) no-repeat;
+    width: 125px;
     height: 15px;
     display: block;
     margin: 10px 10px 0 0;
     float: left;
 }
 #summary .shortcuts .diseasecard:hover {
-    background-position: 0 -92px;
+   /* background-position: 0 -92px;*/
+   opacity: 0.8;
 }
 #summary .shortcuts .diseasecard a {
-    width: 90px;
+    width: 125px;
     height: 15px;
     display: block;
 }

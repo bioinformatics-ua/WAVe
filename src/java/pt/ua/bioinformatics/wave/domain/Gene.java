@@ -1,19 +1,24 @@
 package pt.ua.bioinformatics.wave.domain;
 
+import java.io.Serializable;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.JSONValue;
 import pt.ua.bioinformatics.wave.services.API;
 
 import pt.ua.bioinformatics.wave.services.DB;
+import redis.clients.jedis.Jedis;
 
 /**
  *
  * @author pedrolopes
  * @version 1.2, 2010-12-17
  */
-public class Gene {
+public class Gene implements Serializable {
 
     private DB db = API.getDb();
     private int id = 0;
@@ -89,7 +94,8 @@ public class Gene {
      *
      * @param id Gene WAVe identifier.
      * @param HGNC Gene HGNC approved symbol.
-     * @param enabled Gene status in WAVe (enabled means that there is an LSDB available for the gene)
+     * @param enabled Gene status in WAVe (enabled means that there is an LSDB
+     * available for the gene)
      */
     public Gene(int id, String HGNC, boolean enabled) {
         this.id = id;
@@ -245,10 +251,14 @@ public class Gene {
     /**
      * Enables a Gene in WAVe database (when a LSDB is added).
      * <p><b>Feature:</b><br />
-     * WAVe contains a list of all genes approved by HGNC. However, only some of those genes have a locus-specific database available.
-     * In WAVe only genes with one or more LSDBs available are considered. Thus, a gene is enabled in the system when data is loaded for its LSDB.
+     * WAVe contains a list of all genes approved by HGNC. However, only some of
+     * those genes have a locus-specific database available. In WAVe only genes
+     * with one or more LSDBs available are considered. Thus, a gene is enabled
+     * in the system when data is loaded for its LSDB.
      * </p>
-     * @return success of the operation (true if gene is enabled, false if fails to enable gene).
+     *
+     * @return success of the operation (true if gene is enabled, false if fails
+     * to enable gene).
      */
     public boolean enable() {
         try {
@@ -270,10 +280,13 @@ public class Gene {
     /**
      * Sets the number of variants found for this gene.
      * <p><b>Feature:</b><br />
-     * Loads the number of variants and each respective change for this gene. These counts are required to a correct display of data in
-     * the gene navigation tree.
+     * Loads the number of variants and each respective change for this gene.
+     * These counts are required to a correct display of data in the gene
+     * navigation tree.
      * </p>
-     * @return success of the operation (true if can count all variants and change types, false if fails to count).
+     *
+     * @return success of the operation (true if can count all variants and
+     * change types, false if fails to count).
      */
     public boolean setNumberOfVariants() {
         boolean success = false;
@@ -380,8 +393,10 @@ public class Gene {
     /**
      * Sets the number of locus-specific databases for this gene.
      * <p><b>Feature:</b><br />
-     * Counts the number of available LSDBs for this gene in order to present them in the full gene name search interface.
+     * Counts the number of available LSDBs for this gene in order to present
+     * them in the full gene name search interface.
      * </p>
+     *
      * @return success of the operation (true if counts LSDBs, false if fails).
      */
     public boolean setNumberOfLsdbs() {
@@ -410,10 +425,11 @@ public class Gene {
     /**
      * Loads entire variant information for associated gene.
      * <p><ul>
-     *  <li>Get all variants and variant counts from DB</li>
-     *  <li>Check number of LSDBs for gene and variant</li>
-     *  <li>Check leaf sources for each variant</li>
+     * <li>Get all variants and variant counts from DB</li>
+     * <li>Check number of LSDBs for gene and variant</li>
+     * <li>Check leaf sources for each variant</li>
      * </ul></p>
+     *
      * @param change
      * @return
      */
@@ -609,7 +625,7 @@ public class Gene {
 
     /**
      * Loads reference sequence information for Gene.
-     * 
+     *
      * @return
      */
     public boolean loadSequence() {
@@ -638,52 +654,153 @@ public class Gene {
     /**
      * Reads available gene information for the gene navigation tree.
      * <p><b>Feature:</b><br />
-     * Loads information from WAVe database required to populate the gene navigation tree. This inclueds data for all data types, nodes for each data type
-     * and leafs for each node.
+     * Loads information from WAVe database required to populate the gene
+     * navigation tree. This includes data for all data types, nodes for each
+     * data type and leafs for each node.
      * </p>
      *
      * @return success if the operation.
      */
     public ArrayList<Type> loadInfo() {
-        setNumberOfVariants();
-        loadSequence();
-        this.updateGeneHGNC(id);
+        boolean loaded = false;
         ArrayList<Type> datatypes = new ArrayList<Type>();
+        // try to load from Redis first
         try {
-            db.connect();
-            ResultSet rs = db.getData("SELECT wave#build#_type.id, wave#build#_type.name, wave#build#_type.description, wave#build#_type.refmetatypeid FROM wave#build#_type INNER JOIN wave#build#_metatype ON wave#build#_type.refmetatypeid = wave#build#_metatype.id WHERE wave#build#_metatype.shortname LIKE 'data'");
-            while (rs.next()) {
-                datatypes.add(new Type(rs.getInt("id"), rs.getString("name"), rs.getString("description"), rs.getInt("refmetatypeid")));
-            }
-            db.close();
-            for (Type t : datatypes) {
-                if (t.loadInfo()) {
-                    for (Node n : t.getNodes()) {
-                        if (n.getType().getName().equals("LSDB") || !n.getMethod().equals("direct")) {
-                            n.loadInfo(this);
+            Jedis jedis = API.getJedis();
+            JSONObject data_obj = (JSONObject) JSONValue.parse(jedis.hget("wave:gene:" + HGNC, "data"));
+            this.numberOfLsdbs = Integer.parseInt(jedis.hget("wave:gene:" + HGNC, "lsdb"));
+            this.numberOfVariants= Integer.parseInt(jedis.hget("wave:gene:" + HGNC, "variant"));
+            this.totalVariants = Integer.parseInt(jedis.hget("wave:gene:" + HGNC, "totalVariants"));
+            this.variantCon = Integer.parseInt(jedis.hget("wave:gene:" + HGNC, "con"));
+            this.variantDel = Integer.parseInt(jedis.hget("wave:gene:" + HGNC, "del"));
+            this.variantDelins= Integer.parseInt(jedis.hget("wave:gene:" + HGNC, "delins"));
+            this.variantDup = Integer.parseInt(jedis.hget("wave:gene:" + HGNC, "dup"));
+            this.variantIns = Integer.parseInt(jedis.hget("wave:gene:" + HGNC, "ins"));
+            this.variantInv = Integer.parseInt(jedis.hget("wave:gene:" + HGNC, "inv"));
+            this.variantSub = Integer.parseInt(jedis.hget("wave:gene:" + HGNC, "sub"));
+            this.sequence = new Leaf();
+            this.sequence.id = Integer.parseInt(jedis.hget("wave:gene:" + HGNC, "sequence_id"));
+            this.sequence.setName(jedis.hget("wave:gene:" + HGNC, "sequence_name"));
+            this.sequence.setInfo(jedis.hget("wave:gene:" + HGNC, "sequence_info"));
+            this.name = jedis.hget("wave:gene:" + HGNC, "name");
+            this.locus = jedis.hget("wave:gene:" + HGNC, "locus");
+            
+
+            JSONArray types = (JSONArray) data_obj.get("data");
+            for (Object obj : types.toArray()) {
+                JSONObject type_obj = (JSONObject) obj;
+                Type t = new Type(Integer.parseInt(type_obj.get("id").toString()), type_obj.get("name").toString(), type_obj.get("description").toString(), Integer.parseInt(type_obj.get("metatype").toString()));
+                JSONArray nodes = (JSONArray) type_obj.get("nodes");
+                for (Object n_obj : nodes.toArray()) {
+                    JSONObject node_obj = (JSONObject) n_obj;
+                    Node n = new Node(Integer.parseInt(node_obj.get("id").toString()), node_obj.get("name").toString(), node_obj.get("description").toString(), node_obj.get("shortname").toString(), node_obj.get("method").toString(), node_obj.get("value").toString(), new Node(Integer.parseInt(node_obj.get("parent").toString())), t, node_obj.get("ua").toString());
+                    //  if (n.getType().getName().equals("LSDB") || !n.getMethod().equals("direct")) {
+                    JSONArray leafs = (JSONArray) node_obj.get("leafs");
+                    for (Object l_obj : leafs.toArray()) {
+                        JSONObject leaf = (JSONObject) l_obj;
+                        Leaf l = new Leaf(Integer.parseInt(leaf.get("id").toString()), leaf.get("name").toString(), leaf.get("value").toString(), n);
+                        n.leafs.add(l);
+                        if (n.getShortname().equals("SwissProt")) {
+                            this.setProtein(l);
                         }
-                        if (n.getSize() > t.getSize()) {
-                            t.setSize(n.getSize());
+                        //  }
+                    }
+                    n.setLoaded(true);
+                    n.setSize(n.getLeafs().size());
+                    if (n.getSize() > t.getSize()) {
+                        t.setSize(n.getSize());
+                    }
+                    t.getNodes().add(n);
+                }
+
+                datatypes.add(t);
+            }
+            System.out.println("[WAVe] Gene data loaded from Redis cache");
+            loaded = true;
+        } catch (Exception ex) {
+           System.out.println("[WAVe] Failed to read from Redis cache for " + HGNC + "\n");
+            Logger.getLogger(Gene.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        // Redis failed, go to DB   
+        if (!loaded) {
+            setNumberOfVariants();
+            loadSequence();
+            this.updateGeneHGNC(id);
+            try {
+                db.connect();
+                ResultSet rs = db.getData("SELECT wave#build#_type.id, wave#build#_type.name, wave#build#_type.description, wave#build#_type.refmetatypeid FROM wave#build#_type INNER JOIN wave#build#_metatype ON wave#build#_type.refmetatypeid = wave#build#_metatype.id WHERE wave#build#_metatype.shortname LIKE 'data'");
+                while (rs.next()) {
+                    datatypes.add(new Type(rs.getInt("id"), rs.getString("name"), rs.getString("description"), rs.getInt("refmetatypeid")));
+                }
+                db.close();
+                for (Type t : datatypes) {
+                    if (t.loadInfo()) {
+                        for (Node n : t.getNodes()) {
+                            if (n.getType().getName().equals("LSDB") || !n.getMethod().equals("direct")) {
+                                n.loadInfo(this);
+                            }
+                            if (n.getSize() > t.getSize()) {
+                                t.setSize(n.getSize());
+                            }
                         }
                     }
                 }
-            }
 
-            if (numberOfVariants == -1) {
-                setNumberOfVariants();
+                if (numberOfVariants == -1) {
+                    setNumberOfVariants();
+                }
+            } catch (Exception e) {
+                System.out.println("[Gene][" + HGNC + "] Unable to load gene info\n\t" + e.toString());
             }
-        } catch (Exception e) {
-            System.out.println("[Gene][" + HGNC + "] Unable to load gene info\n\t" + e.toString());
         }
+        return datatypes;
+    }
 
+    public ArrayList<Type> loadInfoForCache() {
+        boolean loaded = false;
+        ArrayList<Type> datatypes = new ArrayList<Type>();
+
+        if (!loaded) {
+            setNumberOfVariants();
+            loadSequence();
+            this.updateGeneHGNC(id);
+            try {
+                db.connect();
+                ResultSet rs = db.getData("SELECT wave#build#_type.id, wave#build#_type.name, wave#build#_type.description, wave#build#_type.refmetatypeid FROM wave#build#_type INNER JOIN wave#build#_metatype ON wave#build#_type.refmetatypeid = wave#build#_metatype.id WHERE wave#build#_metatype.shortname LIKE 'data'");
+                while (rs.next()) {
+                    datatypes.add(new Type(rs.getInt("id"), rs.getString("name"), rs.getString("description"), rs.getInt("refmetatypeid")));
+                }
+                db.close();
+                for (Type t : datatypes) {
+                    if (t.loadInfo()) {
+                        for (Node n : t.getNodes()) {
+                            if (n.getType().getName().equals("LSDB") || !n.getMethod().equals("direct")) {
+                                n.loadInfo(this);
+                            }
+                            if (n.getSize() > t.getSize()) {
+                                t.setSize(n.getSize());
+                            }
+                        }
+                    }
+                }
+
+                if (numberOfVariants == -1) {
+                    setNumberOfVariants();
+                }
+            } catch (Exception e) {
+                System.out.println("[Gene][" + HGNC + "] Unable to load gene info\n\t" + e.toString());
+            }
+        }
         return datatypes;
     }
 
     /**
-     * Overrides the toString() returning valuable information about the gene.<br/><p>
+     * Overrides the toString() returning valuable information about the
+     * gene.<br/><p>
      * <b>Feature:</b><br/>
-     * Returns a simple definition of the instanced Gene containing its HGNC Id and
-     * its internal WAVe Id</p>
+     * Returns a simple definition of the instanced Gene containing its HGNC Id
+     * and its internal WAVe Id</p>
      *
      * @return Gene WAVe identifiers
      */

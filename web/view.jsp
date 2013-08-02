@@ -7,7 +7,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <s:layout-render name="/layout/navigate.jsp">
-    <s:layout-component name="title">${actionBean.gene.HGNC} | WAVe</s:layout-component>    
+    <s:layout-component name="title">${actionBean.gene.HGNC} WAVe</s:layout-component>    
     <s:layout-component name="sidebar">
         <!-- breadcrumbs, gene name and tools -->
         <div class="infozone">

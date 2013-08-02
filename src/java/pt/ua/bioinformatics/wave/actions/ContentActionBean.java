@@ -68,6 +68,7 @@ public class ContentActionBean implements ActionBean {
 
     /**
      * Handles simple gene views.
+     *
      * @return
      */
     @DefaultHandler
@@ -84,7 +85,8 @@ public class ContentActionBean implements ActionBean {
 
     /**
      * Handles AJAX calls to load gene description from Freebase
-     * @return
+     *
+     * @deprecated
      */
     public Resolution free() {
         return new StreamingResolution("text/html", API.getFreebase(hgnc));

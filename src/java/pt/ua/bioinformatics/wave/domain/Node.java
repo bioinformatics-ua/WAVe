@@ -1,5 +1,6 @@
 package pt.ua.bioinformatics.wave.domain;
 
+import java.io.Serializable;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -12,10 +13,10 @@ import pt.ua.bioinformatics.wave.services.DB;
  * @author pedrolopes
  * @version 1.2, 2010-12-17
  */
-public class Node {
+public class Node implements Serializable {
 
     private DB db = API.getDb();
-    private int id;
+    public int id;
     private String name;
     private String description;
     private String shortname;

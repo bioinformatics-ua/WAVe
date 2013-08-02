@@ -8,7 +8,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="IE" value="${fn:contains(header['User-Agent'],'MSIE')}" />
 <s:layout-render name="/layout/default.jsp">
-    <s:layout-component name="title">Error | WAVe</s:layout-component>
+    <s:layout-component name="title">Error</s:layout-component>
     <s:layout-component name="header">
         <div class="high">
             <c:choose>

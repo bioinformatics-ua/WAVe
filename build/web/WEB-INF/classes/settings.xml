@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WAVe>
-    <version>1.5</version>
+    <version>1.6</version>
     <host>http://localhost:8080/</host>
     <database>
         <!-- MySQL Expression -->
         <connection>
-            <server>jdbc:mysql://localhost:3306/wave10</server>
+            <server>jdbc:mysql://localhost:3306/wave</server>
             <username>root</username>
             <password>telematica</password>
         </connection>
@@ -15,7 +15,7 @@
             <username>wave_user</username>
             <password>JALqN8R3CDYp7TtC</password>
         </connection>-->
-        <build>10</build>
+        <build>9</build>
         <genelist>2011-09-14</genelist>
         <index>hgnc|uniprots|uniprott|omim|pharmgkb|hgvbaseg2p|kegg|reactome|amigob|amigoc|amigom</index>
     </database>

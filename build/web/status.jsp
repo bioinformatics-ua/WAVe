@@ -6,7 +6,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld"%>
 <s:layout-render name="/layout/extras.jsp">
-    <s:layout-component name="title">Status | WAVe</s:layout-component>
+    <s:layout-component name="title">Status WAVe</s:layout-component>
     <s:layout-component name="content">
         <h1>Status</h1>
         <br />

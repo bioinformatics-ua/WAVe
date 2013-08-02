@@ -2,7 +2,7 @@
 <%@ taglib prefix="s" uri="http://stripes.sourceforge.net/stripes.tld"%>
 <s:layout-render name="/layout/extras.jsp">
     <s:layout-component name="title">
-        About | WAVe
+        About WAVe
     </s:layout-component>
     <s:layout-component name="content">        
         <h1>About</h1>
@@ -19,11 +19,12 @@
             <b>WAVe</b>'s gene tree enriches gathered genomic datasets with the most relevant gene-related data available.
         </p>
         </div><div id="gray">
-        <h2>Version 1.5 Updates</h2>
+        <h2>Version 1.6 Updates</h2>
         <h3>Features</h3>
         <ul>
             <li><strong>Updated UI</strong></li>
-            <li><strong>Updated API</strong> Removed RSS support, use Atom format instead</li>
+            <li><strong>Updated API</strong></li>
+            <li><strong>Added dbSNP data</strong></li>
         </ul>
 
         <h2>Information</h2>

@@ -2,11 +2,10 @@ package pt.ua.bioinformatics.wave.services;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import pt.ua.bioinformatics.wave.domain.Gene;
+import redis.clients.jedis.Jedis;
 
 /**
  *
@@ -17,13 +16,20 @@ public class GeneList {
 
     public final static GeneList INSTANCE = new GeneList();
     private HashMap<String, Gene> genelist = new HashMap<String, Gene>();
-
+    
     /**
      * Instances GeneList by loading gene information to in-memory HashMap.
      */
     private GeneList() {
         if (!Settings.isLoaded()) {
             Settings.load();
+        }
+
+        // load from Redis
+        try {
+            loadGeneListFromCache();
+        } catch (Exception e) {
+            System.out.println("[GeneList] Unable to load gene list from Redis cache\n\t" + e.toString());
         }
 
         if (genelist.isEmpty()) {
@@ -49,7 +55,7 @@ public class GeneList {
                     genelist.put(rs.getString("hgnc"), gene);
                 }
 
-                System.out.println("\n\t||||| WAVe Loaded");
+                System.out.println("\n\tWAVe online");
             } catch (Exception e) {
                 System.out.println("[GeneList] Unable to load gene list\n\t" + e.toString());
             } finally {
@@ -60,6 +66,7 @@ public class GeneList {
 
     /**
      * Exports the WAVe enabled gene list loaded in the Singleton.
+     *
      * @return a HashMap containing the gene list.
      */
     public HashMap<String, Gene> getGeneList() {
@@ -76,8 +83,10 @@ public class GeneList {
 
     /**
      * Searches for a gene in the singleton loaded gene list.
+     *
      * @param search the gene search query
-     * @param checkEnabled returns all genes if false or only enabled genes if true
+     * @param checkEnabled returns all genes if false or only enabled genes if
+     * true
      * @return ArrayList containing all the genes matching
      */
     public ArrayList<Gene> searchGene(String search, boolean checkEnabled) {
@@ -120,6 +129,7 @@ public class GeneList {
 
     /**
      * Exports all genes loaded in the singleton list.
+     *
      * @return ArrayList containing all genes.
      */
     public ArrayList<Gene> getAll() {
@@ -130,6 +140,7 @@ public class GeneList {
 
     /**
      * Exports all enabled genes loaded in the singleton list
+     *
      * @return
      */
     public ArrayList<Gene> getEnabled() {
@@ -141,5 +152,20 @@ public class GeneList {
         }
         Collections.sort(genes, new GeneCompare());
         return genes;
+    }
+
+    private void loadGeneListFromCache() {
+        if(!API.isLoaded()) {
+            API.load();
+        }
+        Jedis jedis = API.getJedis();
+        for (String s : jedis.smembers("wave:genelist")) {
+            Gene g = new Gene(Integer.parseInt(jedis.hget("wave:gene:" + s, "id")), s, true);
+            g.setName(jedis.hget("wave:gene:" + s, "name"));
+            g.setLocus(jedis.hget("wave:gene:" + s, "locus"));
+            g.setNumberOfLsdbs(Integer.parseInt(jedis.hget("wave:gene:" + s, "lsdb")));
+            g.setNumberOfVariants(Integer.parseInt(jedis.hget("wave:gene:" + s, "variant")));
+            genelist.put(s, g);
+        }
     }
 }
