@@ -353,6 +353,38 @@ public class API {
     }
 
     /**
+     *
+     * @param gene
+     * @param method
+     * @return
+     */
+    public static String getVariome(Gene gene, String method) {
+        String response = "";
+        if (!methodsLoaded) {
+            loadMethods();
+        }
+        if (method.equals("atom_1.0")) {
+            try {
+                response = variomeFeed(gene, method);
+                //  register(gene.getId(), methods.get("variantatom"));
+            } catch (Exception ex) {
+                Logger.getLogger(API.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("[API][Variant] unable to call API for gene variants " + method + "\n" + ex.toString());
+            }
+        } else if (method.equals("json")) {
+            //  register(gene.getId(), methods.get("variantjson"));
+        } else if (method.equals("csv")) {
+            try {
+                response = variomeCSV(gene);
+            } catch (Exception ex) {
+                Logger.getLogger(API.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("[API][Variant] unable to call API for gene variants " + method + "\n" + ex.toString());
+            }
+        }
+        return response;
+    }
+
+    /**
      * API handler for Gene Browse API requests.
      *
      * @param gene the Gene
@@ -461,7 +493,14 @@ public class API {
 
                     entry = new SyndEntryImpl();
                     entry.setTitle(v.getVariant().replace("&gt;", ">"));
-                    entry.setLink(l.getValue());
+
+                    if (l.getName().contains("home.php")) {
+                        String[] tmp = l.getName().split("home.php");
+                        String[] getgene = l.getName().split("=");
+                        String lsdb_gene = getgene[1];
+                        l.setName(tmp[0] + "variants.php?select_db=" + lsdb_gene + "&action=search_all&search_Variant/DNA=" + v.getVariant());
+                    }
+                    entry.setLink(l.getName());
                     entry.setPublishedDate(new java.util.Date());
                     description = new SyndContentImpl();
                     description.setType("text/plain");
@@ -484,6 +523,112 @@ public class API {
         SyndFeedOutput output = new SyndFeedOutput();
 
         return output.outputString(feed);
+    }
+
+    public static String variomeFeed(Gene g, String feedType) throws IOException, FeedException {
+        SyndFeed feed = new SyndFeedImpl();
+        feed.setFeedType(feedType);
+        feed.setTitle("Variant list | WAVe");
+        feed.setLink("http://bioinformatics.ua.pt/WAVe");
+        feed.setDescription("WAVe | Web Analysis of the Variome variant listing for " + g.getHGNC() + " gene.");
+        feed.setAuthor("http://bioinformatics.ua.pt");
+        feed.setCopyright("WAVe (c) UA.PT Bioinformatics & Computational Biology 2013");
+        List entries = new ArrayList();
+
+        try {
+
+            for (Variant v : g.getVariants("all")) {
+                if (v.getVariant().startsWith(":")) {
+                    v.setVariant(v.getVariant().replace(":", ""));
+                }
+                for (Leaf l : v.getSources()) {
+
+                    SyndEntry entry;
+                    SyndContent description;
+
+                    entry = new SyndEntryImpl();
+                    entry.setTitle(v.getVariant().replace("&gt;", ">"));
+
+                    if (l.getName().contains("home.php")) {
+                        String[] tmp = l.getName().split("home.php");
+                        String[] getgene = l.getName().split("=");
+                        String lsdb_gene = getgene[1];
+                        l.setName(tmp[0] + "variants.php?select_db=" + lsdb_gene + "&action=search_all&search_Variant/DNA=" + v.getVariant());
+                    }
+                    entry.setLink(l.getName());
+                    entry.setPublishedDate(new java.util.Date());
+                    description = new SyndContentImpl();
+                    description.setType("text/plain");
+                    if (!v.getRefseq().equals("")) {
+                        description.setValue(v.getRefseq() + ":" + v.getVariant().replace("&gt;", ">"));
+                    } else {
+                        description.setValue(v.getVariant().replace("&gt;", ">"));
+                    }
+                    entry.setDescription(description);
+                    entries.add(entry);
+                }
+            }
+
+            for (Variant v : loadDbSNP(g.getHGNC())) {
+                SyndEntry entry = new SyndEntryImpl();
+                entry.setTitle(v.getVariant());
+                entry.setLink("http://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=" + v.getId());
+                entry.setPublishedDate(new java.util.Date());
+                SyndContent description = new SyndContentImpl();
+                description.setType("text/plain");
+                description.setValue(v.getVariant());
+                entry.setDescription(description);
+                entries.add(entry);
+            }
+
+            feed.setEntries(entries);
+
+        } catch (Exception e) {
+            System.out.println("[FeedGenerator] error " + e.toString());
+        }
+
+        SyndFeedOutput output = new SyndFeedOutput();
+
+        return output.outputString(feed);
+    }
+
+    public static String variomeCSV(Gene g) throws IOException, FeedException {
+        String response = "hgvs,url";
+        try {
+
+            for (Variant v : g.getVariants("all")) {
+                if (v.getVariant().startsWith(":")) {
+                    v.setVariant(v.getVariant().replace(":", ""));
+                }
+                for (Leaf l : v.getSources()) {
+                    if (l.getName().contains("home.php")) {
+                        String[] tmp = l.getName().split("home.php");
+                        String[] getgene = l.getName().split("=");
+                        String lsdb_gene = getgene[1];
+                        l.setName(tmp[0] + "variants.php?select_db=" + lsdb_gene + "&action=search_all&search_Variant/DNA=" + v.getVariant());
+                    }
+                    response += "\n";
+                    if (!v.getRefseq().equals("")) {
+                        response += v.getRefseq() + ":" + v.getVariant().replace("&gt;", ">");
+                    } else {
+                        response += v.getVariant().replace("&gt;", ">") + "," + l.getName();
+                    }
+                    response += "," + l.getName();
+
+                }
+            }
+
+              for (Variant v : loadDbSNP(g.getHGNC())) {
+             response += "\n" + v.getVariant() + ",http://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=" + v.getId();
+             }
+
+
+        } catch (Exception e) {
+            System.out.println("[API][Variome][CSV] error " + e.toString());
+        }
+
+
+        return response;
     }
 
     /**
@@ -603,6 +748,18 @@ public class API {
                         SyndCategory lsdb = new SyndCategoryImpl();
                         lsdb.setName("LSDB");
                         lsdbs.add(lsdb);
+                        SyndEntry cv = new SyndEntryImpl();
+                        cv.setTitle("CafeVariome:CV");
+                        cv.setLink(Settings.getHost() + "WAVe/gene/" + g.getHGNC() + "/cv:" + g.getHGNC());
+                        cv.setPublishedDate(new java.util.Date());
+                        SyndContent cv_description = new SyndContentImpl();
+                        cv_description.setType("text/plain");
+                        cv_description.setValue("<a href=\"http://www.cafevariome.org/discover/variants/" + g.getHGNC() + "/dbsnp/openAccess/html\">http://www.cafevariome.org/discover/variants/" + g.getHGNC() + "/dbsnp/openAccess/html</a>");
+                        cv.setDescription(cv_description);
+                        cv.setAuthor("WAVe | Web Analysis of the Variome");
+                        cv.setUri("http://www.cafevariome.org/discover/variants/" + g.getHGNC() + "/dbsnp/openAccess/html");
+                        cv.setCategories(lsdbs);
+                        entries.add(cv);
 
                         for (Node node : t.getNodes()) {
                             for (Leaf leaf : node.getLeafs()) {
@@ -920,5 +1077,32 @@ public class API {
 
     public static String getLsdbs() {
         return "(1,2,3,4)";
+    }
+
+    /**
+     * Load dbSNP variants into Variant array list.
+     *
+     * @param gene Gene HGNC symbol.
+     * @return
+     */
+    public static ArrayList<Variant> loadDbSNP(String gene) {
+        ArrayList<Variant> dbsnp_vars = new ArrayList<Variant>();
+        try {
+            db.connect();
+            ResultSet rs = db.getData("SELECT * FROM wave9_dbsnp WHERE hgnc LIKE '" + gene + "';");
+            while (rs.next()) {
+                Variant v = new Variant();
+                v.setId(rs.getInt("id"));
+                v.setVariant(rs.getString("refseq") + ":" + rs.getString("variant"));
+                dbsnp_vars.add(v);
+            }
+
+        } catch (Exception ex) {
+            System.out.println("[API][Variome] Unable to get " + gene + " dbSNP variants\n\t" + ex.toString());
+        } finally {
+            db.close();
+        }
+
+        return dbsnp_vars;
     }
 }

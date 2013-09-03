@@ -437,9 +437,10 @@ public class Gene implements Serializable {
         ArrayList<Variant> variants = new ArrayList<Variant>();
         if (change.equals("all")) {
             try {
-                db.connect();
+                API.getDb().connect();
                 Leaf l;
-                ResultSet rs = db.getData("SELECT * FROM wave#build#_variantlist WHERE refgeneid = " + this.id);
+                ResultSet rs = API.getDb().getData("SELECT * FROM wave#build#_variantlist WHERE refgeneid = " + this.id);
+                
                 while (rs.next()) {
                     Variant var = new Variant(rs.getInt("n"), rs.getInt("id"), rs.getString("variant"), rs.getInt("refchangetypeid"), this);
                     var.setRefseq(rs.getString("refseq"));
@@ -491,7 +492,7 @@ public class Gene implements Serializable {
                 System.out.println("[Gene][DB] Unable to find variants for " + HGNC + "\n\t" + e.toString());
                 Logger.getLogger(API.class.getName()).log(Level.SEVERE, null, e);
             } finally {
-                db.close();
+                API.getDb().close();
             }
         } else {
             try {

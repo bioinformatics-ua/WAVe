@@ -236,9 +236,7 @@ public class DB implements Serializable {
      */
     public ResultSet getData(String query) {
         query = query.replace("#build#", build);
-
         ResultSet rs = null;
-
         try {
            // statement = connection.createStatement();
             if (!connection.isClosed() && !statement.isClosed()) {

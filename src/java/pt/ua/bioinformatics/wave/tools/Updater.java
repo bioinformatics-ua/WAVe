@@ -5,12 +5,11 @@
 package pt.ua.bioinformatics.wave.tools;
 
 import au.com.bytecode.opencsv.CSVReader;
-import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URL;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,7 +20,7 @@ import pt.ua.bioinformatics.wave.domain.Type;
 import pt.ua.bioinformatics.wave.domain.Variant;
 import pt.ua.bioinformatics.wave.services.API;
 import pt.ua.bioinformatics.wave.services.DB;
-import pt.ua.bioinformatics.wave.services.GeneList;
+import pt.ua.bioinformatics.wave.services.Settings;
 import pt.ua.bioinformatics.wave.varcrawler.Creator;
 
 /**
@@ -35,7 +34,7 @@ public class Updater {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        //addDbSNPVariants();
+       // addDbSNPVariants();
         cacheVariants();
     }
 
@@ -44,29 +43,29 @@ public class Updater {
         if (!API.isLoaded()) {
             API.load();
         }
-        String nextLine[];
-        Variant variant = new Variant();
-        ArrayList<String> variants = new ArrayList<String>();
-        String s = "COL3A1";
-        // for (String s : j.smembers("wave:genelist")) {
+        DB db = new DB("wave10", "jdbc:mysql://localhost:3306/wave10?user=root&password=telematica");
+
+        String s = "LAMA2";
+        //for (String s : API.getJedis().smembers("wave:genelist")) {
         try {
-            URL u = new URL("http://www.cafevariome.org/discover/variants/" + s + "/dbsnp/openAccess/tab");
-            BufferedReader in = new BufferedReader(new InputStreamReader(u.openStream()));
-            CSVReader reader = new CSVReader(in, '\t', '\"', 1);
-            Gene gene = new Gene(s);
-            Leaf source = new Leaf();
-            source.setNode(new Node(101));
-            source.setName(u.toString().replace("tab", "html"));
-            source.setValue(u.toString().replace("tab", "html"));
-            source.updateLeafByValue(u.toString().replace("tab", "html"));
-            // System.out.println(reader.toString());
-            while ((nextLine = reader.readNext()) != null) {
-                String ref_seq = nextLine[2];
-                String hgvs = nextLine[3];
-                String url = nextLine[12];
+            db.connectX();
+            ResultSet dbsnp_vars = db.getData("SELECT * FROM dbsnp WHERE hgnc LIKE '" + s + "';");
+
+            while (dbsnp_vars.next()) {
+                Variant variant = new Variant();
+                ArrayList<String> variants = new ArrayList<String>();
+                Gene gene = new Gene(s);
+                Leaf source = new Leaf();
+                source.setNode(new Node(101));
+                source.setName("http://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=" + dbsnp_vars.getString("dbsnp"));
+                source.setValue("http://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=" + dbsnp_vars.getString("dbsnp"));
+                source.updateLeafByValue("http://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=" + dbsnp_vars.getString("dbsnp"));
+                String ref_seq = dbsnp_vars.getString("refseq");
+                String hgvs = dbsnp_vars.getString("variant");
+                String url = "http://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=" + dbsnp_vars.getString("dbsnp");
                 String v = ref_seq + ":" + hgvs;
 
-                System.out.println(ref_seq + ":" + hgvs + " @ " + url);
+                //System.out.println(ref_seq + ":" + hgvs + " @ " + url);
                 try {
                     if (!API.rejectVariant(v)) {
                         variants.add(v);
@@ -77,12 +76,13 @@ public class Updater {
                     Logger.getLogger(Creator.class.getName()).log(Level.SEVERE, null, e);
                 }
 
+                variant.setGene(gene);
+                variant.setSource(source);
+                variant.addVariantsToDB(variants);
             }
-            variant.setGene(gene);
-            variant.setSource(source);
-            variant.addVariantsToDB(variants);
         } catch (Exception ex) {
         }
+        System.out.println("[WAVe][Updated] Added variants for " + s);
         //}
     }
 

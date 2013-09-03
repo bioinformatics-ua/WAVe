@@ -4,11 +4,19 @@
  */
 package pt.ua.bioinformatics.wave.tools;
 
+import au.com.bytecode.opencsv.CSVReader;
 import com.sun.syndication.io.FeedException;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.simple.JSONArray;
@@ -35,11 +43,11 @@ public class Indexer {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException, ClassNotFoundException {
-        cacheGeneList();
+        //cacheGeneList();
         cacheGeneInfo();
-        //cacheGeneData();
+        // cacheGeneData();
         //cacheVariantData();
-        //cacheVariantFeed();
+        //cacheVariomeCS();
         //cacheGeneFeed();
 
     }
@@ -48,24 +56,16 @@ public class Indexer {
      * Store WAVe gene list as an array on Redis cache
      */
     public static void cacheGeneList() {
-        DB db = API.getDb();
         try {
-            db.connect();
-            ResultSet rs;
-            Gene gene = null;
-            rs = db.getData("SELECT G.id, G.hgnc "
-                    + "FROM wave#build#_gene AS G "
-                    + "INNER JOIN wave#build#_genelist AS GL ON GL.id = G.id "
-                    + "ORDER BY G.hgnc ASC");
+            URL hgnc = new URL("http://www.genenames.org/cgi-bin/hgnc_downloads?col=gd_app_sym&status=Approved&status_opt=2&where=%28%28gd_pub_chrom_map+not+like+%27%25patch%25%27+and+gd_pub_chrom_map+not+like+%27%25ALT_REF%25%27%29+or+gd_pub_chrom_map+IS+NULL%29+and+gd_locus_type+%3D+%27gene+with+protein+product%27&order_by=gd_hgnc_id&format=text&limit=&submit=submit");
+            CSVReader reader = new CSVReader(new BufferedReader(new InputStreamReader(hgnc.openStream())), '\t', '\'', 1);
+            List<String[]> genes = reader.readAll();
 
-            while (rs.next()) {
-                j.sadd("wave:genelist", rs.getString("hgnc"));
+            for (String[] s : genes) {
+                j.sadd("wave:genelist", s[0]);
             }
-            db.close();
-            db = null;
-        } catch (Exception e) {
-            System.out.println("[WAVe][Indexer] unable to cache gene list to Redis");
-            Logger.getLogger(Indexer.class.getName()).log(Level.SEVERE, null, e);
+        } catch (Exception ex) {
+            Logger.getLogger(Indexer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -80,7 +80,7 @@ public class Indexer {
 
         for (String s : j.smembers("wave:genelist")) {
             try {
-               
+
                 API.getDb().connect();
                 ResultSet rs;
                 Gene gene = null;
@@ -116,7 +116,7 @@ public class Indexer {
                     } catch (Exception ex) {
                     }
                 }
-                
+
                 //System.out.println("[WAVe][Indexer] cached gene " + s + " data to Redis");
             } catch (Exception e) {
                 System.out.println("[WAVe][Indexer] unable to cache gene " + s + " to Redis");
@@ -284,7 +284,7 @@ public class Indexer {
                 variantList.add(vList);
             }
             stream.put("aaData", variantList);
-            j.set("wave:variant:all:" + s, stream.toJSONString());
+            j.set("wave:variant:" + s + ":all", stream.toJSONString());
             System.out.println("[WAVe][Indexer] cached all variants for " + s);
         } catch (Exception e) {
             System.out.println("[WAVe][Indexer] unable to all variant data for gene " + s + " to Redis");
@@ -348,8 +348,9 @@ public class Indexer {
                 vList.add(String.valueOf(v.getN()));
                 variantList.add(vList);
             }
+
             stream.put("aaData", variantList);
-            j.set("wave:variant:" + type + ":" + s, stream.toJSONString());
+            j.set("wave:variant:" + s + ":" + type, stream.toJSONString());
             System.out.println("[WAVe][Indexer] cached " + type + " variants for " + s);
         } catch (Exception e) {
             System.out.println("[WAVe][Indexer] unable to cache " + type + " variant data for gene " + s + " to Redis");
@@ -360,15 +361,15 @@ public class Indexer {
     /**
      * Store the variant feed (Atom format) for each individual gene.
      */
-    private static void cacheVariantFeed() {
-        // String s = "DMD";
+    private static void cacheVariomeCSV() {
+        //String s = "COL3A1";
         if (!API.isLoaded()) {
             API.load();
         }
         for (String s : j.smembers("wave:genelist")) {
             try {
 
-                API.getJedis().set("wave:variant:feed:" + s, API.variantFeed(new Gene(s), "atom_1.0"));
+                API.getJedis().set("wave:variome:" + s + ":csv", API.variomeFeed(new Gene(s), "csv"));
                 System.out.println("[WAVe][Indexer] cached variant feed for " + s);
 
             } catch (IOException ex) {

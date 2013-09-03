@@ -183,7 +183,7 @@ public class VariantActionBean implements ActionBean {
         }
         try {
             System.out.println("[WAVe][Variant] loaded variant feed from Redis cache");
-            return new StreamingResolution("text/xml", API.getJedis().get("wave:variant:feed:" + hgnc));
+            return new StreamingResolution("text/xml", API.getJedis().get("wave:variant:" + hgnc + ":atom"));
         } catch (Exception ex) {
            try {
                 gene = genelist.getGene(hgnc.toUpperCase());

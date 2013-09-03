@@ -296,7 +296,7 @@ public class GeneActionBean implements ActionBean {
         }
 
         try {
-            System.out.println("[WAVe][Gene] loaded gene feed for " + hgnc + " from Redis cache");
+           // System.out.println("[WAVe][Gene] loaded gene feed for " + hgnc + " from Redis cache");
             return new StreamingResolution("text/xml", API.getJedis().hget("wave:gene:" + hgnc, "feed"));
         } catch (Exception ex) {
             try {

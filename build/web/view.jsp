@@ -30,7 +30,7 @@
                                                 <ul>
                                                     <c:forEach var="g" items="${actionBean.mesh}">
                                                         <li><a href="http://bioinformatics.ua.pt/WAVe/gene/${g.HGNC}" title="${g.HGNC} | WAVe" target="_top">${g.HGNC}</a></li>
-                                                    </c:forEach>
+                                                        </c:forEach>
                                                 </ul>
                                             </div>
                                         </div>
@@ -50,7 +50,7 @@
                                                 <ul>
                                                     <c:forEach var="g" items="${actionBean.mesh}">
                                                         <li><a href="http://bioinformatics.ua.pt/WAVe/gene/${g.HGNC}" title="${g.HGNC} | WAVe" target="_top">${g.HGNC}</a></li>
-                                                    </c:forEach>
+                                                        </c:forEach>
                                                 </ul>
                                             </div>
                                         </div>
@@ -70,7 +70,7 @@
                                                 <ul>
                                                     <c:forEach var="g" items="${actionBean.mesh}">
                                                         <li><a href="http://bioinformatics.ua.pt/WAVe/gene/${g.HGNC}" title="${g.HGNC} | WAVe" target="_top">${g.HGNC}</a></li>
-                                                    </c:forEach>
+                                                        </c:forEach>
                                                 </ul>
                                             </div>
                                         </div>
@@ -90,7 +90,7 @@
                                                 <ul>
                                                     <c:forEach var="g" items="${actionBean.mesh}">
                                                         <li><a href="http://bioinformatics.ua.pt/WAVe/gene/${g.HGNC}" title="${g.HGNC} | WAVe" target="_top">${g.HGNC}</a></li>
-                                                    </c:forEach>
+                                                        </c:forEach>
                                                 </ul>
                                             </div>
                                         </div>
@@ -110,7 +110,7 @@
                                                 <ul>
                                                     <c:forEach var="g" items="${actionBean.mesh}">
                                                         <li><a href="http://bioinformatics.ua.pt/WAVe/gene/${g.HGNC}" title="${g.HGNC} | WAVe" target="_top">${g.HGNC}</a></li>
-                                                    </c:forEach>
+                                                        </c:forEach>
                                                 </ul>
                                             </div>
                                         </div>
@@ -130,7 +130,7 @@
                                                 <ul>
                                                     <c:forEach var="g" items="${actionBean.mesh}">
                                                         <li><a href="http://bioinformatics.ua.pt/WAVe/gene/${g.HGNC}" title="${g.HGNC} | WAVe" target="_top">${g.HGNC}</a></li>
-                                                    </c:forEach>
+                                                        </c:forEach>
                                                 </ul>
                                             </div>
                                         </div>
@@ -150,7 +150,7 @@
                                                 <ul>
                                                     <c:forEach var="g" items="${actionBean.mesh}">
                                                         <li><a href="http://bioinformatics.ua.pt/WAVe/gene/${g.HGNC}" title="${g.HGNC} | WAVe" target="_top">${g.HGNC}</a></li>
-                                                    </c:forEach>
+                                                        </c:forEach>
                                                 </ul>
                                             </div>
                                         </div>
@@ -170,7 +170,7 @@
                                                 <ul>
                                                     <c:forEach var="g" items="${actionBean.mesh}">
                                                         <li><a href="http://bioinformatics.ua.pt/WAVe/gene/${g.HGNC}" title="${g.HGNC} | WAVe" target="_top">${g.HGNC}</a></li>
-                                                    </c:forEach>
+                                                        </c:forEach>
                                                 </ul>
                                             </div>
                                         </div>
@@ -197,16 +197,21 @@
                         <c:when test="${type.name=='LSDB'}">
                             <c:choose>
                                 <c:when test="${actionBean.gene.numberOfLsdbs == 0}">
-                                    <li class="closed"><span class="empty">LSDB</span></li>
+                                    <li class="open"><span class="fold open">LSDB</span>
+                                        <ul>
+                                            <li><span class="file"><a title="${actionBean.gene.HGNC} at Cafe Variome" class="frame" value="http://www.cafevariome.org/discover/variants/${actionBean.gene.HGNC}/dbsnp/openAccess/html">${actionBean.gene.HGNC} at Cafe Variome</a></li>
+                                        </ul>
+                                    </li>
                                 </c:when>
                                 <c:otherwise>
                                     <li class="open"><span class="folder open">${type.name}</span>
                                         <ul>
-                                            <c:forEach var="node" items="${type.nodes}">
-                                                <c:forEach var="leaf" items="${node.leafs}">
+                                            <li><span class="file"><a title="${actionBean.gene.HGNC} at Cafe Variome" class="frame" value="http://www.cafevariome.org/discover/variants/${actionBean.gene.HGNC}/dbsnp/openAccess/html">${actionBean.gene.HGNC} at Cafe Variome</a></li>
+                                                <c:forEach var="node" items="${type.nodes}">
+                                                    <c:forEach var="leaf" items="${node.leafs}">
                                                     <li><span class="file"><a title="${node.shortname}: ${fn:substring(leaf.value,0,25)}..." class="frame" value="${leaf.value}">${node.shortname} ${actionBean.gene.HGNC}</a></span></li>
+                                                    </c:forEach>
                                                 </c:forEach>
-                                            </c:forEach>
                                         </ul>
                                     </li>
                                 </c:otherwise>
@@ -216,39 +221,39 @@
                             <c:choose>
                                 <c:when test="${actionBean.gene.numberOfVariants == 0}">
                                     <li><span class="empty">${type.name}</span></li>
-                                </c:when>
-                                <c:otherwise>
+                                    </c:when>
+                                    <c:otherwise>
                                     <li class="open"><span class="folder">${type.name}</span>
                                         <ul>                                         
                                             <li><span class="file"><a title="Variant: ${actionBean.gene.numberOfVariants} variants" class="frame" value="<c:url value="/variant/${actionBean.gene.HGNC}/all" />" >All</a></span></li>
-                                            <c:choose>
-                                                <c:when test="${actionBean.gene.variantCon < 1 && actionBean.gene.variantInv < 1 && actionBean.gene.variantIns < 1 && actionBean.gene.variantDup < 1 && actionBean.gene.variantSub < 1 && actionBean.gene.variantDel < 1}">
+                                                <c:choose>
+                                                    <c:when test="${actionBean.gene.variantCon < 1 && actionBean.gene.variantInv < 1 && actionBean.gene.variantIns < 1 && actionBean.gene.variantDup < 1 && actionBean.gene.variantSub < 1 && actionBean.gene.variantDel < 1}">
                                                     <li><span class="empty">Change Type</span></li>
-                                                </c:when>
-                                                <c:otherwise>
+                                                    </c:when>
+                                                    <c:otherwise>
                                                     <li class="closed"><span class="folder">Change Type</span>
                                                         <ul>
                                                             <c:if test="${actionBean.gene.variantSub > 0}">
                                                                 <li><span class="file"><a title="Variant: ${actionBean.gene.variantSub} substitution variants" class="frame" value="<c:url value="/variant/${actionBean.gene.HGNC}/sub" />">Substitution</a></span></li>
-                                                            </c:if>
-                                                            <c:if test="${actionBean.gene.variantDel > 0}">
+                                                                </c:if>
+                                                                <c:if test="${actionBean.gene.variantDel > 0}">
                                                                 <li><span class="file"><a title="Variant: ${actionBean.gene.variantDel} deletions variants" class="frame" value="<c:url value="/variant/${actionBean.gene.HGNC}/del" />">Deletions</a></span></li>
-                                                            </c:if>
-                                                            <c:if test="${actionBean.gene.variantIns > 0}">
+                                                                </c:if>
+                                                                <c:if test="${actionBean.gene.variantIns > 0}">
                                                                 <li><span class="file"><a title="Variant: ${actionBean.gene.variantIns} insertions variants" class="frame" value="<c:url value="/variant/${actionBean.gene.HGNC}/ins" />">Insertions</a></span></li>
-                                                            </c:if>
-                                                            <c:if test="${actionBean.gene.variantInv > 0}">
+                                                                </c:if>
+                                                                <c:if test="${actionBean.gene.variantInv > 0}">
                                                                 <li><span class="file"><a title="Variant: ${actionBean.gene.variantInv} inversions variants" class="frame" value="<c:url value="/variant/${actionBean.gene.HGNC}/inv" />">Inversion</a></span></li>
-                                                            </c:if>
-                                                            <c:if test="${actionBean.gene.variantDup > 0}">
+                                                                </c:if>
+                                                                <c:if test="${actionBean.gene.variantDup > 0}">
                                                                 <li><span class="file"><a title="Variant: ${actionBean.gene.variantDup} duplications variants" class="frame" value="<c:url value="/variant/${actionBean.gene.HGNC}/dup" />">Duplications</a></span></li>
-                                                            </c:if>
-                                                            <c:if test="${actionBean.gene.variantCon > 0}">
+                                                                </c:if>
+                                                                <c:if test="${actionBean.gene.variantCon > 0}">
                                                                 <li><span class="file"><a title="Variant: ${actionBean.gene.variantCon} conversions variants" class="frame" value="<c:url value="/variant/${actionBean.gene.HGNC}/con" />">Conversion</a></span></li>
-                                                            </c:if>
-                                                            <c:if test="${actionBean.gene.variantDelins > 0}">
+                                                                </c:if>
+                                                                <c:if test="${actionBean.gene.variantDelins > 0}">
                                                                 <li><span class="file"><a title="Variant: ${actionBean.gene.variantDelins} deletion/insertion variants" class="frame" value="<c:url value="/variant/${actionBean.gene.HGNC}/delins" />">Deletion/Insertion</a></span></li>
-                                                            </c:if>
+                                                                </c:if>
                                                         </ul>
                                                     </li>
                                                 </c:otherwise>
@@ -281,22 +286,22 @@
                             <c:choose>                                
                                 <c:when test="${type.size == 0}">
                                     <li><span class="empty">${type.name}</span></li>
-                                </c:when>
-                                <c:otherwise>
+                                    </c:when>
+                                    <c:otherwise>
                                     <li><span class="folder">${type.name}</span>
                                         <ul>
                                             <c:forEach var="node" items="${type.nodes}">
                                                 <c:if test="${node.size == 0 && node.method != 'direct'}">
                                                     <li><span class="empty">${node.name}</span></li>
-                                                </c:if>
-                                                <c:if test="${node.size > 0 || node.method == 'direct'}">
-                                                    <c:choose>
-                                                        <c:when test="${node.method != 'direct'}">
+                                                    </c:if>
+                                                    <c:if test="${node.size > 0 || node.method == 'direct'}">
+                                                        <c:choose>
+                                                            <c:when test="${node.method != 'direct'}">
                                                             <li><span class="folder">${node.name}</span>
                                                                 <ul>
                                                                     <c:forEach var="leaf" items="${node.leafs}">
                                                                         <li><span class="file"><a title="${node.shortname}: ${leaf.name}" class="frame" value="${fn:replace(node.value, '#replaceme#', leaf.value)}" title="${leaf.name}">${node.shortname} ${leaf.name}</a></span></li>
-                                                                    </c:forEach>
+                                                                        </c:forEach>
                                                                 </ul>
                                                             </li>
                                                         </c:when>
