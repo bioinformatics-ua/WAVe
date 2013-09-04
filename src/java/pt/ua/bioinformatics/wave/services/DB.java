@@ -195,7 +195,7 @@ public class DB implements Serializable {
             System.out.println("[DB] Unable to update " + what + "\n\t" + e.toString());
             return false;
         } finally {
-            System.out.println("[DB] updated " + what);
+            //System.out.println("[DB] updated " + what);
             return true;
         }
     }

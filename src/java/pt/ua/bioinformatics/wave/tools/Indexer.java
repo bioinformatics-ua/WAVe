@@ -7,13 +7,11 @@ package pt.ua.bioinformatics.wave.tools;
 import au.com.bytecode.opencsv.CSVReader;
 import com.sun.syndication.io.FeedException;
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -42,7 +40,7 @@ public class Indexer {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void main(String[] args) throws IOException, ClassNotFoundException, SQLException {
         //cacheGeneList();
         cacheGeneInfo();
         // cacheGeneData();
@@ -73,12 +71,16 @@ public class Indexer {
      * Store individual gene info into Redis cache. Iterates through
      * wave:genelist array, connects to DB and loads data.
      */
-    public static void cacheGeneInfo() {
+    public static void cacheGeneInfo() throws SQLException {
         if (!API.isLoaded()) {
             API.load();
         }
 
-        for (String s : j.smembers("wave:genelist")) {
+        API.getDb().connect();
+        ResultSet genes = API.getDb().getData("SELECT * FROM wave9_genes WHERE info = 0;");
+        while (genes.next()) {
+            //for (String s : j.smembers("wave:genelist")) {
+            String s = genes.getString("hgnc");
             try {
 
                 API.getDb().connect();
@@ -116,14 +118,16 @@ public class Indexer {
                     } catch (Exception ex) {
                     }
                 }
-
+                saveGene(s, "info");
                 //System.out.println("[WAVe][Indexer] cached gene " + s + " data to Redis");
             } catch (Exception e) {
                 System.out.println("[WAVe][Indexer] unable to cache gene " + s + " to Redis");
                 //Logger.getLogger(Indexer.class.getName()).log(Level.SEVERE, null, e);
+
+            } finally {
                 API.getDb().close();
+                API.getDb().getConnection().close();
             }
-            API.getDb().close();
         }
     }
 
@@ -132,8 +136,12 @@ public class Indexer {
      *
      * @throws IOException
      */
-    public static void cacheGeneData() throws IOException {
-        for (String s : j.smembers("wave:genelist")) {
+    public static void cacheGeneData() throws IOException, SQLException {
+        API.getDb().connect();
+        ResultSet genes = API.getDb().getData("SELECT * FROM wave9_genes WHERE cached = 0;");
+        while (genes.next()) {
+            //for (String s : j.smembers("wave:genelist")) {
+            String s = genes.getString("hgnc");
             try {
                 Gene g = new Gene(Integer.parseInt(j.hget("wave:gene:" + s, "id")), s, true);
                 ArrayList<Type> data = g.loadInfoForCache();
@@ -178,7 +186,9 @@ public class Indexer {
                 }
                 data_obj.put("data", types);
                 j.hset("wave:gene:" + s, "data", data_obj.toJSONString());
-                System.out.println("[WAVe][Indexer] Cached >> " + s);
+                //System.out.println("[WAVe][Indexer] Cached >> " + s);
+                
+                saveGene(s, "data");
             } catch (Exception e) {
                 System.out.println("[WAVe][Indexer] unable to cache tree gene " + s + " to Redis");
                 Logger.getLogger(Indexer.class.getName()).log(Level.SEVERE, null, e);
@@ -190,9 +200,13 @@ public class Indexer {
      * Store individual gene variant data in Redis cache. Data are cached for
      * all variants and specific variant types.
      */
-    static void cacheVariantData() {
+    static void cacheVariantData() throws SQLException {
         //String s = "COL3A1";
-        for (String s : j.smembers("wave:genelist")) {
+        API.getDb().connect();
+        ResultSet genes = API.getDb().getData("SELECT * FROM wave9_genes WHERE variant = 0;");
+        while (genes.next()) {
+            //for (String s : j.smembers("wave:genelist")) {
+            String s = genes.getString("hgnc");
             try {
                 cacheAllVariantsForGene(s);
                 cacheVariantsForGene(s, "sub");
@@ -202,6 +216,8 @@ public class Indexer {
                 cacheVariantsForGene(s, "inv");
                 cacheVariantsForGene(s, "con");
                 cacheVariantsForGene(s, "delins");
+                
+                saveGene(s, "variant");
             } catch (Exception e) {
                 System.out.println("[WAVe][Indexer] unable to cache variant data for gene " + s + " to Redis");
                 Logger.getLogger(Indexer.class.getName()).log(Level.SEVERE, null, e);
@@ -361,17 +377,22 @@ public class Indexer {
     /**
      * Store the variant feed (Atom format) for each individual gene.
      */
-    private static void cacheVariomeCSV() {
+    private static void cacheVariomeCSV() throws SQLException {
         //String s = "COL3A1";
         if (!API.isLoaded()) {
             API.load();
         }
-        for (String s : j.smembers("wave:genelist")) {
+        API.getDb().connect();
+        ResultSet genes = API.getDb().getData("SELECT * FROM wave9_genes WHERE variome = 0;");
+        while (genes.next()) {
+            //for (String s : j.smembers("wave:genelist")) {
+            String s = genes.getString("hgnc");
             try {
 
                 API.getJedis().set("wave:variome:" + s + ":csv", API.variomeFeed(new Gene(s), "csv"));
-                System.out.println("[WAVe][Indexer] cached variant feed for " + s);
+               // System.out.println("[WAVe][Indexer] cached variant feed for " + s);
 
+                saveGene(s, "variome");
             } catch (IOException ex) {
                 System.out.println("[WAVe][Indexer] unable to cache variant feed for gene " + s + " to Redis");
                 Logger.getLogger(Indexer.class.getName()).log(Level.SEVERE, null, ex);
@@ -385,19 +406,40 @@ public class Indexer {
     /**
      * Store the gene feed (Atom format) for each individual gene.
      */
-    static void cacheGeneFeed() {
+    static void cacheGeneFeed() throws SQLException {
         // String s = "COL3A1";
         if (!API.isLoaded()) {
             API.load();
         }
-        for (String s : j.smembers("wave:genelist")) {
+        API.getDb().connect();
+        ResultSet genes = API.getDb().getData("SELECT * FROM wave9_genes WHERE feed = 0;");
+        while (genes.next()) {
+            //for (String s : j.smembers("wave:genelist")) {
+            String s = genes.getString("hgnc");
             try {
                 API.getJedis().hset("wave:gene:" + s, "feed", API.geneFeed(new Gene(s), "atom_1.0"));
-                System.out.println("[WAVe][Indexer] cached variant feed for " + s);
+               // System.out.println("[WAVe][Indexer] cached variant feed for " + s);
+                
+                saveGene(s, "feed");
             } catch (FeedException ex) {
                 System.out.println("[WAVe][Indexer] unable to cache gene feed for " + s + " to Redis");
                 Logger.getLogger(Indexer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    static void saveGene(String gene, String method) {
+        DB db = new DB();
+
+        try {
+            db.connect();
+            db.update(gene, "UPDATE wave9_genes SET " + method + " = 1 WHERE hgnc LIKE '" + gene + "';");
+        } catch (Exception ex) {
+            System.out.println("[WAVe][Indexer] unable to update " + gene);
+            Logger.getLogger(Indexer.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            db.close();
+        }
+
     }
 }
