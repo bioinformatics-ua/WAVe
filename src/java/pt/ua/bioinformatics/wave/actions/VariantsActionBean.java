@@ -73,10 +73,10 @@ public class VariantsActionBean implements ActionBean {
         if (!API.isLoaded()) {
             API.load();
         }
-        try {
+       /* try {
             // System.out.println("[WAVe][Variants] loading variants from Redis cache");
             return new StreamingResolution("text/javascript", API.getJedis().get("wave:variant:" + hgnc + ":all"));
-        } catch (Exception ex) {
+        } catch (Exception ex) {*/
             JSONObject stream = new JSONObject();
             JSONArray variantList = new JSONArray();
             if (!API.isLoaded()) {
@@ -144,7 +144,7 @@ public class VariantsActionBean implements ActionBean {
             stream.put("aaData", variantList);
 
             return new StreamingResolution("text/javascript", stream.toJSONString());
-        }
+        //}
     }
 
     /**
@@ -158,10 +158,11 @@ public class VariantsActionBean implements ActionBean {
         }
         try {
             // System.out.println("[WAVe][Variants] loading sub variants from Redis cache");
-            return new StreamingResolution("text/javascript", API.getJedis().get("wave:variant:" + hgnc + ":sub"));
-        } catch (Exception ex) {
+          //  return new StreamingResolution("text/javascript", API.getJedis().get("wave:variant:" + hgnc + ":sub"));
             gene = genelist.getGene(hgnc.toUpperCase());
             return new StreamingResolution("text/javascript", generateVars("sub"));
+        } catch (Exception ex) {
+            return new StreamingResolution("text/javascript", "{}");
         }
     }
 
@@ -176,10 +177,11 @@ public class VariantsActionBean implements ActionBean {
         }
         try {
             // System.out.println("[WAVe][Variants] loading del variants from Redis cache");
-            return new StreamingResolution("text/javascript", API.getJedis().get("wave:variant:" + hgnc + ":del"));
-        } catch (Exception ex) {
+          //  return new StreamingResolution("text/javascript", API.getJedis().get("wave:variant:" + hgnc + ":del"));
             gene = genelist.getGene(hgnc.toUpperCase());
             return new StreamingResolution("text/javascript", generateVars("del"));
+        } catch (Exception ex) {
+            return new StreamingResolution("text/javascript", "{}");            
         }
     }
 
@@ -194,10 +196,11 @@ public class VariantsActionBean implements ActionBean {
         }
         try {
             // System.out.println("[WAVe][Variants] loading dup variants from Redis cache");
-            return new StreamingResolution("text/javascript", API.getJedis().get("wave:variant:" + hgnc + ":dup"));
-        } catch (Exception ex) {
+            //return new StreamingResolution("text/javascript", API.getJedis().get("wave:variant:" + hgnc + ":dup"));
             gene = genelist.getGene(hgnc.toUpperCase());
             return new StreamingResolution("text/javascript", generateVars("dup"));
+        } catch (Exception ex) {
+            return new StreamingResolution("text/javascript", "{}");
         }
     }
 
@@ -212,10 +215,11 @@ public class VariantsActionBean implements ActionBean {
         }
         try {
             // System.out.println("[WAVe][Variants] loading ins variants from Redis cache");
-            return new StreamingResolution("text/javascript", API.getJedis().get("wave:variant:" + hgnc + ":ins"));
-        } catch (Exception ex) {
-            gene = genelist.getGene(hgnc.toUpperCase());
+           // return new StreamingResolution("text/javascript", API.getJedis().get("wave:variant:" + hgnc + ":ins"));
+             gene = genelist.getGene(hgnc.toUpperCase());
             return new StreamingResolution("text/javascript", generateVars("ins"));
+        } catch (Exception ex) {
+            return new StreamingResolution("text/javascript", "{}");
         }
     }
 
@@ -230,10 +234,11 @@ public class VariantsActionBean implements ActionBean {
         }
         try {
             // System.out.println("[WAVe][Variants] loading inv variants from Redis cache");
-            return new StreamingResolution("text/javascript", API.getJedis().get("wave:variant:" + hgnc + ":inv"));
-        } catch (Exception ex) {
+            //return new StreamingResolution("text/javascript", API.getJedis().get("wave:variant:" + hgnc + ":inv"));
             gene = genelist.getGene(hgnc.toUpperCase());
             return new StreamingResolution("text/javascript", generateVars("inv"));
+        } catch (Exception ex) {
+            return new StreamingResolution("text/javascript", "{}");
         }
     }
 
@@ -248,10 +253,11 @@ public class VariantsActionBean implements ActionBean {
         }
         try {
             // System.out.println("[WAVe][Variants] loading con variants from Redis cache");
-            return new StreamingResolution("text/javascript", API.getJedis().get("wave:variant:" + hgnc + ":con"));
-        } catch (Exception ex) {
-            gene = genelist.getGene(hgnc.toUpperCase());
+            //return new StreamingResolution("text/javascript", API.getJedis().get("wave:variant:" + hgnc + ":con"));
+             gene = genelist.getGene(hgnc.toUpperCase());
             return new StreamingResolution("text/javascript", generateVars("con"));
+        } catch (Exception ex) {
+            return new StreamingResolution("text/javascript", "{}");
         }
     }
 
@@ -266,10 +272,11 @@ public class VariantsActionBean implements ActionBean {
         }
         try {
             // System.out.println("[WAVe][Variants] loading delins variants from Redis cache");
-            return new StreamingResolution("text/javascript", API.getJedis().get("wave:variant:" + hgnc + ":delins"));
-        } catch (Exception ex) {
-            gene = genelist.getGene(hgnc.toUpperCase());
+            //return new StreamingResolution("text/javascript", API.getJedis().get("wave:variant:" + hgnc + ":delins"));
+             gene = genelist.getGene(hgnc.toUpperCase());
             return new StreamingResolution("text/javascript", generateVars("delins"));
+        } catch (Exception ex) {
+            return new StreamingResolution("text/javascript", "{}");
         }
     }
 

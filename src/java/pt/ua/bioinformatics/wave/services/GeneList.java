@@ -16,7 +16,7 @@ public class GeneList {
 
     public final static GeneList INSTANCE = new GeneList();
     private HashMap<String, Gene> genelist = new HashMap<String, Gene>();
-    
+
     /**
      * Instances GeneList by loading gene information to in-memory HashMap.
      */
@@ -27,7 +27,7 @@ public class GeneList {
 
         // load from Redis
         try {
-            loadGeneListFromCache();
+          //  loadGeneListFromCache();
         } catch (Exception e) {
             System.out.println("[GeneList] Unable to load gene list from Redis cache\n\t" + e.toString());
         }
@@ -91,6 +91,9 @@ public class GeneList {
      */
     public ArrayList<Gene> searchGene(String search, boolean checkEnabled) {
         search = search.toUpperCase();
+        if (genelist.isEmpty()) {
+            loadGeneListFromCache();
+        }
         ArrayList<Gene> genes = new ArrayList<Gene>();
         Gene gene = new Gene();
         if (search.contains("*")) {
@@ -155,17 +158,21 @@ public class GeneList {
     }
 
     private void loadGeneListFromCache() {
-        if(!API.isLoaded()) {
+        if (!API.isLoaded()) {
             API.load();
         }
         Jedis jedis = API.getJedis();
         for (String s : jedis.smembers("wave:genelist")) {
-            Gene g = new Gene(Integer.parseInt(jedis.hget("wave:gene:" + s, "id")), s, true);
-            g.setName(jedis.hget("wave:gene:" + s, "name"));
-            g.setLocus(jedis.hget("wave:gene:" + s, "locus"));
-            g.setNumberOfLsdbs(Integer.parseInt(jedis.hget("wave:gene:" + s, "lsdb")));
-            g.setNumberOfVariants(Integer.parseInt(jedis.hget("wave:gene:" + s, "variant")));
-            genelist.put(s, g);
+            try {
+                Gene g = new Gene(Integer.parseInt(jedis.hget("wave:gene:" + s, "id")), s, true);
+                g.setName(jedis.hget("wave:gene:" + s, "name"));
+                g.setLocus(jedis.hget("wave:gene:" + s, "locus"));
+                g.setNumberOfLsdbs(Integer.parseInt(jedis.hget("wave:gene:" + s, "lsdb")));
+                g.setNumberOfVariants(Integer.parseInt(jedis.hget("wave:gene:" + s, "variant")));
+                genelist.put(s, g);
+            } catch (Exception ex) {
+            }
+
         }
     }
 }

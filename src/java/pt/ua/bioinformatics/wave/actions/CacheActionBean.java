@@ -12,11 +12,20 @@ import pt.ua.bioinformatics.wave.tools.Indexer;
  *
  * @author pedrolopes
  */
-@UrlBinding("/cache")
+@UrlBinding("/cache/{type}")
 public class CacheActionBean implements ActionBean {
 
     private ActionBeanContext context;
- 
+    private String type;
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     public void setContext(ActionBeanContext context) {
         this.context = context;
     }
@@ -27,18 +36,25 @@ public class CacheActionBean implements ActionBean {
 
     /**
      * Handles call for UniversalAccess API.
+     *
      * @return
      */
     @DefaultHandler
     public Resolution get() {
         try {
-//            addressUA = API.getUA(query, 29951);
+
+            if (type.equals("variome")) {
+                Indexer.cacheVariomeCSV();
+            } else if (type.equals("feed")) {
+                Indexer.cacheGeneFeed();
+            } else if (type.equals("data")) {
+                Indexer.cacheGeneData();
+            }
             Indexer.cacheGeneInfo();
         } catch (Exception e) {
             System.out.println("[CacheActionBean][] Unable to load indexer\n\t" + e.toString() + "\n");
         } finally {
-  //          return new RedirectResolution(addressUA, false);
         }
-        return new StreamingResolution("text","loading");
+        return new StreamingResolution("text", "loading");
     }
 }

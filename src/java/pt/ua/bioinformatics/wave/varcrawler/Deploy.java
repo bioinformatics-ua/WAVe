@@ -19,7 +19,7 @@ public class Deploy {
         if (!API.isLoaded()) {
             API.load();
         }
-        if (Settings.getModules().get("varcrawler")) {
+    /*    if (Settings.getModules().get("varcrawler")) {
             Creator c = new Creator();
             if (c.create()) {
                 System.out.println("[Creator] Configuration information loaded succesfully");
@@ -57,8 +57,11 @@ public class Deploy {
             // testing area
             //Index.get("P51587");
              */
+        /*   
         } else {
             System.out.println("[WAVe Deploy] VarCrawler module is disabled ");
-        }
+        }*/
+         Builder b = new Builder();
+            b.cacheVariants();
     }
 }

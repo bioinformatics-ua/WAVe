@@ -181,7 +181,14 @@ public class VariantActionBean implements ActionBean {
         if (!API.isLoaded()) {
             API.load();
         }
-        try {
+      try {
+                gene = genelist.getGene(hgnc.toUpperCase());
+                return new StreamingResolution("text/xml", API.getGeneVariants(gene, "atom_1.0"));
+            } catch (Exception e) {
+                System.out.println("[VariantActionBean] Error " + e.toString());
+                throw new UnsupportedOperationException();
+            }
+        /*try {
             System.out.println("[WAVe][Variant] loaded variant feed from Redis cache");
             return new StreamingResolution("text/xml", API.getJedis().get("wave:variant:" + hgnc + ":atom"));
         } catch (Exception ex) {
@@ -192,7 +199,7 @@ public class VariantActionBean implements ActionBean {
                 System.out.println("[VariantActionBean] Error " + e.toString());
                 throw new UnsupportedOperationException();
             }
-        }
+        }*/
     }
 
     /**

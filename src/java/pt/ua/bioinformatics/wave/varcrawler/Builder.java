@@ -26,48 +26,55 @@ import pt.ua.bioinformatics.wave.services.Settings;
 public class Builder {
 
     /**
-     * Loads Locus Specific DataBase data from configuration file and gets variants for each gene.
+     * Loads Locus Specific DataBase data from configuration file and gets
+     * variants for each gene.
      * <p><b>Feature:</b><br />
-     * Loads data from local CSV LSDB listing file and process each gene-LSDB combination reading variants
-     * and adding them to WAVe database.<br />
+     * Loads data from local CSV LSDB listing file and process each gene-LSDB
+     * combination reading variants and adding them to WAVe database.<br />
      * <b>Operation:</b>
      * <ul>
-     *  <li>Load LSDB listing CSV configuration file</li>
-     *  <li>Read all data to memory and parse each gene-LSDB according to its type</li>
-     *  <li>IDBases
-     *      <ul>
-     *          <li>Found if address contains 'bioinf.uta.fi'</li>
-     *          <li>Instances the crawler and loads Arabella</li>
-     *          <li>Reads variants and adds them to WAVe database</li>
-     *      </ul>
-     *  </li>
+     * <li>Load LSDB listing CSV configuration file</li>
+     * <li>Read all data to memory and parse each gene-LSDB according to its
+     * type</li>
+     * <li>IDBases
+     * <ul>
+     * <li>Found if address contains 'bioinf.uta.fi'</li>
+     * <li>Instances the crawler and loads Arabella</li>
+     * <li>Reads variants and adds them to WAVe database</li>
+     * </ul>
+     * </li>
      * <li>UMD
-     *      <ul>
-     *          <li>Found if address contains 'umd.be'</li>
-     *          <li>Modifies the crawling address for local UMD address (no direct crawler access to UMD)</li>
-     *          <li>Instances the crawler and loads Arabella</li>
-     *          <li>Reads variants and adds them to WAVe database</li>
-     *      </ul>
-     *  </li>
+     * <ul>
+     * <li>Found if address contains 'umd.be'</li>
+     * <li>Modifies the crawling address for local UMD address (no direct
+     * crawler access to UMD)</li>
+     * <li>Instances the crawler and loads Arabella</li>
+     * <li>Reads variants and adds them to WAVe database</li>
+     * </ul>
+     * </li>
      * <li>LOVD
-     *      <ul>
-     *          <li>Found if address contains 'select_db'</li>
-     *          <li>Reads LOVD version</li>
-     *          <li>If bigger than '2.0-24' loads FeedReads and reads the variants</li>
-     *          <li>If otherwise (or if fails to load feed data) instances the crawler and loads Arabella</li>
-     *      </ul>
-     *  </li>
+     * <ul>
+     * <li>Found if address contains 'select_db'</li>
+     * <li>Reads LOVD version</li>
+     * <li>If bigger than '2.0-24' loads FeedReads and reads the variants</li>
+     * <li>If otherwise (or if fails to load feed data) instances the crawler
+     * and loads Arabella</li>
+     * </ul>
+     * </li>
      * <li>Generic
-     *      <ul>
-     *          <li>If LSDB address does not match any of the previous cases</li>
-     *          <li>Tests additional 'info'</li>
-     *          <li>If it contains an address, instances the crawler and loads Arabella with that address</li>
-     *          <li>If not, instances the crawler and loads Arabella with the main LSDB address</li>
-     *          <li>Reads variants and adds them to WAVe database</li>
-     *      </ul>
-     *  </li>
+     * <ul>
+     * <li>If LSDB address does not match any of the previous cases</li>
+     * <li>Tests additional 'info'</li>
+     * <li>If it contains an address, instances the crawler and loads Arabella
+     * with that address</li>
+     * <li>If not, instances the crawler and loads Arabella with the main LSDB
+     * address</li>
+     * <li>Reads variants and adds them to WAVe database</li>
+     * </ul>
+     * </li>
      * </ul>
      * </p>
+     *
      * @return
      */
     public boolean loadLSDBs() {
@@ -78,7 +85,7 @@ public class Builder {
             Leaf leaf;
             List<String[]> lsdbs = reader.readAll();
             for (String[] lsdb : lsdbs) {
-
+                
                 String hgnc = lsdb[0];
                 String address = lsdb[1];
                 String info = lsdb[3];
@@ -94,11 +101,11 @@ public class Builder {
                 if (info.equals("")) {
                     info = address;
                 }
-
-
+                
+                
                 LSDB locusdb = new LSDB(new Node(lsdbType), gene, address, info);
                 locusdb.addToDB();
-
+                
                 leaf = new Leaf(address);
 
                 //System.out.println("Leaf " + leaf.getId() + ":" + leaf.getName() + ":" + leaf.getValue());
@@ -112,8 +119,8 @@ public class Builder {
                     } else {
                         //System.out.println("[Builder][" + lsdbType + "] Unable to read variants for " + hgnc + " at " + info);
                     }
-
-
+                    
+                    
                 } else if (lsdbType.equals("UMD")) {
                     //System.out.println("[Builder] " + hgnc + " " + lsdbType);
                     crawl = new Crawler(gene, lsdbType);
@@ -123,7 +130,7 @@ public class Builder {
                     } else {
                         System.out.println("[Builder][" + lsdbType + "] Unable to read variants for " + hgnc + " at " + newAddress);
                     }
-
+                    
                 } else if (lsdbType.equals("LOVD")) {
                     //System.out.println("[Builder] " + hgnc + " " + lsdbType);
                     info = lsdb[3];
@@ -157,12 +164,12 @@ public class Builder {
                         } else {
                             //System.out.println("[Builder][" + lsdbType + "] Unable to crawl variants for " + hgnc + " at " + urlAddress);
                         }
-
+                        
                     }
                 } else {
                     lsdbType = "Unknown";
                     crawl = new Crawler(gene, lsdbType);
-
+                    
                     if (info.equals("")) {
                         if (crawl.readVariants(address, leaf)) {
                             //    System.out.println("[Builder][" + lsdbType + "] Read variants for " + hgnc + " at " + address);
@@ -176,7 +183,7 @@ public class Builder {
                             //      System.out.println("[Builder][" + lsdbType + "] Unable to read variants for " + hgnc + " at " + info);
                         }
                     }
-
+                    
                 }
                 // LSDB locusdb = new LSDB(new Node(lsdbType), gene, address);
                 //locusdb.addToDB();
@@ -193,8 +200,9 @@ public class Builder {
     }
 
     /**
-     * Loads gene information (number of LSDB, number of Variants) to genelist table for performance improvement.
-     * 
+     * Loads gene information (number of LSDB, number of Variants) to genelist
+     * table for performance improvement.
+     *
      * @return success of the operation
      */
     public boolean cacheGenes() {
@@ -204,7 +212,7 @@ public class Builder {
         Type t = API.getTypes().get("geneleaf");
         API.load();
         Gene gene = null;
-
+        
         try {
             db.connect();
             //System.out.println("Loading gene information");
@@ -214,7 +222,7 @@ public class Builder {
                     + "INNER JOIN wave#build#_association AS A ON A.a = G.id "
                     + "INNER JOIN wave#build#_leaf AS L ON A.b = L.id "
                     + "WHERE G.enabled = TRUE AND A.reftypeid = " + t.getId() + " AND L.refnodeid IN " + API.getLsdbs() + " GROUP BY G.id");
-
+            
             while (rs.next()) {
                 gene = new Gene(rs.getInt("id"), rs.getString("hgnc"), rs.getBoolean("enabled"));
                 gene.setNumberOfVariants();
@@ -230,7 +238,7 @@ public class Builder {
         }
         return success;
     }
-
+    
     public boolean cacheVariants() {
         boolean success = false;
         GeneList genelist = GeneList.INSTANCE;
@@ -240,86 +248,88 @@ public class Builder {
         }
         DB db = API.getDb();
         Type t = API.getTypes().get("variantleaf");
-        for (Gene gene : genes) {
-            ArrayList<Variant> variants = new ArrayList<Variant>();
-            if (gene.getNumberOfVariants() > 0) {
-                System.out.println("\n[Builder] caching variants for " + gene.getHGNC());
-                try {
-                    db.connect();
-                    Variant var;
-                    Leaf l;
-                    ResultSet rs = db.getData("SELECT COUNT(wave#build#_variant.variant) AS n, wave#build#_variant.id AS vid, wave#build#_variant.refseq, wave#build#_variant.variant, wave#build#_leaf.id AS lid, wave#build#_leaf.name,wave#build#_leaf.value, wave#build#_variant.refchangetypeid"
-                            + " FROM wave#build#_variant INNER JOIN wave#build#_association ON wave#build#_association.a = wave#build#_variant.id"
-                            + " INNER JOIN wave#build#_leaf ON wave#build#_leaf.id = wave#build#_association.b"
-                            + " WHERE wave#build#_variant.refgeneid = " + gene.getId() + " AND wave#build#_association.reftypeid = " + t.getId()
-                            + " GROUP BY wave#build#_variant.variant, wave#build#_variant.refseq"
-                            + " ORDER BY n DESC");
-                    while (rs.next()) {
-                        var = new Variant(rs.getInt("n"), rs.getInt("vid"), rs.getString("variant"), rs.getInt("refchangetypeid"), gene);
-                        var.setRefseq(rs.getString("refseq"));
-
-                        if (gene.getNumberOfLsdbs() > 1) {
-                            if (var.getN() == 1) {
-                                l = new Leaf(rs.getInt("lid"), rs.getString("name"), rs.getString("value"), 1);
-                                var.sources.add(l);
-                                var.setNumberOfSources(1);
-                                variants.add(var);
-                            } else if (var.getN() > 1) {
-                                DB dbx = new DB();
-                                dbx.connect();
-                                ResultSet sources = dbx.getData("SELECT COUNT(wave#build#_leaf.name) AS n, wave#build#_leaf.id AS lid, wave#build#_leaf.name AS name, wave#build#_leaf.value AS value FROM wave#build#_variant INNER JOIN wave#build#_association ON wave#build#_association.a = wave#build#_variant.id INNER JOIN wave#build#_leaf ON wave#build#_leaf.id = wave#build#_association.b WHERE wave#build#_association.reftypeid = " + t.getId() + " AND wave#build#_variant.refgeneid = " + gene.getId() + " AND wave#build#_variant.variant LIKE '" + var.getVariant() + "' GROUP BY wave#build#_leaf.name ORDER BY n ASC");
-
-                                int i = 0;
-                                Leaf source;
-                                while (sources.next()) {
-                                    source = new Leaf(sources.getInt("lid"), sources.getString("name"), sources.getString("value"), sources.getInt("n"));
-                                    var.sources.add(source);
-                                    i++;
-                                }
-                                dbx.close();
-                                var.setNumberOfSources(i);
-                                variants.add(var);
-                            }
-                        } else {
+        // for (Gene gene : genes) {
+        Gene gene = new Gene("DMD");
+        gene.setId(2928);
+        ArrayList<Variant> variants = new ArrayList<Variant>();
+        if (true) { //gene.getNumberOfVariants() > 0) {
+            System.out.println("\n[Builder] caching variants for " + gene.getHGNC());
+            try {
+                db.connect();
+                Variant var;
+                Leaf l;
+                ResultSet rs = db.getData("SELECT COUNT(wave#build#_variant.variant) AS n, wave#build#_variant.id AS vid, wave#build#_variant.refseq, wave#build#_variant.variant, wave#build#_leaf.id AS lid, wave#build#_leaf.name,wave#build#_leaf.value, wave#build#_variant.refchangetypeid"
+                        + " FROM wave#build#_variant INNER JOIN wave#build#_association ON wave#build#_association.a = wave#build#_variant.id"
+                        + " INNER JOIN wave#build#_leaf ON wave#build#_leaf.id = wave#build#_association.b"
+                        + " WHERE wave#build#_variant.refgeneid = " + gene.getId() + " AND wave#build#_association.reftypeid = " + t.getId()
+                        + " GROUP BY wave#build#_variant.variant, wave#build#_variant.refseq"
+                        + " ORDER BY n DESC");
+                while (rs.next()) {
+                    var = new Variant(rs.getInt("n"), rs.getInt("vid"), rs.getString("variant"), rs.getInt("refchangetypeid"), gene);
+                    var.setRefseq(rs.getString("refseq"));
+                    
+                    if (gene.getNumberOfLsdbs() > 1) {
+                        if (var.getN() == 1) {
                             l = new Leaf(rs.getInt("lid"), rs.getString("name"), rs.getString("value"), 1);
                             var.sources.add(l);
                             var.setNumberOfSources(1);
                             variants.add(var);
-                        }
-                    }
-                    db.close();
-
-                    for (Variant v : variants) {
-                        String source = "";
-                        if (v.getNumberOfSources() > 1) {
-                            for (Leaf ls : v.getSources()) {
-                                source += ls.getN() + "%" + ls.getValue() + "##";
+                        } else if (var.getN() > 1) {
+                            DB dbx = new DB();
+                            dbx.connect();
+                            ResultSet sources = dbx.getData("SELECT COUNT(wave#build#_leaf.name) AS n, wave#build#_leaf.id AS lid, wave#build#_leaf.name AS name, wave#build#_leaf.value AS value FROM wave#build#_variant INNER JOIN wave#build#_association ON wave#build#_association.a = wave#build#_variant.id INNER JOIN wave#build#_leaf ON wave#build#_leaf.id = wave#build#_association.b WHERE wave#build#_association.reftypeid = " + t.getId() + " AND wave#build#_variant.refgeneid = " + gene.getId() + " AND wave#build#_variant.variant LIKE '" + var.getVariant() + "' GROUP BY wave#build#_leaf.name ORDER BY n ASC");
+                            
+                            int i = 0;
+                            Leaf source;
+                            while (sources.next()) {
+                                source = new Leaf(sources.getInt("lid"), sources.getString("name"), sources.getString("value"), sources.getInt("n"));
+                                var.sources.add(source);
+                                i++;
                             }
-                            source = source.substring(0, source.length() - 2);
-                        } else {
-                            for (Leaf ls : v.getSources()) {
-                                source = ls.getValue();
-                            }
+                            dbx.close();
+                            var.setNumberOfSources(i);
+                            variants.add(var);
                         }
-                        //System.out.println(v.getId() + ":" + v.getVariant() + ":" + v.getN() + ":" + v.getNumberOfSources() + ":" + source + ":" + v.getGene().getId() + ":" + v.getChangeType());
-
-                        db.connect();
-                        String query = "INSERT INTO wave.wave#build#_variantlist (id, refseq, variant,n,lsdb, source, refgeneid, timestamp,refchangetypeid)"
-                                + " VALUES(" + v.getId() + ", '" + v.getRefseq() + "','" + v.getVariant() + "'," + v.getN() + "," + v.getNumberOfSources() + ",'" + source + "'," + v.getGene().getId() + ",NOW()," + v.getChangeType() + ")";
-                        db.insert(v.getVariant(), query);
-                        db.close();
+                    } else {
+                        l = new Leaf(rs.getInt("lid"), rs.getString("name"), rs.getString("value"), 1);
+                        var.sources.add(l);
+                        var.setNumberOfSources(1);
+                        variants.add(var);
                     }
-                    success = true;
-                    db.close();
-                } catch (Exception e) {
-                    System.out.println("[Builder] unable to cache variants for " + gene.getHGNC() + "\n\t" + e.toString());
-                    Logger.getLogger(API.class.getName()).log(Level.SEVERE, null, e);
                 }
+                db.close();
+                
+                for (Variant v : variants) {
+                    String source = "";
+                    if (v.getNumberOfSources() > 1) {
+                        for (Leaf ls : v.getSources()) {
+                            source += ls.getN() + "%" + ls.getValue() + "##";
+                        }
+                        source = source.substring(0, source.length() - 2);
+                    } else {
+                        for (Leaf ls : v.getSources()) {
+                            source = ls.getValue();
+                        }
+                    }
+                    System.out.println(v.getId() + ":" + v.getVariant() + ":" + v.getN() + ":" + v.getNumberOfSources() + ":" + source + ":" + v.getGene().getId() + ":" + v.getChangeType());
+
+                    db.connect();
+                    String query = "INSERT INTO wave.wave#build#_variantlist (id, refseq, variant,n,lsdb, source, refgeneid, timestamp,refchangetypeid)"
+                            + " VALUES(" + v.getId() + ", '" + v.getRefseq() + "','" + v.getVariant() + "'," + v.getN() + "," + v.getNumberOfSources() + ",'" + source + "'," + v.getGene().getId() + ",NOW()," + v.getChangeType() + ")";
+                    db.insert(v.getVariant(), query);
+                    db.close();
+                }
+                success = true;
+                db.close();
+            } catch (Exception e) {
+                System.out.println("[Builder] unable to cache variants for " + gene.getHGNC() + "\n\t" + e.toString());
+                Logger.getLogger(API.class.getName()).log(Level.SEVERE, null, e);
             }
         }
+        // }
         return success;
     }
-
+    
     public boolean buildIndex() {
         boolean success = false;
         DB db = API.getDb();
@@ -366,7 +376,7 @@ public class Builder {
         }
         return success;
     }
-
+    
     public boolean correctGenes() {
         boolean success = false;
         DB db = API.getDb();
@@ -378,7 +388,7 @@ public class Builder {
         try {
             db.connect();
             ResultSet rs = db.getData("SELECT * FROM wave#build#_gene");
-
+            
             while (rs.next()) {
                 Gene gene = new Gene(rs.getInt("id"), rs.getString("hgnc"), rs.getBoolean("enabled"));
                 gene.setName(rs.getString("name"));
@@ -390,9 +400,9 @@ public class Builder {
                 dbx.insert("Gene " + rs.getString("hgnc"), "INSERT INTO wave#build#_genelist (id, symbol,name,lsdb,variant) VALUES(" + gene.getId() + ", '" + gene.getHGNC() + "','" + gene.getName() + "', 0, 0)");
                 dbx.close();
             }
-
+            
             db.close();
-
+            
             success = true;
         } catch (Exception ex) {
             System.out.println("[Stats] Unable to update gene statistics\n\t" + ex.toString());

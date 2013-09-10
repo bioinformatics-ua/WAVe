@@ -569,7 +569,7 @@ public class API {
                 }
             }
 
-            for (Variant v : loadDbSNP(g.getHGNC())) {
+            for (Variant v : loadDbSNP(g.getHGNC(), g.getRefseq())) {
                 SyndEntry entry = new SyndEntryImpl();
                 entry.setTitle(v.getVariant());
                 entry.setLink("http://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=" + v.getId());
@@ -593,7 +593,7 @@ public class API {
     }
 
     public static String variomeCSV(Gene g) throws IOException, FeedException {
-        String response = "hgvs,url";
+        StringBuilder response = new StringBuilder();
         try {
 
             for (Variant v : g.getVariants("all")) {
@@ -607,28 +607,33 @@ public class API {
                         String lsdb_gene = getgene[1];
                         l.setName(tmp[0] + "variants.php?select_db=" + lsdb_gene + "&action=search_all&search_Variant/DNA=" + v.getVariant());
                     }
-                    response += "\n";
-                    if (!v.getRefseq().equals("")) {
-                        response += v.getRefseq() + ":" + v.getVariant().replace("&gt;", ">");
-                    } else {
-                        response += v.getVariant().replace("&gt;", ">") + "," + l.getName();
-                    }
-                    response += "," + l.getName();
 
+                    if (g.getRefseq().equals("-")) {
+                        if (!v.getRefseq().equals("")) {
+                            response.append(v.getRefseq() + ":" + v.getVariant().replace("&gt;", ">") + "," + l.getName() + "\n");
+                        } else {
+                            response.append(v.getVariant().replace("&gt;", ">") + "," + l.getName() + "\n");
+                        }
+                    } else {
+                        if (v.getRefseq().equals(g.getRefseq())) {
+                            response.append(v.getRefseq() + ":" + v.getVariant().replace("&gt;", ">") + "," + l.getName() + "\n");
+                        }
+                    }
                 }
             }
 
-              for (Variant v : loadDbSNP(g.getHGNC())) {
-             response += "\n" + v.getVariant() + ",http://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=" + v.getId();
-             }
+            for (Variant v : loadDbSNP(g.getHGNC(), g.getRefseq())) {
+                response.append(v.getVariant() + ",http://www.ncbi.nlm.nih.gov/projects/SNP/snp_ref.cgi?rs=" + v.getId() + "\n");
+            }
 
 
         } catch (Exception e) {
             System.out.println("[API][Variome][CSV] error " + e.toString());
+            Logger.getLogger(API.class.getName()).log(Level.SEVERE, null, e);
         }
 
 
-        return response;
+        return response.toString();
     }
 
     /**
@@ -1085,11 +1090,16 @@ public class API {
      * @param gene Gene HGNC symbol.
      * @return
      */
-    public static ArrayList<Variant> loadDbSNP(String gene) {
+    public static ArrayList<Variant> loadDbSNP(String gene, String refseq) {
         ArrayList<Variant> dbsnp_vars = new ArrayList<Variant>();
         try {
             db.connect();
-            ResultSet rs = db.getData("SELECT * FROM wave9_dbsnp WHERE hgnc LIKE '" + gene + "';");
+            ResultSet rs;
+            if (refseq.equals("-")) {
+                rs = db.getData("SELECT * FROM wave9_dbsnp WHERE hgnc LIKE '" + gene + "';");
+            } else {
+                rs = db.getData("SELECT * FROM wave9_dbsnp WHERE hgnc LIKE '" + gene + "' AND refseq LIKE '" + refseq + "';");
+            }
             while (rs.next()) {
                 Variant v = new Variant();
                 v.setId(rs.getInt("id"));
@@ -1099,6 +1109,7 @@ public class API {
 
         } catch (Exception ex) {
             System.out.println("[API][Variome] Unable to get " + gene + " dbSNP variants\n\t" + ex.toString());
+            Logger.getLogger(API.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             db.close();
         }

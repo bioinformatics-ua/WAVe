@@ -7,9 +7,7 @@ package pt.ua.bioinformatics.wave.tools;
 import au.com.bytecode.opencsv.CSVReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,7 +18,6 @@ import pt.ua.bioinformatics.wave.domain.Type;
 import pt.ua.bioinformatics.wave.domain.Variant;
 import pt.ua.bioinformatics.wave.services.API;
 import pt.ua.bioinformatics.wave.services.DB;
-import pt.ua.bioinformatics.wave.services.Settings;
 import pt.ua.bioinformatics.wave.varcrawler.Creator;
 
 /**

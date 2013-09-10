@@ -37,6 +37,9 @@ public class Index {
 
     public static ArrayList<Item> search(String what) {
         ArrayList<Item> items = new ArrayList<Item>();
+        if(!API.isLoaded()) {
+            API.load();
+        }
         DB db = API.getDb();
         try {
             db.connect();

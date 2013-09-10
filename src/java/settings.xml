@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <WAVe>
     <version>1.6</version>
-    <host>http://localhost:8080/</host>
+    <host>http://bioinformatics.ua.pt/</host>
     <database>
         <!-- MySQL Expression -->
         <connection>
-            <server>jdbc:mysql://localhost:3306/wave</server>
+            <server>jdbc:mysql://127.0.0.1:3306/wave</server>
             <username>root</username>
             <password>telematica</password>
         </connection>
@@ -21,7 +21,7 @@
     </database>
     <modules>
         <!-- access to all genes --><module><name>geneverse</name><enabled>false</enabled></module>
-        <!-- database building --><module><name>varcrawler</name><enabled>true</enabled></module>
+        <!-- database building --><module><name>varcrawler</name><enabled>false</enabled></module>
         <!-- Arabella web crawler --><module><name>arabella</name><enabled>false</enabled></module>
         <!-- api --><module><name>api</name><enabled>true</enabled></module>
         <!-- database --><module><name>database</name><enabled>true</enabled></module>

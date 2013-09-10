@@ -349,7 +349,7 @@ public class Node implements Serializable {
             db.close();
             success = true;
         } catch (Exception e) {
-            System.out.println("[Node] Unable to load leafs\n\t" + e.toString());
+            System.out.println("[Node] Unable to load leafs for gene " + gene.getHGNC() + "\n\t" + e.toString());
         }
         return success;
 

@@ -48,7 +48,7 @@
                             <div class="uniprot"><a href="http://www.uniprot.org/uniprot/${actionBean.gene.protein.name}" title="${actionBean.gene.protein.name} in Uniprot" target="frame"><span>${actionBean.gene.protein.name} in Uniprot</span></a></div>
                         </c:when>
                     </c:choose>
-                    <div class="diseasecard"><a href="http://bioinformatics.ua.pt/diseasecard/search/id/${actionBean.hgnc}" title="${actionBean.hgnc} in DiseaseCard"><span>${actionBean.hgnc} in DiseaseCard</span></a></div>
+                            <div class="diseasecard"><a href="http://bioinformatics.ua.pt/diseasecard/search/id/${actionBean.hgnc}" target="_blank" title="${actionBean.hgnc} in DiseaseCard"><span>${actionBean.hgnc} in DiseaseCard</span></a></div>
                     <div class="gen2phenkc"><a href="http://www.gen2phen.org/gene/${actionBean.hgnc}" title="${actionBean.hgnc} in GEN2PHEN Knowledge Centre"><span>${actionBean.hgnc} in GEN2PHEN Knowledge Centre</span></a></div>
                 </div>
             </div>

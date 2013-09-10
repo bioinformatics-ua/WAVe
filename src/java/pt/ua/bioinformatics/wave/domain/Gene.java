@@ -5,13 +5,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.JSONValue;
 import pt.ua.bioinformatics.wave.services.API;
 
 import pt.ua.bioinformatics.wave.services.DB;
-import redis.clients.jedis.Jedis;
 
 /**
  *
@@ -40,6 +36,16 @@ public class Gene implements Serializable {
     private ArrayList<LSDB> lsdbs = new ArrayList<LSDB>();
     private Leaf sequence = new Leaf();
     private Leaf protein = new Leaf();
+    private String refseq = "";
+
+    public String getRefseq() {
+        return refseq;
+    }
+
+    public void setRefseq(String refseq) {
+        this.refseq = refseq;
+    }
+    
 
     public int getTotalVariants() {
         return totalVariants;
@@ -302,81 +308,123 @@ public class Gene implements Serializable {
 
                 if (this.numberOfVariants == -1) {
                     rs = db.getData("SELECT COUNT(DISTINCT variant) AS n FROM wave#build#_variant WHERE refgeneid =" + id);
-
+                    boolean w = false;
                     while (rs.next()) {
                         this.numberOfVariants = rs.getInt("n");
+                        w = true;
+                    }
+                    if (!w) {
+                        this.numberOfVariants = 0;
                     }
                 }
 
                 if (this.totalVariants == -1) {
                     rs = db.getData("SELECT COUNT(variant) AS n FROM wave#build#_variant WHERE refgeneid =" + id);
-
+                    boolean w = false;
                     while (rs.next()) {
                         this.totalVariants = rs.getInt("n");
+                        w = true;
+                    }
+                    if (!w) {
+                        this.totalVariants = 0;
                     }
                 }
 
                 if (this.variantDel == -1) {
                     // variantDel
                     Type t = API.getTypes().get("del");
-
+                    boolean w = false;
                     rs = db.getData("SELECT COUNT(DISTINCT variant) AS n FROM wave#build#_variant WHERE refgeneid = " + id + " AND refchangetypeid = " + t.getId());
                     while (rs.next()) {
                         variantDel = rs.getInt(1);
+                        w = true;
+                    }
+                    if (!w) {
+                        this.variantDel = 0;
                     }
                 }
 
                 if (this.variantSub == -1) {
                     // variantSub
                     Type t = API.getTypes().get("sub");
+                    boolean w = false;
                     rs = db.getData("SELECT COUNT(DISTINCT variant) AS n FROM wave#build#_variant WHERE refgeneid = " + id + " AND refchangetypeid = " + t.getId());
                     while (rs.next()) {
                         this.variantSub = rs.getInt(1);
+                        w = true;
+                    }
+                    if (!w) {
+                        this.variantSub = 0;
                     }
                 }
 
                 if (this.variantIns == -1) {
                     // variantIns
+                    boolean w = false;
                     Type t = API.getTypes().get("ins");
                     rs = db.getData("SELECT COUNT(DISTINCT variant) AS n FROM wave#build#_variant WHERE refgeneid = " + id + " AND refchangetypeid = " + t.getId());
                     while (rs.next()) {
                         this.variantIns = rs.getInt(1);
+                        w = true;
+                    }
+                    if (!w) {
+                        this.variantIns = 0;
                     }
                 }
 
                 if (this.variantInv == -1) {
                     // variantInv
+                    boolean w = false;
                     Type t = API.getTypes().get("inv");
                     rs = db.getData("SELECT COUNT(*) AS n FROM wave#build#_variant WHERE refgeneid = " + id + " AND refchangetypeid = " + t.getId());
                     while (rs.next()) {
                         this.variantInv = rs.getInt(1);
+                        w = true;
+                    }
+                    if (!w) {
+                        this.variantInv = 0;
                     }
                 }
 
                 if (this.variantCon == -1) {
                     // variantCon
+                    boolean w = false;
                     Type t = API.getTypes().get("con");
                     rs = db.getData("SELECT COUNT(DISTINCT variant) AS n FROM wave#build#_variant WHERE refgeneid = " + id + " AND refchangetypeid = " + t.getId());
                     while (rs.next()) {
                         this.variantCon = rs.getInt(1);
+                        w = true;
+                    }
+                    if (!w) {
+                        this.variantCon = 0;
                     }
                 }
 
                 if (this.variantDup == -1) {
                     // variantDup
+                    boolean w = false;
                     Type t = API.getTypes().get("dup");
                     rs = db.getData("SELECT COUNT(DISTINCT variant) AS n FROM wave#build#_variant WHERE refgeneid = " + id + " AND refchangetypeid = " + t.getId());
                     while (rs.next()) {
                         this.variantDup = rs.getInt(1);
+                        w = true;
+                    }
+                    if (!w) {
+                        this.variantDup = 0;
                     }
                 }
 
                 if (this.variantDelins == -1) {
                     // variantDelins
+                    boolean w = false;
                     Type t = API.getTypes().get("delins");
                     rs = db.getData("SELECT COUNT(DISTINCT variant) AS n FROM wave#build#_variant WHERE refgeneid = " + id + " AND refchangetypeid = " + t.getId());
                     while (rs.next()) {
                         this.variantDelins = rs.getInt(1);
+                        w = true;
+                    }
+                    if (!w) {
+                        this.variantDelins = 0;
                     }
                 }
                 success = true;
@@ -440,7 +488,7 @@ public class Gene implements Serializable {
                 API.getDb().connect();
                 Leaf l;
                 ResultSet rs = API.getDb().getData("SELECT * FROM wave#build#_variantlist WHERE refgeneid = " + this.id);
-                
+
                 while (rs.next()) {
                     Variant var = new Variant(rs.getInt("n"), rs.getInt("id"), rs.getString("variant"), rs.getInt("refchangetypeid"), this);
                     var.setRefseq(rs.getString("refseq"));
@@ -493,6 +541,7 @@ public class Gene implements Serializable {
                 Logger.getLogger(API.class.getName()).log(Level.SEVERE, null, e);
             } finally {
                 API.getDb().close();
+                totalVariants = variants.size();
             }
         } else {
             try {
@@ -666,15 +715,16 @@ public class Gene implements Serializable {
         boolean loaded = false;
         ArrayList<Type> datatypes = new ArrayList<Type>();
         // try to load from Redis first
+     /*
         try {
             Jedis jedis = API.getJedis();
             JSONObject data_obj = (JSONObject) JSONValue.parse(jedis.hget("wave:gene:" + HGNC, "data"));
             this.numberOfLsdbs = Integer.parseInt(jedis.hget("wave:gene:" + HGNC, "lsdb"));
-            this.numberOfVariants= Integer.parseInt(jedis.hget("wave:gene:" + HGNC, "variant"));
+            this.numberOfVariants = Integer.parseInt(jedis.hget("wave:gene:" + HGNC, "variant"));
             this.totalVariants = Integer.parseInt(jedis.hget("wave:gene:" + HGNC, "totalVariants"));
             this.variantCon = Integer.parseInt(jedis.hget("wave:gene:" + HGNC, "con"));
             this.variantDel = Integer.parseInt(jedis.hget("wave:gene:" + HGNC, "del"));
-            this.variantDelins= Integer.parseInt(jedis.hget("wave:gene:" + HGNC, "delins"));
+            this.variantDelins = Integer.parseInt(jedis.hget("wave:gene:" + HGNC, "delins"));
             this.variantDup = Integer.parseInt(jedis.hget("wave:gene:" + HGNC, "dup"));
             this.variantIns = Integer.parseInt(jedis.hget("wave:gene:" + HGNC, "ins"));
             this.variantInv = Integer.parseInt(jedis.hget("wave:gene:" + HGNC, "inv"));
@@ -685,7 +735,7 @@ public class Gene implements Serializable {
             this.sequence.setInfo(jedis.hget("wave:gene:" + HGNC, "sequence_info"));
             this.name = jedis.hget("wave:gene:" + HGNC, "name");
             this.locus = jedis.hget("wave:gene:" + HGNC, "locus");
-            
+
 
             JSONArray types = (JSONArray) data_obj.get("data");
             for (Object obj : types.toArray()) {
@@ -719,10 +769,11 @@ public class Gene implements Serializable {
             System.out.println("[WAVe] Gene data loaded from Redis cache");
             loaded = true;
         } catch (Exception ex) {
-           System.out.println("[WAVe] Failed to read from Redis cache for " + HGNC + "\n");
+            loaded = false;
+            System.out.println("[WAVe] Failed to read from Redis cache for " + HGNC + "\n");
             Logger.getLogger(Gene.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        */
         // Redis failed, go to DB   
         if (!loaded) {
             setNumberOfVariants();

@@ -28,6 +28,8 @@ import pt.ua.bioinformatics.wave.services.API;
 import pt.ua.bioinformatics.wave.services.DB;
 import pt.ua.bioinformatics.wave.services.VariantCompare;
 import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
+import redis.clients.jedis.JedisPoolConfig;
 
 /**
  *
@@ -36,16 +38,21 @@ import redis.clients.jedis.Jedis;
 public class Indexer {
 
     static Jedis j = new Jedis("localhost");
+    static JedisPool pool;
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException, ClassNotFoundException, SQLException {
+        JedisPoolConfig config = new JedisPoolConfig();
+        config.testOnBorrow = true;
+        pool = new JedisPool(config, "localhost");
+
         //cacheGeneList();
         cacheGeneInfo();
-        // cacheGeneData();
-        //cacheVariantData();
-        //cacheVariomeCS();
+        //cacheGeneData();
+        //  cacheVariantData();
+        // cacheVariomeCSV();
         //cacheGeneFeed();
 
     }
@@ -64,6 +71,7 @@ public class Indexer {
             }
         } catch (Exception ex) {
             Logger.getLogger(Indexer.class.getName()).log(Level.SEVERE, null, ex);
+
         }
     }
 
@@ -78,9 +86,10 @@ public class Indexer {
 
         API.getDb().connect();
         ResultSet genes = API.getDb().getData("SELECT * FROM wave9_genes WHERE info = 0;");
+        j = pool.getResource();
         while (genes.next()) {
-            //for (String s : j.smembers("wave:genelist")) {
             String s = genes.getString("hgnc");
+            //   for (String s : j.smembers("wave:genelist")) {
             try {
 
                 API.getDb().connect();
@@ -119,16 +128,21 @@ public class Indexer {
                     }
                 }
                 saveGene(s, "info");
-                //System.out.println("[WAVe][Indexer] cached gene " + s + " data to Redis");
+                System.out.println("[WAVe][Indexer] cached gene " + s + " data to Redis");
+
+
             } catch (Exception e) {
                 System.out.println("[WAVe][Indexer] unable to cache gene " + s + " to Redis");
                 //Logger.getLogger(Indexer.class.getName()).log(Level.SEVERE, null, e);
 
+
             } finally {
+                pool.returnResource(j);
                 API.getDb().close();
                 API.getDb().getConnection().close();
             }
         }
+        System.out.println("[Indexer] Gene Info loaded");
     }
 
     /**
@@ -138,62 +152,66 @@ public class Indexer {
      */
     public static void cacheGeneData() throws IOException, SQLException {
         API.getDb().connect();
-        ResultSet genes = API.getDb().getData("SELECT * FROM wave9_genes WHERE cached = 0;");
+        ResultSet genes = API.getDb().getData("SELECT * FROM wave9_genes WHERE data = 0;");
+        j = pool.getResource();
         while (genes.next()) {
-            //for (String s : j.smembers("wave:genelist")) {
             String s = genes.getString("hgnc");
-            try {
-                Gene g = new Gene(Integer.parseInt(j.hget("wave:gene:" + s, "id")), s, true);
-                ArrayList<Type> data = g.loadInfoForCache();
-                JSONObject data_obj = new JSONObject();
-                JSONArray types = new JSONArray();
-                for (Type t : data) {
-                    JSONObject type_obj = new JSONObject();
-                    type_obj.put("id", t.getId());
-                    type_obj.put("metatype", t.getMetaType());
-                    type_obj.put("name", t.getName());
-                    type_obj.put("shortname", t.getShortname());
-                    type_obj.put("description", t.getDescription());
-                    type_obj.put("size", t.getSize());
-                    JSONArray nodes = new JSONArray();
-                    for (Node n : t.getNodes()) {
-                        JSONObject node_obj = new JSONObject();
-                        node_obj.put("id", n.getId());
-                        node_obj.put("description", n.getDescription());
-                        node_obj.put("name", n.getName());
-                        node_obj.put("shortname", n.getShortname());
-                        node_obj.put("parent", n.getParent().getId());
-                        node_obj.put("method", n.getMethod());
-                        node_obj.put("ua", n.getUa());
-                        node_obj.put("value", n.getValue());
+           try {
+            Gene g = new Gene(Integer.parseInt(j.hget("wave:gene:" + s, "id")), s, true);
+            ArrayList<Type> data = g.loadInfoForCache();
+            JSONObject data_obj = new JSONObject();
+            JSONArray types = new JSONArray();
+            for (Type t : data) {
+                JSONObject type_obj = new JSONObject();
+                type_obj.put("id", t.getId());
+                type_obj.put("metatype", t.getMetaType());
+                type_obj.put("name", t.getName());
+                type_obj.put("shortname", t.getShortname());
+                type_obj.put("description", t.getDescription());
+                type_obj.put("size", t.getSize());
+                JSONArray nodes = new JSONArray();
+                for (Node n : t.getNodes()) {
+                    JSONObject node_obj = new JSONObject();
+                    node_obj.put("id", n.getId());
+                    node_obj.put("description", n.getDescription());
+                    node_obj.put("name", n.getName());
+                    node_obj.put("shortname", n.getShortname());
+                    node_obj.put("parent", n.getParent().getId());
+                    node_obj.put("method", n.getMethod());
+                    node_obj.put("ua", n.getUa());
+                    node_obj.put("value", n.getValue());
 
-                        JSONArray leafs = new JSONArray();
-                        for (Leaf l : n.getLeafs()) {
-                            JSONObject leaf_obj = new JSONObject();
-                            leaf_obj.put("id", l.getId());
-                            leaf_obj.put("name", l.getName());
-                            leaf_obj.put("info", l.getInfo());
-                            leaf_obj.put("value", l.getValue());
-                            leaf_obj.put("n", l.getN());
+                    JSONArray leafs = new JSONArray();
+                    for (Leaf l : n.getLeafs()) {
+                        JSONObject leaf_obj = new JSONObject();
+                        leaf_obj.put("id", l.getId());
+                        leaf_obj.put("name", l.getName());
+                        leaf_obj.put("info", l.getInfo());
+                        leaf_obj.put("value", l.getValue());
+                        leaf_obj.put("n", l.getN());
 
-                            leafs.add(leaf_obj);
-                        }
-                        node_obj.put("leafs", leafs);
-                        nodes.add(node_obj);
+                        leafs.add(leaf_obj);
                     }
-                    type_obj.put("nodes", nodes);
-                    types.add(type_obj);
+                    node_obj.put("leafs", leafs);
+                    nodes.add(node_obj);
                 }
-                data_obj.put("data", types);
-                j.hset("wave:gene:" + s, "data", data_obj.toJSONString());
-                //System.out.println("[WAVe][Indexer] Cached >> " + s);
-                
-                saveGene(s, "data");
-            } catch (Exception e) {
-                System.out.println("[WAVe][Indexer] unable to cache tree gene " + s + " to Redis");
-                Logger.getLogger(Indexer.class.getName()).log(Level.SEVERE, null, e);
+                type_obj.put("nodes", nodes);
+                types.add(type_obj);
             }
+            data_obj.put("data", types);
+            j.hset("wave:gene:" + s, "data", data_obj.toJSONString());
+            //System.out.println("[WAVe][Indexer] Cached >> " + s);
+
+            saveGene(s, "data");
+        } catch (Exception e) {
+            System.out.println("[WAVe][Indexer] unable to cache tree gene " + s + " to Redis");
+            Logger.getLogger(Indexer.class.getName()).log(Level.SEVERE, null, e);
         }
+
+        }
+        pool.returnResource(j);
+        API.getDb().close();
+        System.out.println("[Indexer] Gene Data loaded");
     }
 
     /**
@@ -216,13 +234,15 @@ public class Indexer {
                 cacheVariantsForGene(s, "inv");
                 cacheVariantsForGene(s, "con");
                 cacheVariantsForGene(s, "delins");
-                
+
                 saveGene(s, "variant");
             } catch (Exception e) {
                 System.out.println("[WAVe][Indexer] unable to cache variant data for gene " + s + " to Redis");
                 Logger.getLogger(Indexer.class.getName()).log(Level.SEVERE, null, e);
             }
         }
+
+        System.out.println("[Indexer] Variant data loaded");
     }
 
     /**
@@ -301,7 +321,7 @@ public class Indexer {
             }
             stream.put("aaData", variantList);
             j.set("wave:variant:" + s + ":all", stream.toJSONString());
-            System.out.println("[WAVe][Indexer] cached all variants for " + s);
+            // System.out.println("[WAVe][Indexer] cached all variants for " + s);
         } catch (Exception e) {
             System.out.println("[WAVe][Indexer] unable to all variant data for gene " + s + " to Redis");
             Logger.getLogger(Indexer.class.getName()).log(Level.SEVERE, null, e);
@@ -367,7 +387,7 @@ public class Indexer {
 
             stream.put("aaData", variantList);
             j.set("wave:variant:" + s + ":" + type, stream.toJSONString());
-            System.out.println("[WAVe][Indexer] cached " + type + " variants for " + s);
+            // System.out.println("[WAVe][Indexer] cached " + type + " variants for " + s);
         } catch (Exception e) {
             System.out.println("[WAVe][Indexer] unable to cache " + type + " variant data for gene " + s + " to Redis");
             Logger.getLogger(Indexer.class.getName()).log(Level.SEVERE, null, e);
@@ -377,20 +397,20 @@ public class Indexer {
     /**
      * Store the variant feed (Atom format) for each individual gene.
      */
-    private static void cacheVariomeCSV() throws SQLException {
+    public static void cacheVariomeCSV() throws SQLException {
         //String s = "COL3A1";
         if (!API.isLoaded()) {
             API.load();
         }
         API.getDb().connect();
-        ResultSet genes = API.getDb().getData("SELECT * FROM wave9_genes WHERE variome = 0;");
+        ResultSet genes = API.getDb().getData("SELECT * FROM wave9_genes WHERE variome = 0 ORDER BY hgnc DESC;");
         while (genes.next()) {
             //for (String s : j.smembers("wave:genelist")) {
             String s = genes.getString("hgnc");
             try {
 
-                API.getJedis().set("wave:variome:" + s + ":csv", API.variomeFeed(new Gene(s), "csv"));
-               // System.out.println("[WAVe][Indexer] cached variant feed for " + s);
+                API.getJedis().set("wave:variome:" + s + ":csv", API.variomeCSV(new Gene(s)));
+                // System.out.println("[WAVe][Indexer] cached variant feed for " + s);
 
                 saveGene(s, "variome");
             } catch (IOException ex) {
@@ -401,12 +421,13 @@ public class Indexer {
                 Logger.getLogger(Indexer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        System.out.println("[Indexer] Variome loaded");
     }
 
     /**
      * Store the gene feed (Atom format) for each individual gene.
      */
-    static void cacheGeneFeed() throws SQLException {
+    static public void cacheGeneFeed() throws SQLException {
         // String s = "COL3A1";
         if (!API.isLoaded()) {
             API.load();
@@ -418,14 +439,16 @@ public class Indexer {
             String s = genes.getString("hgnc");
             try {
                 API.getJedis().hset("wave:gene:" + s, "feed", API.geneFeed(new Gene(s), "atom_1.0"));
-               // System.out.println("[WAVe][Indexer] cached variant feed for " + s);
-                
+                // System.out.println("[WAVe][Indexer] cached variant feed for " + s);
+
                 saveGene(s, "feed");
             } catch (FeedException ex) {
                 System.out.println("[WAVe][Indexer] unable to cache gene feed for " + s + " to Redis");
                 Logger.getLogger(Indexer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+
+        System.out.println("[Indexer] Gene Feed loaded");
     }
 
     static void saveGene(String gene, String method) {

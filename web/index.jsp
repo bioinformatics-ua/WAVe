@@ -33,7 +33,7 @@
         </div>
     </s:layout-component>
     <s:layout-component name="main">
-        <img src="<c:url value="/resources/images/title.png" />" width="350" alt="WAVe | Web Analysis of the Variome" />
+        <img src="<c:url value="/resources/images/title.png" />" width="350" height="111" alt="WAVe | Web Analysis of the Variome" />
         <c:choose>
             <c:when test="${IE}">
                 <div class="box">
