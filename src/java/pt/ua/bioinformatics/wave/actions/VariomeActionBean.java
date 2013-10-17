@@ -1,6 +1,7 @@
 package pt.ua.bioinformatics.wave.actions;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.PrintWriter;
 import net.sourceforge.stripes.action.ActionBean;
 import net.sourceforge.stripes.action.ActionBeanContext;
@@ -157,11 +158,11 @@ public class VariomeActionBean implements ActionBean {
                 out.println(response.substring(0, response.length()-1));
                 out.close();
                 //System.out.println("File Saved at: " + path);
-                return new ForwardResolution("/variomes/" + hgnc + "-" + refseq); //getContext().getServletContext().getContextPath() + "/variomes/" + hgnc + ".csv");
+                return new StreamingResolution("text/plain", new FileInputStream(f)); //ForwardResolution("/variomes/" + hgnc + "-" + refseq); //getContext().getServletContext().getContextPath() + "/variomes/" + hgnc + ".csv");
                 
             } else {
                // System.out.println("Redirecting...");
-              return new ForwardResolution("/variomes/" + hgnc + "-" + refseq); //getContext().getServletContext().getContextPath() + "/variomes/" + hgnc + ".csv");
+              return new StreamingResolution("text/plain", new FileInputStream(f)); //ForwardResolution("/variomes/" + hgnc + "-" + refseq); //getContext().getServletContext().getContextPath() + "/variomes/" + hgnc + ".csv");
             }
 
         } catch (Exception ex) {
@@ -169,7 +170,7 @@ public class VariomeActionBean implements ActionBean {
                
             try {
                 gene = genelist.getGene(hgnc.toUpperCase());
-                return new StreamingResolution("text", API.getVariome(gene, "csv"));
+                return new StreamingResolution("text/plain", API.getVariome(gene, "csv"));
             } catch (Exception e) {
                 System.out.println("[VariomeActionBean] Error " + e.toString());
                 throw new UnsupportedOperationException();

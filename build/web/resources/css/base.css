@@ -974,3 +974,14 @@ img {
     border: none;
     padding: 4px;
 }
+
+#frame_loading {
+    position: fixed;
+    top: 28px;
+    right: 8px;
+    opacity: 0.8;
+    margin: 0px;
+    padding: 2px;
+    width: 40px;
+    display: none;
+}

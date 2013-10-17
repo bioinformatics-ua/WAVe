@@ -22,6 +22,7 @@
                     <jsp:include page="/layout/header.jsp"/>
                 </s:layout-component>
                 <!-- <a id="opened" class="toggler" href="#"></a>-->
+                <div id="frame_loading"><img src="<c:url value="/resources/images/ajax-loader.gif" />" width="16" height="16" /></div>
             </div>
             <div id="container">
                 <!-- item box (Toggle + Feed) -->
