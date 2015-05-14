@@ -2,10 +2,11 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
-        <file>file:/Users/pedrolopes/Dropbox/Software/WAVe/WAVe/web/layout/navigate.jsp</file>
-        <file>file:/Users/pedrolopes/Dropbox/Software/WAVe/WAVe/web/resources/css/base.css</file>
-        <file>file:/Users/pedrolopes/Dropbox/Software/WAVe/WAVe/web/resources/javascript/navigate.js</file>
-        <file>file:/Users/pedrolopes/Dropbox/Software/WAVe/WAVe/src/java/settings.xml</file>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/Users/pedrolopes/Dropbox/Software/WAVe/WAVe/src/java/pt/ua/bioinformatics/wave/actions/VariantsActionBean.java</file>
+            <file>file:/Users/pedrolopes/Dropbox/Software/WAVe/WAVe/src/java/pt/ua/bioinformatics/wave/actions/VariomeActionBean.java</file>
+            <file>file:/Users/pedrolopes/Dropbox/Software/WAVe/WAVe/src/java/pt/ua/bioinformatics/wave/actions/VariantActionBean.java</file>
+        </group>
     </open-files>
 </project-private>

@@ -63,7 +63,7 @@
                                     Try one of these searches: <a href="<c:url value="/gene/COL3A1" />" title="COL3A1 | Gene | WAVe" class="ex">COL3A1</a>, <a href="<c:url value="/search/P11532" />" title="P11532 | Protein | WAVe" class="ex">P11532</a>, <a href="<c:url value="/search/137800" />" title="137800 | Disease | WAVe" class="ex">137800</a> or <a href="<c:url value="/gene/*" />" title="All genes | WAVe" class="ex">view all genes</a>.</p>
                                 <br /><br /><b>WAVe</b> is a human variome integration application, focused on providing unified and enriched
                                 access to public locus-specific databases and genomic variation datasets.
-                                <br /><br /><br/><b>UPDATE</b>: WAVe has been updated to version 1.6, please refer to <a href="<c:url value="/about" />" title="About | WAVe">the about page</a> for relevant changes.
+                                <br /><br /><br/><b>UPDATE</b>: With the latest evolution on data integration and sharing, locus-specific database owners have, unfortunately, started blocking access to their internal datasets to third parties. As such, WAVe's variome collection should be considered legacy and not representative of the current state of the art. Hence, linked resources, such as LOVD, UMD or Cafe Variome, are the <em>de facto</em> mutation databases.
                             </div>
                         </c:otherwise>
                     </c:choose>
